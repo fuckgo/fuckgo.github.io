@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>upload-labs通关笔记 | $_Fuck | 白天搞笑的废物，晚上抑郁的怪物。</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Web安全">
+    <meta name="description" content="第一关：  可以看到这里的上传的验证是javascript验证的，也就是前台认证，但是我们可以利用后台验证绕过。 步骤：1、上传一个2.png2、抓包将2.png修改为2.php  然后看看是否成功上传   upload目录是这个靶机上传的文件的存放目录，所以上传的东西都会在这里，所以看有没有成功上传的话可以直接来这里看，或者去访问一下http:&#x2F;&#x2F;xxx.xxx.xxx&#x2F;upload&#x2F;文件名，如">
+<meta name="keywords" content="Web安全">
+<meta property="og:type" content="article">
+<meta property="og:title" content="upload-labs通关笔记">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;12&#x2F;18&#x2F;upload-labs%E9%80%9A%E5%85%B3%E7%AC%94%E8%AE%B0&#x2F;index.html">
+<meta property="og:site_name" content="$_Fuck">
+<meta property="og:description" content="第一关：  可以看到这里的上传的验证是javascript验证的，也就是前台认证，但是我们可以利用后台验证绕过。 步骤：1、上传一个2.png2、抓包将2.png修改为2.php  然后看看是否成功上传   upload目录是这个靶机上传的文件的存放目录，所以上传的东西都会在这里，所以看有没有成功上传的话可以直接来这里看，或者去访问一下http:&#x2F;&#x2F;xxx.xxx.xxx&#x2F;upload&#x2F;文件名，如">
+<meta property="og:locale" content="zh">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;dfxzko0fx07b0zzwhs8b9rc5&#x2F;image.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;7i5cct348yr73j5bb5lvq83o&#x2F;1.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;yalbi6a2hqg1edk2av1g1irf&#x2F;1.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;angm6k565a0a80yb92s88aag&#x2F;1.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;tqnbqfhzv9lwkw5czg14ww0r&#x2F;1.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;l3to2zba83jvgqcwo4qd29m9&#x2F;1.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;xjeoam8717exn8g2d242f27c&#x2F;1.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;reje45f4tr5e91y6l1wnxwtk&#x2F;1.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;gklph1wdj0vfabm9i2z7w1ba&#x2F;1.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;f9jc8iu3bedg49usjc4tipvg&#x2F;1.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;kgpcz0hxj09dh57r08zc8ned&#x2F;1.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;gcfd56ax6iap0olkmal7zes5&#x2F;1.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;zcos4m1rgbmdwjo3jd64sexb&#x2F;1.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;zf12ie3hs0k5aa3neqe0xp47&#x2F;1.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;7i9btw4p1jgg389i5ldg8f7n&#x2F;1.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;e235k0xqmjlb1mux16sq42pp&#x2F;1.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;oggqh8pqlrxh123ach0i1sr5&#x2F;1.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;sm2pqysgey461fw4horiamzt&#x2F;1.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;vv8dn5cbhb5dytjligzy2ay8&#x2F;1.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;bp51xt04y8tkd2vcq60e5qxn&#x2F;1.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;1htnv3q748vlkus1ofrqr5tw&#x2F;1.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;n6tnwg5w5j1mxdnxig7loc5a&#x2F;1.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;cs7e2iz253rsgfsrebhvl41s&#x2F;1.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;1fotl28nmsl9pdtp7yycrhis&#x2F;1.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;uys1zulksuzq9g39yhj7jjae&#x2F;1.png">
+<meta property="og:updated_time" content="2019-12-18T01:15:48.909Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;dfxzko0fx07b0zzwhs8b9rc5&#x2F;image.png">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/blog.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">$_Fuck</h5>
+          <a href="mailto:以凡人之躯比肩神明" target="_blank" rel="noopener" title="以凡人之躯比肩神明" class="mail">以凡人之躯比肩神明</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-address-book"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/Web%E5%AE%89%E5%85%A8/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/link"  >
+                <i class="icon icon-lg icon-link"></i>
+                友情链接
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">upload-labs通关笔记</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">upload-labs通关笔记</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-12-18T01:14:58.000Z" itemprop="datePublished" class="page-time">
+  2018-12-18
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD/">兴趣爱好</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container-fluid blog body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第四关"><span class="post-toc-number">1.</span> <span class="post-toc-text">第四关</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第五关"><span class="post-toc-number">2.</span> <span class="post-toc-text">第五关</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第六关"><span class="post-toc-number">3.</span> <span class="post-toc-text">第六关</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第七关"><span class="post-toc-number">4.</span> <span class="post-toc-text">第七关</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第八关"><span class="post-toc-number">5.</span> <span class="post-toc-text">第八关</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第九关"><span class="post-toc-number">6.</span> <span class="post-toc-text">第九关</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第十关"><span class="post-toc-number">7.</span> <span class="post-toc-text">第十关</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第十一关"><span class="post-toc-number">8.</span> <span class="post-toc-text">第十一关</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第十二关"><span class="post-toc-number">9.</span> <span class="post-toc-text">第十二关</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第十三关"><span class="post-toc-number">10.</span> <span class="post-toc-text">第十三关</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第十四关"><span class="post-toc-number">11.</span> <span class="post-toc-text">第十四关</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#null"><span class="post-toc-number">12.</span> <span class="post-toc-text"></span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-upload-labs通关笔记"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">upload-labs通关笔记</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-12-18 09:14:58" datetime="2018-12-18T01:14:58.000Z"  itemprop="datePublished">2018-12-18</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD/">兴趣爱好</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p><strong>第一关：</strong></p>
+<p><img src="http://static.zybuluo.com/1kbfree/dfxzko0fx07b0zzwhs8b9rc5/image.png" alt="image.png-194.5kB"></p>
+<p>可以看到这里的上传的验证是<code>javascript</code>验证的，也就是前台认证，但是我们可以利用后台验证绕过。</p>
+<p>步骤：<br>1、上传一个<code>2.png</code><br>2、抓包将<code>2.png</code>修改为<code>2.php</code></p>
+<p><img src="http://static.zybuluo.com/1kbfree/7i5cct348yr73j5bb5lvq83o/1.png" alt="1.png-225.3kB"></p>
+<p>然后看看是否成功上传</p>
+<p><img src="http://static.zybuluo.com/1kbfree/yalbi6a2hqg1edk2av1g1irf/1.png" alt="1.png-16.1kB"></p>
+<blockquote>
+<p><code>upload</code>目录是这个靶机上传的文件的存放目录，所以上传的东西都会在这里，所以看有没有成功上传的话可以直接来这里看，或者去访问一下<code>http://xxx.xxx.xxx/upload/文件名</code>，如我刚刚上传的<code>2.php</code>就是这个链接</p>
+</blockquote>
+<p><a href="http://127.0.0.1/upload/upload/2.php" target="_blank" rel="noopener">http://127.0.0.1/upload/upload/2.php</a></p>
+<p><img src="http://static.zybuluo.com/1kbfree/angm6k565a0a80yb92s88aag/1.png" alt="1.png-51.8kB"></p>
+<p><strong>第二关：</strong></p>
+<p><img src="http://static.zybuluo.com/1kbfree/tqnbqfhzv9lwkw5czg14ww0r/1.png" alt="1.png-256kB"></p>
+<p>所谓文件类型就是上传文件的时候请求中的<code>Content-Type</code>，如下</p>
+<p><img src="http://static.zybuluo.com/1kbfree/l3to2zba83jvgqcwo4qd29m9/1.png" alt="1.png-206.5kB"></p>
+<p>这关的代码逻辑就是，如果上传的文件类型是<code>image/jpeg</code>或<code>image/png</code>或<code>image/gif</code>就可以上传。那么只要上传一个<code>php</code>文件，然后把文件类型修改为<code>image/jpeg</code>即可上传</p>
+<p><img src="http://static.zybuluo.com/1kbfree/xjeoam8717exn8g2d242f27c/1.png" alt="1.png-132.5kB"></p>
+<p><img src="http://static.zybuluo.com/1kbfree/reje45f4tr5e91y6l1wnxwtk/1.png" alt="1.png-30.6kB"></p>
+<p>成功上传~</p>
+<p><strong>第三关：</strong></p>
+<blockquote>
+<p>此关就是后台禁止<code>php</code>、<code>jsp</code>、<code>asp</code>、<code>aspx</code>这四个文件上传</p>
+</blockquote>
+<p>这关的代码比较长，我就直接贴出来了~</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$is_upload = <span class="keyword">false</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">$msg = <span class="keyword">null</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_POST[<span class="string">'submit'</span>])) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (file_exists(UPLOAD_PATH)) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        $deny_ext = <span class="keyword">array</span>(<span class="string">'.asp'</span>,<span class="string">'.aspx'</span>,<span class="string">'.php'</span>,<span class="string">'.jsp'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        $file_name = trim($_FILES[<span class="string">'upload_file'</span>][<span class="string">'name'</span>]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        $file_name = deldot($file_name);<span class="comment">//删除文件名末尾的点</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        $file_ext = strrchr($file_name, <span class="string">'.'</span>); <span class="comment">// 获取文件名的后缀（就是获取.后面的内容）</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        $file_ext = strtolower($file_ext); <span class="comment">//转换为小写</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        $file_ext = str_ireplace(<span class="string">'::$DATA'</span>, <span class="string">''</span>, $file_ext);<span class="comment">//去除字符串::$DATA</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        $file_ext = trim($file_ext); <span class="comment">//收尾去空</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(!in_array($file_ext, $deny_ext)) &#123; <span class="comment">// 如果$file_ext的值不在$deny_ext列表里，即进入条件</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            $temp_file = $_FILES[<span class="string">'upload_file'</span>][<span class="string">'tmp_name'</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">            $img_path = UPLOAD_PATH.<span class="string">'/'</span>.date(<span class="string">"YmdHis"</span>).rand(<span class="number">1000</span>,<span class="number">9999</span>).$file_ext;          </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (move_uploaded_file($temp_file,$img_path)) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">                 $is_upload = <span class="keyword">true</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">            &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">                $msg = <span class="string">'上传出错！'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">            $msg = <span class="string">'不允许上传.asp,.aspx,.php,.jsp后缀文件！'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">        $msg = UPLOAD_PATH . <span class="string">'文件夹不存在,请手工创建！'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>既然不能上传<code>php</code>，那么我们可以上传<code>.php3</code>（在某些环境下<code>php3</code>也是当<code>php</code>解析，介绍文章：<code>https://www.cnblogs.com/natian-ws/p/7265806.html</code>）</p>
+<p><img src="http://static.zybuluo.com/1kbfree/gklph1wdj0vfabm9i2z7w1ba/1.png" alt="1.png-135.2kB"></p>
+<p>然后看看是否上传了</p>
+<p><img src="http://static.zybuluo.com/1kbfree/f9jc8iu3bedg49usjc4tipvg/1.png" alt="1.png-25.3kB"></p>
+<p>可以看到是上传了的，但是为什么名字会那么长呢？<br>可以看看代码中第<code>15</code>行</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$img_path = UPLOAD_PATH.<span class="string">'/'</span>.date(<span class="string">"YmdHis"</span>).rand(<span class="number">1000</span>,<span class="number">9999</span>).$file_ext;</span></pre></td></tr></table></figure>
+
+<p>这个<code>$img_path</code>就是上传后的文件的地址，<code>UPDATE_PATH</code>就是上传目录(<code>upload</code>)，<code>data(&quot;YmdHis&quot;)</code>就是当前时间的年月日时分秒，<code>rand(1000,9999)</code>就是在<code>0000</code>到<code>9999</code>中随机抽数字，<code>$file_ext</code>就是上传的文件的后缀，所以拼接起来就是这么长的名字。</p>
+<p>那么我们上传了这个文件后，看不到他的名字，我们就可以爆破当前时间的年月日时分秒，然后后面几个随机数字爆破，这里不演示了，直接打开看看<code>php3</code>是否和<code>php</code>效果一样~</p>
+<h3 id="第四关"><a href="#第四关" class="headerlink" title="第四关"></a>第四关</h3><p>这一关坏得很，因为他把全部后缀都加入黑名单了，代码如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$is_upload = <span class="keyword">false</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">$msg = <span class="keyword">null</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_POST[<span class="string">'submit'</span>])) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (file_exists(UPLOAD_PATH)) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        $deny_ext = <span class="keyword">array</span>(<span class="string">".php"</span>,<span class="string">".php5"</span>,<span class="string">".php4"</span>,<span class="string">".php3"</span>,<span class="string">".php2"</span>,<span class="string">"php1"</span>,<span class="string">".html"</span>,<span class="string">".htm"</span>,<span class="string">".phtml"</span>,<span class="string">".pht"</span>,<span class="string">".pHp"</span>,<span class="string">".pHp5"</span>,<span class="string">".pHp4"</span>,<span class="string">".pHp3"</span>,<span class="string">".pHp2"</span>,<span class="string">"pHp1"</span>,<span class="string">".Html"</span>,<span class="string">".Htm"</span>,<span class="string">".pHtml"</span>,<span class="string">".jsp"</span>,<span class="string">".jspa"</span>,<span class="string">".jspx"</span>,<span class="string">".jsw"</span>,<span class="string">".jsv"</span>,<span class="string">".jspf"</span>,<span class="string">".jtml"</span>,<span class="string">".jSp"</span>,<span class="string">".jSpx"</span>,<span class="string">".jSpa"</span>,<span class="string">".jSw"</span>,<span class="string">".jSv"</span>,<span class="string">".jSpf"</span>,<span class="string">".jHtml"</span>,<span class="string">".asp"</span>,<span class="string">".aspx"</span>,<span class="string">".asa"</span>,<span class="string">".asax"</span>,<span class="string">".ascx"</span>,<span class="string">".ashx"</span>,<span class="string">".asmx"</span>,<span class="string">".cer"</span>,<span class="string">".aSp"</span>,<span class="string">".aSpx"</span>,<span class="string">".aSa"</span>,<span class="string">".aSax"</span>,<span class="string">".aScx"</span>,<span class="string">".aShx"</span>,<span class="string">".aSmx"</span>,<span class="string">".cEr"</span>,<span class="string">".sWf"</span>,<span class="string">".swf"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        $file_name = trim($_FILES[<span class="string">'upload_file'</span>][<span class="string">'name'</span>]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        $file_name = deldot($file_name);<span class="comment">//删除文件名末尾的点</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        $file_ext = strrchr($file_name, <span class="string">'.'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        $file_ext = strtolower($file_ext); <span class="comment">//转换为小写</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        $file_ext = str_ireplace(<span class="string">'::$DATA'</span>, <span class="string">''</span>, $file_ext);<span class="comment">//去除字符串::$DATA</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        $file_ext = trim($file_ext); <span class="comment">//收尾去空</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (!in_array($file_ext, $deny_ext)) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            $temp_file = $_FILES[<span class="string">'upload_file'</span>][<span class="string">'tmp_name'</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">            $img_path = UPLOAD_PATH.<span class="string">'/'</span>.date(<span class="string">"YmdHis"</span>).rand(<span class="number">1000</span>,<span class="number">9999</span>).$file_ext;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (move_uploaded_file($temp_file, $img_path)) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">                $is_upload = <span class="keyword">true</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">            &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">                $msg = <span class="string">'上传出错！'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">            $msg = <span class="string">'此文件不允许上传!'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">        $msg = UPLOAD_PATH . <span class="string">'文件夹不存在,请手工创建！'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>可以看到限制了很多后缀，但是我们可以上传<code>.htaccess</code>文件，然后在里面写</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">SetHandler application&#x2F;x-httpd-php</span></pre></td></tr></table></figure>
+
+<p>这个意思是把这个目录的所以文件当<code>php</code>解析，但是这个也是有环境限制的，只能在<code>apache</code>用，因为<code>.htaccess</code>是<code>apache</code>的配置文件</p>
+<h3 id="第五关"><a href="#第五关" class="headerlink" title="第五关"></a>第五关</h3><p>这一关代码如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$is_upload = <span class="keyword">false</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">$msg = <span class="keyword">null</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_POST[<span class="string">'submit'</span>])) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (file_exists(UPLOAD_PATH)) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        $deny_ext = <span class="keyword">array</span>(<span class="string">".php"</span>,<span class="string">".php5"</span>,<span class="string">".php4"</span>,<span class="string">".php3"</span>,<span class="string">".php2"</span>,<span class="string">".html"</span>,<span class="string">".htm"</span>,<span class="string">".phtml"</span>,<span class="string">".pht"</span>,<span class="string">".pHp"</span>,<span class="string">".pHp5"</span>,<span class="string">".pHp4"</span>,<span class="string">".pHp3"</span>,<span class="string">".pHp2"</span>,<span class="string">".Html"</span>,<span class="string">".Htm"</span>,<span class="string">".pHtml"</span>,<span class="string">".jsp"</span>,<span class="string">".jspa"</span>,<span class="string">".jspx"</span>,<span class="string">".jsw"</span>,<span class="string">".jsv"</span>,<span class="string">".jspf"</span>,<span class="string">".jtml"</span>,<span class="string">".jSp"</span>,<span class="string">".jSpx"</span>,<span class="string">".jSpa"</span>,<span class="string">".jSw"</span>,<span class="string">".jSv"</span>,<span class="string">".jSpf"</span>,<span class="string">".jHtml"</span>,<span class="string">".asp"</span>,<span class="string">".aspx"</span>,<span class="string">".asa"</span>,<span class="string">".asax"</span>,<span class="string">".ascx"</span>,<span class="string">".ashx"</span>,<span class="string">".asmx"</span>,<span class="string">".cer"</span>,<span class="string">".aSp"</span>,<span class="string">".aSpx"</span>,<span class="string">".aSa"</span>,<span class="string">".aSax"</span>,<span class="string">".aScx"</span>,<span class="string">".aShx"</span>,<span class="string">".aSmx"</span>,<span class="string">".cEr"</span>,<span class="string">".sWf"</span>,<span class="string">".swf"</span>,<span class="string">".htaccess"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        $file_name = trim($_FILES[<span class="string">'upload_file'</span>][<span class="string">'name'</span>]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        $file_name = deldot($file_name);<span class="comment">//删除文件名末尾的点</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        $file_ext = strrchr($file_name, <span class="string">'.'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        $file_ext = str_ireplace(<span class="string">'::$DATA'</span>, <span class="string">''</span>, $file_ext);<span class="comment">//去除字符串::$DATA</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        $file_ext = trim($file_ext); <span class="comment">//首尾去空</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (!in_array($file_ext, $deny_ext)) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">            $temp_file = $_FILES[<span class="string">'upload_file'</span>][<span class="string">'tmp_name'</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            $img_path = UPLOAD_PATH.<span class="string">'/'</span>.date(<span class="string">"YmdHis"</span>).rand(<span class="number">1000</span>,<span class="number">9999</span>).$file_ext;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (move_uploaded_file($temp_file, $img_path)) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">                $is_upload = <span class="keyword">true</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">            &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">                $msg = <span class="string">'上传出错！'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">            $msg = <span class="string">'此文件类型不允许上传！'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">        $msg = UPLOAD_PATH . <span class="string">'文件夹不存在,请手工创建！'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>这一段大概意思就是上传的文件后缀名不允许出现在<code>$deny_ext</code>里，但是我们可以通过上传<code>Php</code>来绕过~ 他这里限制了<code>php</code>不能上传 但是并没有将其全转换成小写 所以可以用大写绕过</p>
+<p><img src="http://static.zybuluo.com/1kbfree/kgpcz0hxj09dh57r08zc8ned/1.png" alt="1.png-241.9kB"></p>
+<h3 id="第六关"><a href="#第六关" class="headerlink" title="第六关"></a>第六关</h3><p><img src="http://static.zybuluo.com/1kbfree/gcfd56ax6iap0olkmal7zes5/1.png" alt="1.png-60.1kB"></p>
+<p>这一关也是黑名单策略，然后把<code>.htaccess</code>文件也限制了，但是我们可以用<code>php空格</code>绕过，如下</p>
+<p><img src="http://static.zybuluo.com/1kbfree/zcos4m1rgbmdwjo3jd64sexb/1.png" alt="1.png-211.2kB"></p>
+<h3 id="第七关"><a href="#第七关" class="headerlink" title="第七关"></a>第七关</h3><p><img src="http://static.zybuluo.com/1kbfree/zf12ie3hs0k5aa3neqe0xp47/1.png" alt="1.png-104.4kB"></p>
+<p>这一关还是黑名单策略，因为这里没有把<code>.</code>删除，所以可以上传<code>.php.</code>绕过（原理是<code>window</code>会把文件后缀后面的<code>.</code>删除，比如上传<code>1.php....</code>会变成<code>1.php</code>这是<code>window</code>的特性）</p>
+<p><img src="http://static.zybuluo.com/1kbfree/7i9btw4p1jgg389i5ldg8f7n/1.png" alt="1.png-195.2kB"></p>
+<h3 id="第八关"><a href="#第八关" class="headerlink" title="第八关"></a>第八关</h3><p><img src="http://static.zybuluo.com/1kbfree/e235k0xqmjlb1mux16sq42pp/1.png" alt="1.png-104.8kB"></p>
+<p>还是黑名单，但是我们还是可以利用<code>window</code>的特性绕过，上传一个<code>.php::$DATA</code>后缀类型，上传后会变成<code>.php</code></p>
+<p><img src="http://static.zybuluo.com/1kbfree/oggqh8pqlrxh123ach0i1sr5/1.png" alt="1.png-182.3kB"></p>
+<h3 id="第九关"><a href="#第九关" class="headerlink" title="第九关"></a>第九关</h3><p><img src="http://static.zybuluo.com/1kbfree/sm2pqysgey461fw4horiamzt/1.png" alt="1.png-61.3kB"></p>
+<p>还是黑名单策略，但是我们可以利用<code>only_free.php. .</code>来绕过，因为第<code>7</code>行会删除末尾的点就变成了<code>only_free.php.空格</code>，然后第<code>11</code>行会把后面的空格去掉，就变成了<code>only_free.php.</code>然后经过<code>window</code>的特性，会变成<code>only_free.php</code>，如图</p>
+<p><img src="http://static.zybuluo.com/1kbfree/vv8dn5cbhb5dytjligzy2ay8/1.png" alt="1.png-178.7kB"></p>
+<h3 id="第十关"><a href="#第十关" class="headerlink" title="第十关"></a>第十关</h3><p><img src="http://static.zybuluo.com/1kbfree/bp51xt04y8tkd2vcq60e5qxn/1.png" alt="1.png-39.4kB"></p>
+<p>先看到第<code>8</code>行，代码意思是：把<code>$file_name</code>中的<code>$deny_ext</code>替换为空，意思就是如果我上传的文件名是<code>1.php</code>而<code>php</code>在<code>$deny_ext</code>列表里，然后就会把<code>php</code>替换为空，变成<code>1.</code>，但是这里有个逻辑缺陷。如上传一个<code>1.pphphp</code>他会把<code>php</code>去掉，如图<img src="http://static.zybuluo.com/1kbfree/1htnv3q748vlkus1ofrqr5tw/1.png" alt="1.png-0.7kB">，然后就变成了<code>1.php</code>成功绕过，如图</p>
+<p><img src="http://static.zybuluo.com/1kbfree/n6tnwg5w5j1mxdnxig7loc5a/1.png" alt="1.png-212.5kB"></p>
+<h3 id="第十一关"><a href="#第十一关" class="headerlink" title="第十一关"></a>第十一关</h3><p>暂空</p>
+<h3 id="第十二关"><a href="#第十二关" class="headerlink" title="第十二关"></a>第十二关</h3><p>暂空</p>
+<h3 id="第十三关"><a href="#第十三关" class="headerlink" title="第十三关"></a>第十三关</h3><p>这一关比较奇特，不用上传<code>php</code>文件，只要能成功上传图片即可，而上传图片的前提是这个图片必须为图片马，何为图片马呢？ 就是一个能正常显示，但是图片本身是带有恶意的代码的，详细可看如下链接</p>
+<p><a href="http://gv7.me/articles/2017/picture-trojan-horse-making-method/" target="_blank" rel="noopener">http://gv7.me/articles/2017/picture-trojan-horse-making-method/</a></p>
+<p>这里上传的话上传一个<code>only_free.jpg</code>，然后内容是</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">GIF98a</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">phpinfo();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="meta">?&gt;</span></span></pre></td></tr></table></figure>
+
+<p><code>GIF98a</code>是图片头，这样子表示这个是<code>GIF</code>图片，然后看上传结果</p>
+<p><img src="http://static.zybuluo.com/1kbfree/cs7e2iz253rsgfsrebhvl41s/1.png" alt="1.png-200.4kB"></p>
+<h3 id="第十四关"><a href="#第十四关" class="headerlink" title="第十四关"></a>第十四关</h3><p><img src="http://static.zybuluo.com/1kbfree/1fotl28nmsl9pdtp7yycrhis/1.png" alt="1.png-102.3kB"></p>
+<p>看到这里的第四行是获取<code>$filename</code>的图片类型，依旧可以用<code>GIF98a</code>来绕过</p>
+<p><img src="http://static.zybuluo.com/1kbfree/uys1zulksuzq9g39yhj7jjae/1.png" alt="1.png-216.4kB"></p>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-12-18T01:15:48.909Z" itemprop="dateUpdated">2019-12-18 09:15:48</time>
+</span><br>
+
+
+        
+        未经允许，禁止转载：<a href="/2018/12/18/upload-labs%E9%80%9A%E5%85%B3%E7%AC%94%E8%AE%B0/" target="_blank" rel="external">http://yoursite.com/2018/12/18/upload-labs%E9%80%9A%E5%85%B3%E7%AC%94%E8%AE%B0/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/blog.jpg" alt="$_Fuck">
+            $_Fuck
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" target="_blank" rel="noopener" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web%E5%AE%89%E5%85%A8/" rel="tag">Web安全</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/12/18/upload-labs%E9%80%9A%E5%85%B3%E7%AC%94%E8%AE%B0/&title=《upload-labs通关笔记》 — $_Fuck&pic=http://yoursite.com/img/blog.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/12/18/upload-labs%E9%80%9A%E5%85%B3%E7%AC%94%E8%AE%B0/&title=《upload-labs通关笔记》 — $_Fuck&source=无助就算了，还要假装坚强。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/12/18/upload-labs%E9%80%9A%E5%85%B3%E7%AC%94%E8%AE%B0/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《upload-labs通关笔记》 — $_Fuck&url=http://yoursite.com/2018/12/18/upload-labs%E9%80%9A%E5%85%B3%E7%AC%94%E8%AE%B0/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/12/18/upload-labs%E9%80%9A%E5%85%B3%E7%AC%94%E8%AE%B0/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" target="_blank" rel="noopener" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/12/21/%E7%8C%8E%E8%B1%B9%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%AA%E4%BA%BA%E4%B8%AD%E5%BF%83%E9%80%BB%E8%BE%91%E9%94%99%E8%AF%AF%E5%AF%BC%E8%87%B4%E9%87%8D%E7%BD%AE%E7%94%A8%E6%88%B7%E6%95%B0%E6%8D%AE/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">猎豹浏览器个人中心逻辑错误导致重置用户数据</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/12/18/%E8%8E%B7%E5%8F%96%E7%9C%9F%E5%AE%9EIP%E6%96%B9%E6%B3%95%E3%80%90%E7%BB%95%E8%BF%87CDN%E3%80%91/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">获取真实IP方法【绕过CDN】</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        禁止打赏~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/" data-alipay="/img/">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" target="_blank" rel="noopener" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/12/18/upload-labs%E9%80%9A%E5%85%B3%E7%AC%94%E8%AE%B0/&title=《upload-labs通关笔记》 — $_Fuck&pic=http://yoursite.com/img/blog.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/12/18/upload-labs%E9%80%9A%E5%85%B3%E7%AC%94%E8%AE%B0/&title=《upload-labs通关笔记》 — $_Fuck&source=无助就算了，还要假装坚强。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/12/18/upload-labs%E9%80%9A%E5%85%B3%E7%AC%94%E8%AE%B0/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《upload-labs通关笔记》 — $_Fuck&url=http://yoursite.com/2018/12/18/upload-labs%E9%80%9A%E5%85%B3%E7%AC%94%E8%AE%B0/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/12/18/upload-labs%E9%80%9A%E5%85%B3%E7%AC%94%E8%AE%B0/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2018/12/18/upload-labs%E9%80%9A%E5%85%B3%E7%AC%94%E8%AE%B0/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Bay！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Fuck的博客~';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

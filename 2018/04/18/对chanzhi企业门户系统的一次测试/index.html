@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>对chanzhi企业门户系统的一次测试 | $_Fuck | 白天搞笑的废物，晚上抑郁的怪物。</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Web安全">
+    <meta name="description" content="依稀记得，这是我挖的第一个漏洞，非常怀念。  系统官网:http:&#x2F;&#x2F;www.chanzhi.org&#x2F;?v&#x3D;7.0.1安装步骤之类的就省去了，直接开始测试 Csrf+Xss漏洞漏洞复现过程：漏洞处:后台-&amp;gt;内容-&amp;gt;维护目录( www.yousite.xxx&#x2F;www&#x2F;admin.php?m&#x3D;tree&amp;amp;f&#x3D;browse&amp;amp;type&#x3D;article ) 尝试输入一些恶意代码:">
+<meta name="keywords" content="Web安全">
+<meta property="og:type" content="article">
+<meta property="og:title" content="对chanzhi企业门户系统的一次测试">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;04&#x2F;18&#x2F;%E5%AF%B9chanzhi%E4%BC%81%E4%B8%9A%E9%97%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B5%8B%E8%AF%95&#x2F;index.html">
+<meta property="og:site_name" content="$_Fuck">
+<meta property="og:description" content="依稀记得，这是我挖的第一个漏洞，非常怀念。  系统官网:http:&#x2F;&#x2F;www.chanzhi.org&#x2F;?v&#x3D;7.0.1安装步骤之类的就省去了，直接开始测试 Csrf+Xss漏洞漏洞复现过程：漏洞处:后台-&amp;gt;内容-&amp;gt;维护目录( www.yousite.xxx&#x2F;www&#x2F;admin.php?m&#x3D;tree&amp;amp;f&#x3D;browse&amp;amp;type&#x3D;article ) 尝试输入一些恶意代码:">
+<meta property="og:locale" content="zh">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;1eqczzj0lmvp5bx7cuytacx7&#x2F;image_1cf22p9ph1h001c11c48en41udv9.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;9jkepe0movhb3wqnogdp3q72&#x2F;image_1cf22sib1r2s1gmr1ef91jdobl3m.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;kamwo6vjibi723vy6xsftfpj&#x2F;image_1cf234ih41j9j13q81fui1vt61e4613.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;spy3dawa6wefouk801yjbmmy&#x2F;image_1cf238hq59dd17s81hmc19fo17de1g.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;z77f48e487ibum2kzqzgtbyg&#x2F;image_1cf23afcu47711rc1f8dda51td81t.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;ia6pgpvoujwmaiubnvr32dac&#x2F;image_1cf23be0010jv2trk20h981fa32a.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;bi0vt6ds8xk4tjja26jatavc&#x2F;image_1cf23jr1ahr71q7oh512dkthq51.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;akzoa6mwnynhh9alfkz5z27d&#x2F;image_1cf23er16or4g0a18gh18ap7a22n.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;zodoc27hx19hevz7zi2yu7yz&#x2F;image_1cf23lrb4153tkd2123m1v988p85e.png">
+<meta property="og:updated_time" content="2019-12-18T01:19:30.657Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;1eqczzj0lmvp5bx7cuytacx7&#x2F;image_1cf22p9ph1h001c11c48en41udv9.png">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/blog.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">$_Fuck</h5>
+          <a href="mailto:以凡人之躯比肩神明" target="_blank" rel="noopener" title="以凡人之躯比肩神明" class="mail">以凡人之躯比肩神明</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-address-book"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/Web%E5%AE%89%E5%85%A8/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/link"  >
+                <i class="icon icon-lg icon-link"></i>
+                友情链接
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">对chanzhi企业门户系统的一次测试</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">对chanzhi企业门户系统的一次测试</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-04-18T07:17:18.000Z" itemprop="datePublished" class="page-time">
+  2018-04-18
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD/">兴趣爱好</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container-fluid blog body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Csrf-Xss漏洞"><span class="post-toc-number">1.</span> <span class="post-toc-text">Csrf+Xss漏洞</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#漏洞复现过程："><span class="post-toc-number">1.1.</span> <span class="post-toc-text">漏洞复现过程：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#尝试输入一些恶意代码"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">尝试输入一些恶意代码:</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#用Burp抓包分析一波，并且放入Repeater模块"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">用Burp抓包分析一波，并且放入Repeater模块</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-对chanzhi企业门户系统的一次测试"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">对chanzhi企业门户系统的一次测试</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-04-18 15:17:18" datetime="2018-04-18T07:17:18.000Z"  itemprop="datePublished">2018-04-18</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD/">兴趣爱好</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <blockquote>
+<p>依稀记得，这是我挖的第一个漏洞，非常怀念。</p>
+</blockquote>
+<p>系统官网:<a href="http://www.chanzhi.org/?v=7.0.1" target="_blank" rel="noopener">http://www.chanzhi.org/?v=7.0.1</a><br>安装步骤之类的就省去了，直接开始测试</p>
+<h2 id="Csrf-Xss漏洞"><a href="#Csrf-Xss漏洞" class="headerlink" title="Csrf+Xss漏洞"></a>Csrf+Xss漏洞</h2><h3 id="漏洞复现过程："><a href="#漏洞复现过程：" class="headerlink" title="漏洞复现过程："></a>漏洞复现过程：</h3><p><strong>漏洞处:后台-&gt;内容-&gt;维护目录( <code>www.yousite.xxx/www/admin.php?m=tree&amp;f=browse&amp;type=article</code> )</strong><br><img src="http://static.zybuluo.com/1kbfree/1eqczzj0lmvp5bx7cuytacx7/image_1cf22p9ph1h001c11c48en41udv9.png" alt="image_1cf22p9ph1h001c11c48en41udv9.png-88kB"></p>
+<h3 id="尝试输入一些恶意代码"><a href="#尝试输入一些恶意代码" class="headerlink" title="尝试输入一些恶意代码:"></a>尝试输入一些恶意代码:</h3><p><img src="http://static.zybuluo.com/1kbfree/9jkepe0movhb3wqnogdp3q72/image_1cf22sib1r2s1gmr1ef91jdobl3m.png" alt="image_1cf22sib1r2s1gmr1ef91jdobl3m.png-94kB"><br><em>这里因为发现没有过滤，所以存在Xss漏洞，但是这里我们是不可能插入的(除非管理员自己插入的，那么，我们就来看看有没有Csrf漏洞可以结合一下)，然后就想着用<code>Burp</code>抓包分析一下，发现有戏~</em></p>
+<h3 id="用Burp抓包分析一波，并且放入Repeater模块"><a href="#用Burp抓包分析一波，并且放入Repeater模块" class="headerlink" title="用Burp抓包分析一波，并且放入Repeater模块"></a>用Burp抓包分析一波，并且放入Repeater模块</h3><p><img src="http://static.zybuluo.com/1kbfree/kamwo6vjibi723vy6xsftfpj/image_1cf234ih41j9j13q81fui1vt61e4613.png" alt="image_1cf234ih41j9j13q81fui1vt61e4613.png-179.2kB"><br><em>这里并没有发现有<code>Token</code>验证，那么我们来利用<code>Burp</code>自带的生成<code>Csrf Poc</code></em></p>
+<ol>
+<li><p>右键-&gt;Engagement tools-&gt;Generate Csrf PoC<br><img src="http://static.zybuluo.com/1kbfree/spy3dawa6wefouk801yjbmmy/image_1cf238hq59dd17s81hmc19fo17de1g.png" alt="image_1cf238hq59dd17s81hmc19fo17de1g.png-200.7kB"></p>
+</li>
+<li><p>自动写出PoC，我们直接复制到本地的HTML文件里<br><img src="http://static.zybuluo.com/1kbfree/z77f48e487ibum2kzqzgtbyg/image_1cf23afcu47711rc1f8dda51td81t.png" alt="image_1cf23afcu47711rc1f8dda51td81t.png-130.6kB"><br><img src="http://static.zybuluo.com/1kbfree/ia6pgpvoujwmaiubnvr32dac/image_1cf23be0010jv2trk20h981fa32a.png" alt="image_1cf23be0010jv2trk20h981fa32a.png-166.1kB"></p>
+</li>
+<li><p>在浏览器中打开这个生成的PoC<br><img src="http://static.zybuluo.com/1kbfree/bi0vt6ds8xk4tjja26jatavc/image_1cf23jr1ahr71q7oh512dkthq51.png" alt="image_1cf23jr1ahr71q7oh512dkthq51.png-32.9kB"><br><img src="http://static.zybuluo.com/1kbfree/akzoa6mwnynhh9alfkz5z27d/image_1cf23er16or4g0a18gh18ap7a22n.png" alt="image_1cf23er16or4g0a18gh18ap7a22n.png-78.5kB"><br><img src="http://static.zybuluo.com/1kbfree/zodoc27hx19hevz7zi2yu7yz/image_1cf23lrb4153tkd2123m1v988p85e.png" alt="image_1cf23lrb4153tkd2123m1v988p85e.png-81.4kB"></p>
+</li>
+</ol>
+<p><em>ok，存在Csrf漏洞</em></p>
+<blockquote>
+<p>我们可以利用社工来把这个文件发送给管理员，如果管理员选择了打开的话那么就可以盗取他的Cookie了，那么很多人会问，管理员看到这样的界面肯定会不点击啦，那么我给你一个思路，就是把csrf_poc的代码放在 1.html 文件( 把点击提交修改为自动提交 )，然后把2.html文件用 iframe标签把 1.html 文件嵌入 并且把iframe标签透明度设置为100%，那么管理员打开后就会自动提交表单并且不会展示在2.html页面上<del>~</del></p>
+</blockquote>
+<hr>
+<blockquote>
+<p>本来还想写另一个漏洞的，可惜无法绕过，实属能力有限<del>~ ~</del></p>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-12-18T01:19:30.657Z" itemprop="dateUpdated">2019-12-18 09:19:30</time>
+</span><br>
+
+
+        
+        未经允许，禁止转载：<a href="/2018/04/18/%E5%AF%B9chanzhi%E4%BC%81%E4%B8%9A%E9%97%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B5%8B%E8%AF%95/" target="_blank" rel="external">http://yoursite.com/2018/04/18/%E5%AF%B9chanzhi%E4%BC%81%E4%B8%9A%E9%97%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B5%8B%E8%AF%95/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/blog.jpg" alt="$_Fuck">
+            $_Fuck
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" target="_blank" rel="noopener" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web%E5%AE%89%E5%85%A8/" rel="tag">Web安全</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/04/18/%E5%AF%B9chanzhi%E4%BC%81%E4%B8%9A%E9%97%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B5%8B%E8%AF%95/&title=《对chanzhi企业门户系统的一次测试》 — $_Fuck&pic=http://yoursite.com/img/blog.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/04/18/%E5%AF%B9chanzhi%E4%BC%81%E4%B8%9A%E9%97%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B5%8B%E8%AF%95/&title=《对chanzhi企业门户系统的一次测试》 — $_Fuck&source=无助就算了，还要假装坚强。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/04/18/%E5%AF%B9chanzhi%E4%BC%81%E4%B8%9A%E9%97%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B5%8B%E8%AF%95/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《对chanzhi企业门户系统的一次测试》 — $_Fuck&url=http://yoursite.com/2018/04/18/%E5%AF%B9chanzhi%E4%BC%81%E4%B8%9A%E9%97%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B5%8B%E8%AF%95/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/04/18/%E5%AF%B9chanzhi%E4%BC%81%E4%B8%9A%E9%97%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B5%8B%E8%AF%95/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" target="_blank" rel="noopener" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/05/21/php%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%86%99%E5%85%A5%E6%89%A7%E8%A1%8C%E4%BB%A3%E7%A0%81/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">php配置文件写入执行代码</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/03/07/PHP%E5%8E%9F%E7%94%9F%E7%A8%8B%E5%BA%8F%E4%B9%8B%E5%8D%9A%E5%AE%A2%E5%88%86%E6%9E%90/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">PHP原生程序之博客分析</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        禁止打赏~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/" data-alipay="/img/">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" target="_blank" rel="noopener" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/04/18/%E5%AF%B9chanzhi%E4%BC%81%E4%B8%9A%E9%97%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B5%8B%E8%AF%95/&title=《对chanzhi企业门户系统的一次测试》 — $_Fuck&pic=http://yoursite.com/img/blog.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/04/18/%E5%AF%B9chanzhi%E4%BC%81%E4%B8%9A%E9%97%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B5%8B%E8%AF%95/&title=《对chanzhi企业门户系统的一次测试》 — $_Fuck&source=无助就算了，还要假装坚强。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/04/18/%E5%AF%B9chanzhi%E4%BC%81%E4%B8%9A%E9%97%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B5%8B%E8%AF%95/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《对chanzhi企业门户系统的一次测试》 — $_Fuck&url=http://yoursite.com/2018/04/18/%E5%AF%B9chanzhi%E4%BC%81%E4%B8%9A%E9%97%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B5%8B%E8%AF%95/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/04/18/%E5%AF%B9chanzhi%E4%BC%81%E4%B8%9A%E9%97%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B5%8B%E8%AF%95/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2018/04/18/%E5%AF%B9chanzhi%E4%BC%81%E4%B8%9A%E9%97%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B5%8B%E8%AF%95/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Bay！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Fuck的博客~';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

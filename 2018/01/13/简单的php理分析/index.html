@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>简单的PHP用户管理分析 | $_Fuck | 白天搞笑的废物，晚上抑郁的怪物。</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="开发">
+    <meta name="description" content="项目介绍这是笔者从GITHUB上找的简单PHP程序(用于学习) 这是一个可 增删查 的用户数据管理  数据库连接代码:先介绍一下数据库的表结构：  1&amp;lt;?php2    $pdo &amp;#x3D; new PDO(&amp;#39;mysql:host&amp;#x3D;localhost;dbname&amp;#x3D;data&amp;#39;,&amp;#39;root&amp;#39;,&amp;#39;root&amp;#39;); &amp;#x2F;">
+<meta name="keywords" content="开发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="简单的PHP用户管理分析">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;01&#x2F;13&#x2F;%E7%AE%80%E5%8D%95%E7%9A%84php%E7%90%86%E5%88%86%E6%9E%90&#x2F;index.html">
+<meta property="og:site_name" content="$_Fuck">
+<meta property="og:description" content="项目介绍这是笔者从GITHUB上找的简单PHP程序(用于学习) 这是一个可 增删查 的用户数据管理  数据库连接代码:先介绍一下数据库的表结构：  1&amp;lt;?php2    $pdo &amp;#x3D; new PDO(&amp;#39;mysql:host&amp;#x3D;localhost;dbname&amp;#x3D;data&amp;#39;,&amp;#39;root&amp;#39;,&amp;#39;root&amp;#39;); &amp;#x2F;">
+<meta property="og:locale" content="zh">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;k5qvxxtdmbdxj9tpqq9x10fa&#x2F;timg.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;4z5de16ziysrio7dqad9u1ow&#x2F;image_1cc2vfnu31qpg1a1j1fob13be3ejm.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;jgp8ljt3m0adp7i8ty1kkdr2&#x2F;image_1cc3136er1ru31m9si1chlcue21t.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;bepqcvepabcym10rq7qnksgz&#x2F;image_1cc30pp7sd2s1qr7198mul41vig1g.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;sc0wogf37jngd8cpysvke01r&#x2F;image_1cc3s3mnp9ma7luult1egp1rk19.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;snrsn6lp951qha73mz3fbdpa&#x2F;image_1cc57auk9gkn62o16121cad1bau9.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;h9iti01jywhmby5a3x4n8h3o&#x2F;image_1cc57donr1leu1i341t1r1479fafm.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;79lf8bu5wdylyn1rmkhrzgu9&#x2F;image_1cc57nvhn1dml1u0910ko1sccv4213.png">
+<meta property="og:updated_time" content="2020-01-31T19:50:37.169Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;k5qvxxtdmbdxj9tpqq9x10fa&#x2F;timg.jpg">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/blog.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">$_Fuck</h5>
+          <a href="mailto:以凡人之躯比肩神明" target="_blank" rel="noopener" title="以凡人之躯比肩神明" class="mail">以凡人之躯比肩神明</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-address-book"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/Web%E5%AE%89%E5%85%A8/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/link"  >
+                <i class="icon icon-lg icon-link"></i>
+                友情链接
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">简单的PHP用户管理分析</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">简单的PHP用户管理分析</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-01-13T00:27:08.000Z" itemprop="datePublished" class="page-time">
+  2018-01-13
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container-fluid blog body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#项目介绍"><span class="post-toc-number">1.</span> <span class="post-toc-text">项目介绍</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据库连接代码"><span class="post-toc-number">2.</span> <span class="post-toc-text">数据库连接代码:</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#其中的PDO是"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">其中的PDO是:</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#首页代码："><span class="post-toc-number">3.</span> <span class="post-toc-text">首页代码：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#首页的代码我统统写了注释："><span class="post-toc-number">3.1.</span> <span class="post-toc-text">首页的代码我统统写了注释：</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#更改用户数据代码："><span class="post-toc-number">4.</span> <span class="post-toc-text">更改用户数据代码：</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#插入数据代码："><span class="post-toc-number">5.</span> <span class="post-toc-text">插入数据代码：</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#删除功能代码"><span class="post-toc-number">6.</span> <span class="post-toc-text">删除功能代码:</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#最后我们看看act-php的代码："><span class="post-toc-number">7.</span> <span class="post-toc-text">最后我们看看act.php的代码：</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-简单的php理分析"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">简单的PHP用户管理分析</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-01-13 08:27:08" datetime="2018-01-13T00:27:08.000Z"  itemprop="datePublished">2018-01-13</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p><img src="http://static.zybuluo.com/1kbfree/k5qvxxtdmbdxj9tpqq9x10fa/timg.jpg" alt="PHP图片"></p>
+<h2 id="项目介绍"><a href="#项目介绍" class="headerlink" title="项目介绍"></a>项目介绍</h2><p>这是笔者从GITHUB上找的简单PHP程序(用于学习)</p>
+<p><img src="http://static.zybuluo.com/1kbfree/4z5de16ziysrio7dqad9u1ow/image_1cc2vfnu31qpg1a1j1fob13be3ejm.png" alt="image_1cc2vfnu31qpg1a1j1fob13be3ejm.png-72.6kB"><br><strong>这是一个可 增删查 的用户数据管理</strong></p>
+<hr>
+<h2 id="数据库连接代码"><a href="#数据库连接代码" class="headerlink" title="数据库连接代码:"></a>数据库连接代码:</h2><p><strong>先介绍一下数据库的表结构：</strong></p>
+<p><img src="http://static.zybuluo.com/1kbfree/jgp8ljt3m0adp7i8ty1kkdr2/image_1cc3136er1ru31m9si1chlcue21t.png" alt="image_1cc3136er1ru31m9si1chlcue21t.png-24.4kB"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&lt;?php</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    $pdo &#x3D; new PDO(&#39;mysql:host&#x3D;localhost;dbname&#x3D;data&#39;,&#39;root&#39;,&#39;root&#39;); &#x2F;&#x2F;PDO(PHP访问数据库定义了一个轻量级的、一致性的接口，它提供了一个数据访问抽象层，这样，无论使用什么数据库，都可以通过一致的函数执行查询和获取数据，比如mysql有limit，MSSQL没有limit，pdo会自动转换)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    $pdo-&gt;exec(&#39;set names utf8&#39;); &#x2F;&#x2F;设置编码</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    $pdo-&gt;setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE,PDO::FETCH_ASSOC); &#x2F;&#x2F;设置默认结果集模式为关联数组</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    $pdo-&gt;setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION); &#x2F;&#x2F;修改报错模式</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">?&gt;</span></pre></td></tr></table></figure>
+<h3 id="其中的PDO是"><a href="#其中的PDO是" class="headerlink" title="其中的PDO是:"></a>其中的PDO是:</h3><p><em>PDO(PHP访问数据库定义了一个轻量级的、一致性的接口，它提供了一个数据访问抽象层，这样，无论使用什么数据库，都可以通过一致的函数执行查询和获取数据，比如mysql有limit，MSSQL没有limit，pdo会自动转换)</em></p>
+<p><strong>PDO好处：</strong></p>
+<ol>
+<li>更换数据库时取得极大便利(从A数据库换成其他数据库可以不需要修改查询的代码，因为PDO帮我实现了)</li>
+<li>更换数据库时取得极大便利</li>
+</ol>
+<h2 id="首页代码："><a href="#首页代码：" class="headerlink" title="首页代码："></a>首页代码：</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">include</span> <span class="string">'config.inc.php'</span>; <span class="comment">//包含连接数据库的代码</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">	$len = <span class="number">10</span>; <span class="comment">//每页展现10条数据</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">	$page = !<span class="keyword">empty</span>($_GET[<span class="string">"page"</span>]) ? $_GET[<span class="string">"page"</span>] : <span class="number">1</span>;<span class="comment">//三元表达式，表示如果$_GET['page']为空时，默认值为1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    $sqlTotal = <span class="string">"select count(Id) from t1"</span>; <span class="comment">// SQL语句。意思是查询t1表中的Id字段个数</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    $smtTotal = $pdo-&gt;prepare($sqlTotal); <span class="comment">//准备要执行的SQL语句并返回一个 PDOStatement 对象(PHP 5 &gt;= 5.1.0, PECL pdo &gt;= 0.1.0)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">echo</span> <span class="string">"&lt;strong&gt;\$sqlTotal:&lt;/strong&gt;"</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    print_r($smtTotal);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">echo</span> <span class="string">"&lt;br /&gt;"</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">echo</span> <span class="string">"&lt;strong&gt;execute():&lt;/strong&gt;"</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">	print_r($smtTotal-&gt;execute());</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    $tot = $smtTotal-&gt;fetchColumn();	<span class="comment">//总记录数</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">echo</span> <span class="string">"&lt;br /&gt;"</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">echo</span> <span class="string">"&lt;strong&gt;\$tot:&lt;/strong&gt;"</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    print_r($tot);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">echo</span> <span class="string">"&lt;br /&gt;"</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    $pages = ceil($tot/$len);	<span class="comment">//总页数</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">echo</span> <span class="string">"&lt;strong&gt;\$pages:&lt;/strong&gt;"</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    print_r($pages);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">    ... ...(省略，先讲解一下这段代码的用法)</span></pre></td></tr></table></figure>
+
+<p><img src="http://static.zybuluo.com/1kbfree/bepqcvepabcym10rq7qnksgz/image_1cc30pp7sd2s1qr7198mul41vig1g.png" alt="image_1cc30pp7sd2s1qr7198mul41vig1g.png-34.8kB"></p>
+<blockquote>
+<p>可以看看我写的PDO的（博客里找）</p>
+</blockquote>
+<h3 id="首页的代码我统统写了注释："><a href="#首页的代码我统统写了注释：" class="headerlink" title="首页的代码我统统写了注释："></a>首页的代码我统统写了注释：</h3><p><img src="http://static.zybuluo.com/1kbfree/sc0wogf37jngd8cpysvke01r/image_1cc3s3mnp9ma7luult1egp1rk19.png" alt="image_1cc3s3mnp9ma7luult1egp1rk19.png-178.8kB"></p>
+<h2 id="更改用户数据代码："><a href="#更改用户数据代码：" class="headerlink" title="更改用户数据代码："></a>更改用户数据代码：</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">/* </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">    思路:先获取对应的数据，然后返回到输入框，如果我们选择提交，表单就会发送的数据就会更改到数据库里，实现更改内容</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">*/</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">	</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">	<span class="meta">&lt;?php</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">include</span> <span class="string">'config.inc.php'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">$Id = $_GET[<span class="string">"Id"</span>]; <span class="comment">//获取GET请求过来的Id值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">$sql = <span class="string">"select * from t1 where Id=?"</span>; <span class="comment">//SQL语句的查询</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">$smt = $pdo-&gt;prepare($sql); <span class="comment">//给SQL语句做标记</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">$smt-&gt;bindValue(<span class="number">1</span>,$Id); <span class="comment">//想成是给上面的?改成$Id变量的值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">$smt-&gt;execute(); <span class="comment">//执行SQL语句</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">$row = $smt-&gt;fetch(); <span class="comment">//接收SQL语句查询到的结果</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"><span class="meta">?&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">&lt;head&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    &lt;title&gt;update&lt;/title&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    &lt;meta charset=<span class="string">"utf-8"</span>&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">&lt;/head&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span> src=<span class="string">"bower_components/jquery/dist/jquery.min.js"</span>&gt;&lt;/script&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span> src=<span class="string">"bower_components/bootstrap/dist/js/bootstrap.min.js"</span>&gt;&lt;/script&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">&lt;link rel=<span class="string">"stylesheet"</span> type=<span class="string">"text/css"</span> href=<span class="string">"bower_components/bootstrap/dist/css/bootstrap.min.css"</span>&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">&lt;div class="container"&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">    &lt;h1 class="page-header"&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">        &lt;a href="index.php" class="btn btn-warning"&gt;查看用户&lt;/a&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">        &lt;a href="" class="btn btn-primary"&gt;修改用户&lt;/a&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">    &lt;/h1&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">    &lt;form action=<span class="string">"act.php?act=update&amp;Id=&lt;?php echo $Id;?&gt;"</span> method=<span class="string">"post"</span>&gt; &lt;!-- act页面实现的修改功能，这里只需要传入要修改的Id值就可以更改此Id中对应的数据 --&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">        &lt;div class="form-group"&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">            &lt;label&gt;新用户名:&lt;/label&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">            &lt;input type="text" class="form-control" name="Name" value=&lt;?php echo "&#123;$row['Name']&#125;";//把查询到的数据的Name返回到输入框中，这样子我们就可以实现修改功能 ?&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">            &gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">        &lt;/div&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">        &lt;div class="form-group"&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">            &lt;label&gt;新密码:&lt;/label&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">            &lt;input type="text" class="form-control" name="Pwd" value=</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">            <span class="meta">&lt;?php</span> <span class="keyword">echo</span> <span class="string">"&#123;$row['Pwd']&#125;"</span>; <span class="comment">//同上<span class="meta">?&gt;</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">            &gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">        &lt;/div&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line">        &lt;div class="form-group"&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line">            &lt;input type="submit" class="btn btn-primary"&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">48</span></pre></td><td class="code"><pre><span class="line">            &lt;input type="reset" class="btn btn-danger"&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">49</span></pre></td><td class="code"><pre><span class="line">        &lt;/div&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">50</span></pre></td><td class="code"><pre><span class="line">    &lt;/form&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">51</span></pre></td><td class="code"><pre><span class="line">&lt;/div&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">52</span></pre></td><td class="code"><pre><span class="line">&lt;/body&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">53</span></pre></td><td class="code"><pre><span class="line">&lt;/html&gt;</span></pre></td></tr></table></figure>
+
+<h2 id="插入数据代码："><a href="#插入数据代码：" class="headerlink" title="插入数据代码："></a>插入数据代码：</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">title</span>&gt;</span>add<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"bower_components/jquery/dist/jquery.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"bower_components/bootstrap/dist/js/bootstrap.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> <span class="attr">href</span>=<span class="string">"bower_components/bootstrap/dist/css/bootstrap.min.css"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">		<span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">"page-header"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">			<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"index.php"</span> <span class="attr">class</span>=<span class="string">"btn btn-warning"</span>&gt;</span>查看用户<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">			<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">""</span> <span class="attr">class</span>=<span class="string">"btn btn-primary"</span>&gt;</span>添加用户<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">		<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">		<span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"act.php?act=insert"</span> <span class="attr">method</span>=<span class="string">"post"</span>&gt;</span> <span class="comment">&lt;!-- act.php页面实现了插入功能，所以这里我们只需要把内容提交到act.php就可以完成插入内容 --&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">			<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"form-group"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">				<span class="tag">&lt;<span class="name">label</span>&gt;</span>用户名:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">				<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">class</span>=<span class="string">"form-control"</span> <span class="attr">name</span>=<span class="string">"Name"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">			<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">			<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"form-group"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">				<span class="tag">&lt;<span class="name">label</span>&gt;</span>密码:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">				<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">class</span>=<span class="string">"form-control"</span> <span class="attr">name</span>=<span class="string">"Pwd"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">			<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">			<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"form-group"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">				<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">class</span>=<span class="string">"btn btn-primary"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">				<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"reset"</span> <span class="attr">class</span>=<span class="string">"btn btn-danger"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">			<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">		<span class="tag">&lt;/<span class="name">form</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span></pre></td></tr></table></figure>
+
+<h2 id="删除功能代码"><a href="#删除功能代码" class="headerlink" title="删除功能代码:"></a>删除功能代码:</h2><p><strong>删除页面代码也在首页(index.php)里实现的</strong><br><img src="http://static.zybuluo.com/1kbfree/snrsn6lp951qha73mz3fbdpa/image_1cc57auk9gkn62o16121cad1bau9.png" alt="image_1cc57auk9gkn62o16121cad1bau9.png-104.5kB"><br><em>一般我们删除操作是需要十分谨慎的，因为数据一旦删除是无法恢复的，那么如果用户不小心点到了按钮，我们就应该提醒他是否要删除。</em></p>
+<p><img src="http://static.zybuluo.com/1kbfree/h9iti01jywhmby5a3x4n8h3o/image_1cc57donr1leu1i341t1r1479fafm.png" alt="image_1cc57donr1leu1i341t1r1479fafm.png-36kB"><br><em>可以看到这里有一个class是delete，然后看到下面有一段提醒是否执行删除的JS代码：</em><br><img src="http://static.zybuluo.com/1kbfree/79lf8bu5wdylyn1rmkhrzgu9/image_1cc57nvhn1dml1u0910ko1sccv4213.png" alt="image_1cc57nvhn1dml1u0910ko1sccv4213.png-48.6kB"></p>
+<h2 id="最后我们看看act-php的代码："><a href="#最后我们看看act-php的代码：" class="headerlink" title="最后我们看看act.php的代码："></a>最后我们看看act.php的代码：</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">include</span> <span class="string">'config.inc.php'</span>; <span class="comment">//包含PDO链接数据库代码</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">	$act = $_GET[<span class="string">"act"</span>]; <span class="comment">//获取GET请求过来的act值，来实现增、删、改。</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">if</span>($act == <span class="string">'delete'</span>)&#123; <span class="comment">//如果是选择删除</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    	$Id = $_GET[<span class="string">"Id"</span>]; <span class="comment">//获取GET请求过来的ID</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    	$sql = <span class="string">"delete from t1 where Id=?"</span>; <span class="comment">//这是SQL语句的删除</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    	$smt = $pdo-&gt;prepare($sql); <span class="comment">//给SQL语句做标记</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    	$smt-&gt;bindValue(<span class="number">1</span>,$Id); <span class="comment">//绑定一个值到用作预处理的 SQL 语句中的对应命名占位符或问号占位符</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">if</span>($smt-&gt;execute())&#123; <span class="comment">//判断是否执行成功，如果执行成功返回的是1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">			<span class="keyword">echo</span> <span class="string">"&lt;script&gt;location='index.php'&lt;/script&gt;"</span>; <span class="comment">//执行成功就跳转到首页(index.php)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">		&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">	&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">	</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">if</span>($act == <span class="string">'insert'</span>)&#123; <span class="comment">//如果是选择插入</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        $Name = $_POST[<span class="string">"Name"</span>]; <span class="comment">//获取POST请求的Name值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        $Pwd = $_POST[<span class="string">"Pwd"</span>]; <span class="comment">//获取POST请求的Pwd值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        $sql = <span class="string">"insert into t1(Name,Pwd) values('&#123;$Name&#125;','&#123;$Pwd&#125;')"</span>; <span class="comment">//这是SQL语句的插入</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        $smt = $pdo-&gt;prepare($sql); <span class="comment">//给SQL语句做标记</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>($smt-&gt;execute())&#123; <span class="comment">//判断是否执行成功</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">echo</span> <span class="string">"&lt;script&gt;location='index.php'&lt;/script&gt;"</span>; <span class="comment">//执行成功就跳转到首页(index.php)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">/*如果act=update和id=x，那么就执行修改的SQL语句，修改条件(where)是Id=x*/</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">if</span>($act == <span class="string">'update'</span>)&#123; <span class="comment">//如果是更改</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">		$Id = $_GET[<span class="string">"Id"</span>]; <span class="comment">//获取GET请求的Id值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">		$Name = $_POST[<span class="string">"Name"</span>]; <span class="comment">//获取POST的Name值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">		$Pwd = $_POST[<span class="string">"Pwd"</span>]; <span class="comment">//获取POST请求的Pwd值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">		$sql = <span class="string">"update t1 set Name='&#123;$Name&#125;',Pwd='&#123;$Pwd&#125;' where Id=&#123;$Id&#125;"</span>; <span class="comment">//这是SQL语句的更改</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">		$smt = $pdo-&gt;prepare($sql); <span class="comment">//给SQL语句做标记</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">		<span class="keyword">if</span>($smt-&gt;execute())&#123; <span class="comment">//判断是否执行成功</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">			<span class="keyword">echo</span> <span class="string">"&lt;script&gt;location='index.php'&lt;/script&gt;"</span>; <span class="comment">//如果执行成功就跳转到首页(index.php)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">		&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">	&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">	</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line"> <span class="meta">?&gt;</span></span></pre></td></tr></table></figure>
+
+
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-01-31T19:50:37.169Z" itemprop="dateUpdated">2020-02-01 03:50:37</time>
+</span><br>
+
+
+        
+        未经允许，禁止转载：<a href="/2018/01/13/%E7%AE%80%E5%8D%95%E7%9A%84php%E7%90%86%E5%88%86%E6%9E%90/" target="_blank" rel="external">http://yoursite.com/2018/01/13/%E7%AE%80%E5%8D%95%E7%9A%84php%E7%90%86%E5%88%86%E6%9E%90/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/blog.jpg" alt="$_Fuck">
+            $_Fuck
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" target="_blank" rel="noopener" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BC%80%E5%8F%91/" rel="tag">开发</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/01/13/%E7%AE%80%E5%8D%95%E7%9A%84php%E7%90%86%E5%88%86%E6%9E%90/&title=《简单的PHP用户管理分析》 — $_Fuck&pic=http://yoursite.com/img/blog.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/01/13/%E7%AE%80%E5%8D%95%E7%9A%84php%E7%90%86%E5%88%86%E6%9E%90/&title=《简单的PHP用户管理分析》 — $_Fuck&source=无助就算了，还要假装坚强。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/01/13/%E7%AE%80%E5%8D%95%E7%9A%84php%E7%90%86%E5%88%86%E6%9E%90/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《简单的PHP用户管理分析》 — $_Fuck&url=http://yoursite.com/2018/01/13/%E7%AE%80%E5%8D%95%E7%9A%84php%E7%90%86%E5%88%86%E6%9E%90/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/01/13/%E7%AE%80%E5%8D%95%E7%9A%84php%E7%90%86%E5%88%86%E6%9E%90/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" target="_blank" rel="noopener" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/03/07/PHP%E5%8E%9F%E7%94%9F%E7%A8%8B%E5%BA%8F%E4%B9%8B%E5%8D%9A%E5%AE%A2%E5%88%86%E6%9E%90/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">PHP原生程序之博客分析</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/01/11/PDO%E8%AE%B2%E8%A7%A3/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">PDO讲解</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        禁止打赏~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/" data-alipay="/img/">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" target="_blank" rel="noopener" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/01/13/%E7%AE%80%E5%8D%95%E7%9A%84php%E7%90%86%E5%88%86%E6%9E%90/&title=《简单的PHP用户管理分析》 — $_Fuck&pic=http://yoursite.com/img/blog.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/01/13/%E7%AE%80%E5%8D%95%E7%9A%84php%E7%90%86%E5%88%86%E6%9E%90/&title=《简单的PHP用户管理分析》 — $_Fuck&source=无助就算了，还要假装坚强。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/01/13/%E7%AE%80%E5%8D%95%E7%9A%84php%E7%90%86%E5%88%86%E6%9E%90/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《简单的PHP用户管理分析》 — $_Fuck&url=http://yoursite.com/2018/01/13/%E7%AE%80%E5%8D%95%E7%9A%84php%E7%90%86%E5%88%86%E6%9E%90/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/01/13/%E7%AE%80%E5%8D%95%E7%9A%84php%E7%90%86%E5%88%86%E6%9E%90/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2018/01/13/%E7%AE%80%E5%8D%95%E7%9A%84php%E7%90%86%E5%88%86%E6%9E%90/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Bay！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Fuck的博客~';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

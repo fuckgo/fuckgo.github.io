@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>PHP原生程序之博客分析 | $_Fuck | 白天搞笑的废物，晚上抑郁的怪物。</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="代码审计">
+    <meta name="description" content="介绍这是一个GITHUB上找到的一个使用原生PHP代码写的一个博客，地址是:https:&#x2F;&#x2F;github.com&#x2F;qinshuang1998&#x2F;Tiger-Blog，但是这里有很多功能没有实现（这个作者是不是比我还懒，，，哈哈哈），然后我分析的话只是想让大家明白一下这些功能是如何实现的，还有如果有漏洞的话我也会写出来（因为我是边读边写，然后自己分析一下，但是因为我水平也不是很厉害，所以有很多漏洞也没">
+<meta name="keywords" content="代码审计">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP原生程序之博客分析">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;03&#x2F;07&#x2F;PHP%E5%8E%9F%E7%94%9F%E7%A8%8B%E5%BA%8F%E4%B9%8B%E5%8D%9A%E5%AE%A2%E5%88%86%E6%9E%90&#x2F;index.html">
+<meta property="og:site_name" content="$_Fuck">
+<meta property="og:description" content="介绍这是一个GITHUB上找到的一个使用原生PHP代码写的一个博客，地址是:https:&#x2F;&#x2F;github.com&#x2F;qinshuang1998&#x2F;Tiger-Blog，但是这里有很多功能没有实现（这个作者是不是比我还懒，，，哈哈哈），然后我分析的话只是想让大家明白一下这些功能是如何实现的，还有如果有漏洞的话我也会写出来（因为我是边读边写，然后自己分析一下，但是因为我水平也不是很厉害，所以有很多漏洞也没">
+<meta property="og:locale" content="zh">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;y253t8g6t8ct44fjd2q1i1hp&#x2F;image_1chv32k2d1s6c1dp44h57298is9.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;5h92eelh5zlrpn3vfrakjo5c&#x2F;image_1chv3750l31210tlns91rc7mlom.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;y2bzhzgo1rk1crxwyot68h9s&#x2F;image_1chv37qd4bluakblkmh17k8213.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;0vzpjjzrcc43mj67svdwsnzl&#x2F;image_1chv3h8iu1alr1u7b1b3015dq19u61g.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;fzjzo21zxp86npuirk9cl3pk&#x2F;php.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;9vbxv83wly06fgrb5c3o01bj&#x2F;image_1chv3taag1o2119grhdq1vsuos0l.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;j2ua1x2o2k0y2x6nktgi7z1s&#x2F;image_1chv421os1d9e1eaequa1fu61rp83f.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;jjv1b3ykbxdacsy78apoiaz1&#x2F;image_1chv4b03q5ps106732kps68no4s.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;tlgsb75z0prxkkyspwclzfml&#x2F;image_1chv4djq76svshi2s31otkm7g59.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;brc7ftnqs452j4xf08r6uj8j&#x2F;php.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;5l8j1c0xqox3ml672s9vuypa&#x2F;image_1chv4qovjliodscff9nr61smr82.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;5pqcsn5zw54secwj3s3ucf92&#x2F;image_1chv5gf6v1fst1gv71kj61i161p538v.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;ooxrb0fsh5ipc0zij5iwcbp6&#x2F;image_1chv5i6ucjs1vni1vonsji1pcn9c.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;sk4m0o2rczor7msf5pdt26yv&#x2F;image_1chv5innl6vj1lo54241k2v1jdo9p.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;xhumgcamh5j9uge6bj2ur0e4&#x2F;php.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;aif4kvy0lrvr90bdcv39pbpo&#x2F;image_1chv5pvt5r761cm817v410slt023l.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;76ue5oiav00tak7dvn1e077g&#x2F;image_1chv5r0er6g8qe01tt81fdkhf842.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;twgquzlmt9muvuo9lak67i8p&#x2F;image_1chv5rc1g1a5t15ef9qu1hsqcbe4f.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;u0ds3ms0ocjbpibqcvyk2oi9&#x2F;image_1chv6gl8n15dpns31br5p11ttf5c.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;hb07nekxlo0afqp3jvfma62m&#x2F;image_1chv6jdc0lak1c5h1bvl1if21es37p.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;2stc0xet22rj0o3ziicshqm1&#x2F;image_1ci0vr2aq1udv1t4pun115fp1a6bp.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;mr0s9mk7c9vjn1oi37zc3xep&#x2F;image_1ci100s7mi9g14vbasa16ft1aot26.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;y77pa1n0wrgpus8ufy3ma3cf&#x2F;image_1ci105k2r71l1k2d1na5sb11g7s2j.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;xm9ymwrgn5obbsfwyb7dsyl4&#x2F;image_1ci10doif73q1vun1l5fq9a9i70.png">
+<meta property="og:updated_time" content="2019-12-25T00:30:31.439Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;y253t8g6t8ct44fjd2q1i1hp&#x2F;image_1chv32k2d1s6c1dp44h57298is9.png">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/blog.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">$_Fuck</h5>
+          <a href="mailto:以凡人之躯比肩神明" target="_blank" rel="noopener" title="以凡人之躯比肩神明" class="mail">以凡人之躯比肩神明</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-address-book"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/Web%E5%AE%89%E5%85%A8/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/link"  >
+                <i class="icon icon-lg icon-link"></i>
+                友情链接
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">PHP原生程序之博客分析</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">PHP原生程序之博客分析</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-03-07T00:29:47.000Z" itemprop="datePublished" class="page-time">
+  2018-03-07
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container-fluid blog body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#介绍"><span class="post-toc-number">1.</span> <span class="post-toc-text">介绍</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#源代码讲解"><span class="post-toc-number">2.</span> <span class="post-toc-text">源代码讲解</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#First、"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">First、</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#index-php"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">index.php</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#首先看第三行和第四行："><span class="post-toc-number">2.2.1.</span> <span class="post-toc-text">首先看第三行和第四行：</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#接着到了第七行："><span class="post-toc-number">2.2.2.</span> <span class="post-toc-text">接着到了第七行：</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#第8行："><span class="post-toc-number">2.2.3.</span> <span class="post-toc-text">第8行：</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#打印-num："><span class="post-toc-number">2.2.4.</span> <span class="post-toc-text">打印$num：</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#16-23行"><span class="post-toc-number">2.2.5.</span> <span class="post-toc-text">16-23行</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#admin功能"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">admin功能</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#登陆功能"><span class="post-toc-number">2.3.1.</span> <span class="post-toc-text">登陆功能</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#login-php"><span class="post-toc-number">2.3.1.1.</span> <span class="post-toc-text">login.php</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#login-html"><span class="post-toc-number">2.3.1.2.</span> <span class="post-toc-text">login.html</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#confirm-php"><span class="post-toc-number">2.3.1.3.</span> <span class="post-toc-text">confirm.php</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#index-php-1"><span class="post-toc-number">2.3.1.4.</span> <span class="post-toc-text">index.php</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#upload-php"><span class="post-toc-number">2.3.1.5.</span> <span class="post-toc-text">upload.php</span></a></li></ol></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-PHP原生程序之博客分析"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">PHP原生程序之博客分析</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-03-07 08:29:47" datetime="2018-03-07T00:29:47.000Z"  itemprop="datePublished">2018-03-07</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>这是一个<code>GITHUB</code>上找到的一个使用原生<code>PHP</code>代码写的一个博客，地址是:<code>https://github.com/qinshuang1998/Tiger-Blog</code>，但是这里有很多功能没有实现（这个作者是不是比我还懒，，，哈哈哈），然后我分析的话只是想让大家明白一下这些功能是如何实现的，还有如果有漏洞的话我也会写出来（因为我是边读边写，然后自己分析一下，但是因为我水平也不是很厉害，所以有很多漏洞也没看出来还请大佬们多多指教），对我们的代码审计有很大的帮助，不多说啦，</p>
+<h3 id="源代码讲解"><a href="#源代码讲解" class="headerlink" title="源代码讲解"></a>源代码讲解</h3><h4 id="First、"><a href="#First、" class="headerlink" title="First、"></a>First、</h4><p>这里说明一下，我分析的时候，只会写注释，或者截屏然后在旁边标注一下，因为我觉得这样会比较高效一点，所以你们可以下载这个源代码，然后按照我分析的然后再自己看一下，大概也就能明白功能实现原理了，祝你学习愉快。</p>
+<h4 id="index-php"><a href="#index-php" class="headerlink" title="index.php"></a>index.php</h4><p>这个是首页文件( 废话，我也知道 )~</p>
+<p><img src="http://static.zybuluo.com/1kbfree/y253t8g6t8ct44fjd2q1i1hp/image_1chv32k2d1s6c1dp44h57298is9.png" alt="image_1chv32k2d1s6c1dp44h57298is9.png-125.8kB"></p>
+<h5 id="首先看第三行和第四行："><a href="#首先看第三行和第四行：" class="headerlink" title="首先看第三行和第四行："></a>首先看第三行和第四行：</h5><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">require</span>(<span class="string">'./inc/conn.php'</span>); <span class="comment">// 连接数据库</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">require</span>(<span class="string">'./inc/func.php'</span>); <span class="comment">// 引入函数文件(一般都是封装了常用的函数,方便调用)</span></span></pre></td></tr></table></figure>
+<p>这个不必多说。</p>
+<h5 id="接着到了第七行："><a href="#接着到了第七行：" class="headerlink" title="接着到了第七行："></a>接着到了第七行：</h5><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$url = $_SERVER[<span class="string">'REQUEST_URI'</span>]; <span class="comment">//这个功能我也不知道是干嘛的，我们来输出一下。</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">var_dump( $url );<span class="keyword">die</span>; <span class="comment">//输出一下$url,并且不然他执行下面的代码</span></span></pre></td></tr></table></figure>
+<p><img src="http://static.zybuluo.com/1kbfree/5h92eelh5zlrpn3vfrakjo5c/image_1chv3750l31210tlns91rc7mlom.png" alt="image_1chv3750l31210tlns91rc7mlom.png-54.1kB"><br><img src="http://static.zybuluo.com/1kbfree/y2bzhzgo1rk1crxwyot68h9s/image_1chv37qd4bluakblkmh17k8213.png" alt="image_1chv37qd4bluakblkmh17k8213.png-57.7kB"></p>
+<p>这个是用于输出除了域名外的路径。</p>
+<h5 id="第8行："><a href="#第8行：" class="headerlink" title="第8行："></a>第8行：</h5><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$url = parse_url($url); <span class="comment">// parse_url将路径放在了数组的path，将?后面的参数放在了数组的query</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">var_dump( $url );<span class="keyword">die</span>; <span class="comment">// 如果上面字体描述的不懂我们再来打印一下。</span></span></pre></td></tr></table></figure>
+
+<p><img src="http://static.zybuluo.com/1kbfree/0vzpjjzrcc43mj67svdwsnzl/image_1chv3h8iu1alr1u7b1b3015dq19u61g.png" alt="image_1chv3h8iu1alr1u7b1b3015dq19u61g.png-29.6kB"></p>
+<p><img src="http://static.zybuluo.com/1kbfree/fzjzo21zxp86npuirk9cl3pk/php.png" alt="php.png-146.3kB"></p>
+<h5 id="打印-num："><a href="#打印-num：" class="headerlink" title="打印$num："></a>打印$num：</h5><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">var_dump( $num );<span class="keyword">die</span>;</span></pre></td></tr></table></figure>
+<p><img src="http://static.zybuluo.com/1kbfree/9vbxv83wly06fgrb5c3o01bj/image_1chv3taag1o2119grhdq1vsuos0l.png" alt="image_1chv3taag1o2119grhdq1vsuos0l.png-25.3kB"></p>
+<p><em>这里为什么是5呢？我也好奇，然后我来到数据库看了一下。</em></p>
+<p><img src="http://static.zybuluo.com/1kbfree/j2ua1x2o2k0y2x6nktgi7z1s/image_1chv421os1d9e1eaequa1fu61rp83f.png" alt="image_1chv421os1d9e1eaequa1fu61rp83f.png-85kB"></p>
+<p><em>这个5就是<code>article</code>表的数量</em></p>
+<h5 id="16-23行"><a href="#16-23行" class="headerlink" title="16-23行"></a>16-23行</h5><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(@$_GET[<span class="string">'page'</span>])&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 把个个参数都打印一下。</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">	$pageval=$_GET[<span class="string">'page'</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">echo</span>( <span class="string">'$pageval -&gt; '</span>.$pageval .<span class="string">"&lt;br /&gt;"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">	$page=($pageval<span class="number">-1</span>)*$pagesize;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">echo</span>( <span class="string">'$page -&gt; '</span>.$page .<span class="string">"&lt;br /&gt;"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">	$page.=<span class="string">','</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">echo</span>( <span class="string">'$page -&gt; '</span>.$page .<span class="string">"&lt;br /&gt;"</span>);<span class="keyword">die</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p><img src="http://static.zybuluo.com/1kbfree/jjv1b3ykbxdacsy78apoiaz1/image_1chv4b03q5ps106732kps68no4s.png" alt="image_1chv4b03q5ps106732kps68no4s.png-49.1kB"></p>
+<p><em>看不明白看下去先</em></p>
+<p><img src="http://static.zybuluo.com/1kbfree/tlgsb75z0prxkkyspwclzfml/image_1chv4djq76svshi2s31otkm7g59.png" alt="image_1chv4djq76svshi2s31otkm7g59.png-134.4kB"></p>
+<p><em>然后下面的就基本上是简单的<code>SQL</code>语句了，不讲解了，开始另一个文件</em></p>
+<h4 id="admin功能"><a href="#admin功能" class="headerlink" title="admin功能"></a>admin功能</h4><p>先讲解后台功能的实现。</p>
+<h5 id="登陆功能"><a href="#登陆功能" class="headerlink" title="登陆功能"></a>登陆功能</h5><p><img src="http://static.zybuluo.com/1kbfree/brc7ftnqs452j4xf08r6uj8j/php.png" alt="php.png-86.7kB"></p>
+<blockquote>
+<p>在<code>xxx/admin/login.php</code></p>
+</blockquote>
+<h6 id="login-php"><a href="#login-php" class="headerlink" title="login.php"></a>login.php</h6><p>打开后发现只有一句代码：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">	</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">require</span>(<span class="string">'./page/login.html'</span>); <span class="comment">// 包含当前的page文件夹里的login.html文件</span></span></pre></td></tr></table></figure>
+
+<h6 id="login-html"><a href="#login-html" class="headerlink" title="login.html"></a>login.html</h6><p>打开后就是一些前端登陆的表单以及一些样式，然后他是将登陆的数据提交到<code>confirm.php</code>文件，如图：</p>
+<p><img src="http://static.zybuluo.com/1kbfree/5l8j1c0xqox3ml672s9vuypa/image_1chv4qovjliodscff9nr61smr82.png" alt="image_1chv4qovjliodscff9nr61smr82.png-149.6kB"></p>
+<p>表单之类的<code>html</code>代码不多讲，这里来分析一下js代码(这里有一个问授权访问漏洞，可以不输入密码直接登陆)：</p>
+<p><img src="http://static.zybuluo.com/1kbfree/5pqcsn5zw54secwj3s3ucf92/image_1chv5gf6v1fst1gv71kj61i161p538v.png" alt="image_1chv5gf6v1fst1gv71kj61i161p538v.png-172.4kB"></p>
+<p>然后我们来尝试登陆一下，查看<code>result</code>都会返回什么~</p>
+<p><img src="http://static.zybuluo.com/1kbfree/ooxrb0fsh5ipc0zij5iwcbp6/image_1chv5i6ucjs1vni1vonsji1pcn9c.png" alt="image_1chv5i6ucjs1vni1vonsji1pcn9c.png-109.6kB"></p>
+<p><em>表示登陆成功</em></p>
+<p><img src="http://static.zybuluo.com/1kbfree/sk4m0o2rczor7msf5pdt26yv/image_1chv5innl6vj1lo54241k2v1jdo9p.png" alt="image_1chv5innl6vj1lo54241k2v1jdo9p.png-110kB"></p>
+<p><em>表示登陆失败</em></p>
+<p><strong>我们身为白帽子，就是用来打破这些规矩的，输入错误密码的时候我们来抓包获取返回结果并且将<code>result</code>修改为<code>success</code>~</strong></p>
+<p><img src="http://static.zybuluo.com/1kbfree/xhumgcamh5j9uge6bj2ur0e4/php.png" alt="php.png-185.1kB"></p>
+<p><img src="http://static.zybuluo.com/1kbfree/aif4kvy0lrvr90bdcv39pbpo/image_1chv5pvt5r761cm817v410slt023l.png" alt="image_1chv5pvt5r761cm817v410slt023l.png-95.7kB"></p>
+<p><img src="http://static.zybuluo.com/1kbfree/76ue5oiav00tak7dvn1e077g/image_1chv5r0er6g8qe01tt81fdkhf842.png" alt="image_1chv5r0er6g8qe01tt81fdkhf842.png-90.1kB"><br><em>成功绕过</em></p>
+<p><img src="http://static.zybuluo.com/1kbfree/twgquzlmt9muvuo9lak67i8p/image_1chv5rc1g1a5t15ef9qu1hsqcbe4f.png" alt="image_1chv5rc1g1a5t15ef9qu1hsqcbe4f.png-92.7kB"></p>
+<p>接下来讲解一下<code>confirm.php</code>文件是如何接受数据的。</p>
+<h6 id="confirm-php"><a href="#confirm-php" class="headerlink" title="confirm.php"></a>confirm.php</h6><p><img src="http://static.zybuluo.com/1kbfree/u0ds3ms0ocjbpibqcvyk2oi9/image_1chv6gl8n15dpns31br5p11ttf5c.png" alt="image_1chv6gl8n15dpns31br5p11ttf5c.png-178.3kB"></p>
+<p><img src="http://static.zybuluo.com/1kbfree/hb07nekxlo0afqp3jvfma62m/image_1chv6jdc0lak1c5h1bvl1if21es37p.png" alt="image_1chv6jdc0lak1c5h1bvl1if21es37p.png-88.8kB"></p>
+<p>上面的<code>$result</code>使用了<code>GetALL</code>函数，我们来看一下他的代码。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">GetAll</span><span class="params">($query)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">	</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">while</span>($tmp = mysql_fetch_array($query))&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">		$result[] = $tmp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">	&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">	</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">return</span> @$result;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>查询<code>$query</code>这个<code>sql</code>语句执行后的数据然后循环赋值到<code>$result</code>数组里。</p>
+<p><img src="http://static.zybuluo.com/1kbfree/2stc0xet22rj0o3ziicshqm1/image_1ci0vr2aq1udv1t4pun115fp1a6bp.png" alt="image_1ci0vr2aq1udv1t4pun115fp1a6bp.png-169.1kB"></p>
+<p><em>这里的不多将了，具体有注释了，下面没注释的就是一些登陆操作的（我也看不懂）</em></p>
+<h6 id="index-php-1"><a href="#index-php-1" class="headerlink" title="index.php"></a>index.php</h6><p>登陆页面分析完了，来分析一下首页页面。</p>
+<p><img src="http://static.zybuluo.com/1kbfree/mr0s9mk7c9vjn1oi37zc3xep/image_1ci100s7mi9g14vbasa16ft1aot26.png" alt="image_1ci100s7mi9g14vbasa16ft1aot26.png-115.3kB"></p>
+<p><strong>page文件夹里面的都是<code>html</code>文件，也就是展示页面效果的，就不多讲解了。</strong></p>
+<h6 id="upload-php"><a href="#upload-php" class="headerlink" title="upload.php"></a>upload.php</h6><blockquote>
+<p>这个文件是后台发布文章的</p>
+</blockquote>
+<p><img src="http://static.zybuluo.com/1kbfree/y77pa1n0wrgpus8ufy3ma3cf/image_1ci105k2r71l1k2d1na5sb11g7s2j.png" alt="image_1ci105k2r71l1k2d1na5sb11g7s2j.png-81.4kB"></p>
+<p><img src="http://static.zybuluo.com/1kbfree/xm9ymwrgn5obbsfwyb7dsyl4/image_1ci10doif73q1vun1l5fq9a9i70.png" alt="image_1ci10doif73q1vun1l5fq9a9i70.png-180.8kB"></p>
+<p>这里是存在<code>Csrf</code>漏洞的，而且也没有过滤<code>Xss</code>漏洞，所以是存在<code>Xsrf</code>的，但是因为这里他完成了插入功能，但是没有完成展示插入的数据的功能，所以没办法继续讲解了，等作者把功能实现了我再来具体分析。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-12-25T00:30:31.439Z" itemprop="dateUpdated">2019-12-25 08:30:31</time>
+</span><br>
+
+
+        
+        未经允许，禁止转载：<a href="/2018/03/07/PHP%E5%8E%9F%E7%94%9F%E7%A8%8B%E5%BA%8F%E4%B9%8B%E5%8D%9A%E5%AE%A2%E5%88%86%E6%9E%90/" target="_blank" rel="external">http://yoursite.com/2018/03/07/PHP%E5%8E%9F%E7%94%9F%E7%A8%8B%E5%BA%8F%E4%B9%8B%E5%8D%9A%E5%AE%A2%E5%88%86%E6%9E%90/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/blog.jpg" alt="$_Fuck">
+            $_Fuck
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" target="_blank" rel="noopener" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/" rel="tag">代码审计</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/03/07/PHP%E5%8E%9F%E7%94%9F%E7%A8%8B%E5%BA%8F%E4%B9%8B%E5%8D%9A%E5%AE%A2%E5%88%86%E6%9E%90/&title=《PHP原生程序之博客分析》 — $_Fuck&pic=http://yoursite.com/img/blog.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/03/07/PHP%E5%8E%9F%E7%94%9F%E7%A8%8B%E5%BA%8F%E4%B9%8B%E5%8D%9A%E5%AE%A2%E5%88%86%E6%9E%90/&title=《PHP原生程序之博客分析》 — $_Fuck&source=无助就算了，还要假装坚强。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/03/07/PHP%E5%8E%9F%E7%94%9F%E7%A8%8B%E5%BA%8F%E4%B9%8B%E5%8D%9A%E5%AE%A2%E5%88%86%E6%9E%90/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《PHP原生程序之博客分析》 — $_Fuck&url=http://yoursite.com/2018/03/07/PHP%E5%8E%9F%E7%94%9F%E7%A8%8B%E5%BA%8F%E4%B9%8B%E5%8D%9A%E5%AE%A2%E5%88%86%E6%9E%90/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/03/07/PHP%E5%8E%9F%E7%94%9F%E7%A8%8B%E5%BA%8F%E4%B9%8B%E5%8D%9A%E5%AE%A2%E5%88%86%E6%9E%90/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" target="_blank" rel="noopener" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/04/18/%E5%AF%B9chanzhi%E4%BC%81%E4%B8%9A%E9%97%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B5%8B%E8%AF%95/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">对chanzhi企业门户系统的一次测试</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/01/13/%E7%AE%80%E5%8D%95%E7%9A%84php%E7%90%86%E5%88%86%E6%9E%90/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">简单的PHP用户管理分析</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        禁止打赏~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/" data-alipay="/img/">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" target="_blank" rel="noopener" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/03/07/PHP%E5%8E%9F%E7%94%9F%E7%A8%8B%E5%BA%8F%E4%B9%8B%E5%8D%9A%E5%AE%A2%E5%88%86%E6%9E%90/&title=《PHP原生程序之博客分析》 — $_Fuck&pic=http://yoursite.com/img/blog.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/03/07/PHP%E5%8E%9F%E7%94%9F%E7%A8%8B%E5%BA%8F%E4%B9%8B%E5%8D%9A%E5%AE%A2%E5%88%86%E6%9E%90/&title=《PHP原生程序之博客分析》 — $_Fuck&source=无助就算了，还要假装坚强。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/03/07/PHP%E5%8E%9F%E7%94%9F%E7%A8%8B%E5%BA%8F%E4%B9%8B%E5%8D%9A%E5%AE%A2%E5%88%86%E6%9E%90/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《PHP原生程序之博客分析》 — $_Fuck&url=http://yoursite.com/2018/03/07/PHP%E5%8E%9F%E7%94%9F%E7%A8%8B%E5%BA%8F%E4%B9%8B%E5%8D%9A%E5%AE%A2%E5%88%86%E6%9E%90/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/03/07/PHP%E5%8E%9F%E7%94%9F%E7%A8%8B%E5%BA%8F%E4%B9%8B%E5%8D%9A%E5%AE%A2%E5%88%86%E6%9E%90/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2018/03/07/PHP%E5%8E%9F%E7%94%9F%E7%A8%8B%E5%BA%8F%E4%B9%8B%E5%8D%9A%E5%AE%A2%E5%88%86%E6%9E%90/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Bay！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Fuck的博客~';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

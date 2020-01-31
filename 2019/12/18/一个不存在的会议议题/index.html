@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>一个不存在的会议议题 | $_Fuck | 白天搞笑的废物，晚上抑郁的怪物。</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Web安全">
+    <meta name="description" content="这本是一个会议议题的，然后没选上。  会议内容技巧我会对所测试过的系统、挖掘的漏洞写在一个页面中  暂时是手工添加很尴尬。。。以后就想把测试系统的burp日志包都抓下来，然后用脚本匹配自动化写入到这里。 1、为了查漏补缺2、为了可以扩展漏洞3、为了其他漏洞出来后我可以马上定位漏洞点 信息收集心得对一个系统进行挖掘最重要的就是信息收集部分，对一个系统收集的越多、攻击链就越大，下面就是我在漏洞挖掘中">
+<meta name="keywords" content="Web安全">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一个不存在的会议议题">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;18&#x2F;%E4%B8%80%E4%B8%AA%E4%B8%8D%E5%AD%98%E5%9C%A8%E7%9A%84%E4%BC%9A%E8%AE%AE%E8%AE%AE%E9%A2%98&#x2F;index.html">
+<meta property="og:site_name" content="$_Fuck">
+<meta property="og:description" content="这本是一个会议议题的，然后没选上。  会议内容技巧我会对所测试过的系统、挖掘的漏洞写在一个页面中  暂时是手工添加很尴尬。。。以后就想把测试系统的burp日志包都抓下来，然后用脚本匹配自动化写入到这里。 1、为了查漏补缺2、为了可以扩展漏洞3、为了其他漏洞出来后我可以马上定位漏洞点 信息收集心得对一个系统进行挖掘最重要的就是信息收集部分，对一个系统收集的越多、攻击链就越大，下面就是我在漏洞挖掘中">
+<meta property="og:locale" content="zh">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;g4x0bklthlrnfikvivfgibu9&#x2F;image.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;rljrl0sikxweiya8ryua9g1o&#x2F;image.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;hvkqulqfyl7vm0my3ydiow3z&#x2F;image.png">
+<meta property="og:updated_time" content="2020-01-31T18:47:58.325Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;g4x0bklthlrnfikvivfgibu9&#x2F;image.png">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/blog.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">$_Fuck</h5>
+          <a href="mailto:以凡人之躯比肩神明" target="_blank" rel="noopener" title="以凡人之躯比肩神明" class="mail">以凡人之躯比肩神明</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-address-book"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/Web%E5%AE%89%E5%85%A8/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/link"  >
+                <i class="icon icon-lg icon-link"></i>
+                友情链接
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">一个不存在的会议议题</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">一个不存在的会议议题</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-12-18T01:29:16.000Z" itemprop="datePublished" class="page-time">
+  2019-12-18
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD/">兴趣爱好</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD/%E6%80%9D%E8%B7%AF/">思路</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container-fluid blog body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#会议内容"><span class="post-toc-number">1.</span> <span class="post-toc-text">会议内容</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#技巧"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">技巧</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#信息收集心得"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">信息收集心得</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#案例一"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">案例一</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#案例二"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">案例二</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#案例三"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text">案例三</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#有趣的漏洞"><span class="post-toc-number">1.2.4.</span> <span class="post-toc-text">有趣的漏洞</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-一个不存在的会议议题"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">一个不存在的会议议题</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-12-18 09:29:16" datetime="2019-12-18T01:29:16.000Z"  itemprop="datePublished">2019-12-18</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD/">兴趣爱好</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD/%E6%80%9D%E8%B7%AF/">思路</a></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <blockquote>
+<p>这本是一个会议议题的，然后没选上。</p>
+</blockquote>
+<h1 id="会议内容"><a href="#会议内容" class="headerlink" title="会议内容"></a>会议内容</h1><h2 id="技巧"><a href="#技巧" class="headerlink" title="技巧"></a>技巧</h2><p>我会对所测试过的系统、挖掘的漏洞写在一个页面中</p>
+<p><img src="http://static.zybuluo.com/1kbfree/g4x0bklthlrnfikvivfgibu9/image.png" alt="image.png-14.3kB"></p>
+<p>暂时是手工添加很尴尬。。。以后就想把测试系统的<code>burp</code>日志包都抓下来，然后用脚本匹配自动化写入到这里。</p>
+<p>1、为了查漏补缺<br>2、为了可以扩展漏洞<br>3、为了其他漏洞出来后我可以马上定位漏洞点</p>
+<h2 id="信息收集心得"><a href="#信息收集心得" class="headerlink" title="信息收集心得"></a>信息收集心得</h2><p>对一个系统进行挖掘最重要的就是信息收集部分，对一个系统收集的越多、攻击链就越大，下面就是我在漏洞挖掘中一些信息收集的心得</p>
+<p><a href="https://www.zybuluo.com/mdeditor#1484882" target="_blank" rel="noopener">https://www.zybuluo.com/mdeditor#1484882</a></p>
+<p>一般拿到系统我会先用如下语法查看他是否有后台手册、或者开发手册（都是为了看看有没有弱口令等敏感信息）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">google语法</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">site:ooxx.com filetype:xls</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">百度云盘搜索xx厂商，然后选取看文档文件的类型</span></pre></td></tr></table></figure>
+
+<p><img src="http://static.zybuluo.com/1kbfree/rljrl0sikxweiya8ryua9g1o/image.png" alt="image.png-143.4kB"></p>
+<p>然后会进行找后台地址</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">site:xxx.xxx admin</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">site:xxx.xxx login</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">site:xxx.xxx system</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">site:xxx.xxx 管理</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">site:xxx.xxx 登录</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">site:xxx.xxx 内部</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">site:xxx.xxx 系统</span></pre></td></tr></table></figure>
+
+<p>或者找邮箱进行钓鱼（用低位的跳转漏洞，让管理员打开钓鱼页面）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">site:xxx.xxx 邮件</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">site:xxx.xxx email</span></pre></td></tr></table></figure>
+
+<p>找对应的漏洞（比较没效率）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">site:xxx.com inurl:jmx-console</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">site:xxx.com inurl:&#x2F;public&#x2F;index.php</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">... ...</span></pre></td></tr></table></figure>
+
+<p>使用<code>github</code>来搜索厂商敏感信息</p>
+<p><img src="http://static.zybuluo.com/1kbfree/hvkqulqfyl7vm0my3ydiow3z/image.png" alt="image.png-151kB"></p>
+<h3 id="案例一"><a href="#案例一" class="headerlink" title="案例一"></a>案例一</h3><p>在对一个系统挖掘的时候他有一个如下的<code>url</code>看收货地址</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;www.xxx.xxx&#x2F;xxx.html?xxxid&#x3D;2018WOIDJWOIDJ5201314</span></pre></td></tr></table></figure>
+
+<p>然后可以用搜索引擎来对其进行搜索，并且成功发现几十个的用户收货地址</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">site:xxx.xxx inurl:xxxid&#x3D;20</span></pre></td></tr></table></figure>
+
+<p>当然这个用法还可以用来对已挖掘的漏洞查找更多漏洞（以洞找洞），比如<code>www.xxx.com</code>下的域名的一个参数<code>searchxxx</code>存在<code>xss</code>漏洞，然后我可以用搜索引擎来找更多的<code>xss</code>漏洞</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">site:xxx.com inurl:searchxxx&#x3D;</span></pre></td></tr></table></figure>
+
+<p>并且找出其他2个<code>xss</code>漏洞</p>
+<h3 id="案例二"><a href="#案例二" class="headerlink" title="案例二"></a>案例二</h3><p>这个是一个驻场的项目，给的环境是用他们电脑然后可以黑盒+白盒，然后我利用黑盒（看<code>js</code>然后拼接）找出了一个接口（<code>http://xxx.xxx.xxx/api/getxxxx.html</code>然后<code>post</code>传递的是<code>xxxname=</code>这里因为在公司内部，很容易看到其他员工的名字直接改成拼音），这个接口打开然后发现是可以获取用户的登录时间、账号密码（加密）等，但是因为这里的密码是加密的，然后我让另一个白盒的朋友去找出对应的加密函数并且解密了密码，就直接登录了他们的员工系统</p>
+<h3 id="案例三"><a href="#案例三" class="headerlink" title="案例三"></a>案例三</h3><p>上传处只能上传<code>.txt、.png、.jpg等</code>（白名单），然后我后面发现了一个回收功能和<code>window</code>这样子是一样的，就是可以拖进去然后拖出来，但是在期间抓包的时候，发现他拖到里面再拖出来的时候，参数是这样的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">fname&#x3D;xxx.txt&amp;fid&#x3D;1455230&amp;content&#x3D;&lt;?php echo 1?&gt;</span></pre></td></tr></table></figure>
+
+<p>然后我把<code>fname</code>改成了<code>1.php</code>可以打开的，但是没有解析为<code>php</code>脚本，然后改成了<code>1.html</code>就可以解析为<code>html</code>，当成存储<code>xss</code></p>
+<h3 id="有趣的漏洞"><a href="#有趣的漏洞" class="headerlink" title="有趣的漏洞"></a>有趣的漏洞</h3><p>利用<code>waf</code>和退出功能来对网站产生影响业务的漏洞</p>
+<p><a href="https://bbs.ichunqiu.com/forum.php?mod=viewthread&amp;tid=46282" target="_blank" rel="noopener">https://bbs.ichunqiu.com/forum.php?mod=viewthread&amp;tid=46282</a><br><a href="https://www.zybuluo.com/1kbfree/note/1359028" target="_blank" rel="noopener">https://www.zybuluo.com/1kbfree/note/1359028</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-01-31T18:47:58.325Z" itemprop="dateUpdated">2020-02-01 02:47:58</time>
+</span><br>
+
+
+        
+        未经允许，禁止转载：<a href="/2019/12/18/%E4%B8%80%E4%B8%AA%E4%B8%8D%E5%AD%98%E5%9C%A8%E7%9A%84%E4%BC%9A%E8%AE%AE%E8%AE%AE%E9%A2%98/" target="_blank" rel="external">http://yoursite.com/2019/12/18/%E4%B8%80%E4%B8%AA%E4%B8%8D%E5%AD%98%E5%9C%A8%E7%9A%84%E4%BC%9A%E8%AE%AE%E8%AE%AE%E9%A2%98/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/blog.jpg" alt="$_Fuck">
+            $_Fuck
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" target="_blank" rel="noopener" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web%E5%AE%89%E5%85%A8/" rel="tag">Web安全</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/12/18/%E4%B8%80%E4%B8%AA%E4%B8%8D%E5%AD%98%E5%9C%A8%E7%9A%84%E4%BC%9A%E8%AE%AE%E8%AE%AE%E9%A2%98/&title=《一个不存在的会议议题》 — $_Fuck&pic=http://yoursite.com/img/blog.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/12/18/%E4%B8%80%E4%B8%AA%E4%B8%8D%E5%AD%98%E5%9C%A8%E7%9A%84%E4%BC%9A%E8%AE%AE%E8%AE%AE%E9%A2%98/&title=《一个不存在的会议议题》 — $_Fuck&source=无助就算了，还要假装坚强。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/12/18/%E4%B8%80%E4%B8%AA%E4%B8%8D%E5%AD%98%E5%9C%A8%E7%9A%84%E4%BC%9A%E8%AE%AE%E8%AE%AE%E9%A2%98/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《一个不存在的会议议题》 — $_Fuck&url=http://yoursite.com/2019/12/18/%E4%B8%80%E4%B8%AA%E4%B8%8D%E5%AD%98%E5%9C%A8%E7%9A%84%E4%BC%9A%E8%AE%AE%E8%AE%AE%E9%A2%98/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/12/18/%E4%B8%80%E4%B8%AA%E4%B8%8D%E5%AD%98%E5%9C%A8%E7%9A%84%E4%BC%9A%E8%AE%AE%E8%AE%AE%E9%A2%98/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" target="_blank" rel="noopener" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/12/18/qq%E7%A9%BA%E9%97%B4%E4%B8%80%E5%A4%84%E6%9C%89%E8%B6%A3%E7%9A%84%E6%8B%92%E7%BB%9D%E6%9C%8D%E5%8A%A1/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">qq空间一处有趣的拒绝服务</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/12/18/%E6%AF%8F%E5%91%A8%E6%8E%A8%E8%8D%90-%E3%80%8A%E4%BB%A5%E5%B9%BD%E9%BB%98%E7%9A%84%E6%96%B9%E5%BC%8F%E8%BF%87%E4%B8%80%E7%94%9F%E3%80%8B/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[每周推荐]《以幽默的方式过一生》</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        禁止打赏~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/" data-alipay="/img/">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" target="_blank" rel="noopener" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/12/18/%E4%B8%80%E4%B8%AA%E4%B8%8D%E5%AD%98%E5%9C%A8%E7%9A%84%E4%BC%9A%E8%AE%AE%E8%AE%AE%E9%A2%98/&title=《一个不存在的会议议题》 — $_Fuck&pic=http://yoursite.com/img/blog.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/12/18/%E4%B8%80%E4%B8%AA%E4%B8%8D%E5%AD%98%E5%9C%A8%E7%9A%84%E4%BC%9A%E8%AE%AE%E8%AE%AE%E9%A2%98/&title=《一个不存在的会议议题》 — $_Fuck&source=无助就算了，还要假装坚强。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/12/18/%E4%B8%80%E4%B8%AA%E4%B8%8D%E5%AD%98%E5%9C%A8%E7%9A%84%E4%BC%9A%E8%AE%AE%E8%AE%AE%E9%A2%98/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《一个不存在的会议议题》 — $_Fuck&url=http://yoursite.com/2019/12/18/%E4%B8%80%E4%B8%AA%E4%B8%8D%E5%AD%98%E5%9C%A8%E7%9A%84%E4%BC%9A%E8%AE%AE%E8%AE%AE%E9%A2%98/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/12/18/%E4%B8%80%E4%B8%AA%E4%B8%8D%E5%AD%98%E5%9C%A8%E7%9A%84%E4%BC%9A%E8%AE%AE%E8%AE%AE%E9%A2%98/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2019/12/18/%E4%B8%80%E4%B8%AA%E4%B8%8D%E5%AD%98%E5%9C%A8%E7%9A%84%E4%BC%9A%E8%AE%AE%E8%AE%AE%E9%A2%98/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Bay！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Fuck的博客~';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

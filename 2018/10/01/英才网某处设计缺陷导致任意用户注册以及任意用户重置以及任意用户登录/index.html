@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>英才网某处设计缺陷导致任意用户注册以及任意用户重置以及任意用户登录 | $_Fuck | 白天搞笑的废物，晚上抑郁的怪物。</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Web安全">
+    <meta name="description" content="利用fuzz大法导致的任意用户重置&amp;amp;注册1、打开Url：http:&#x2F;&#x2F;mym.chinahr.com&#x2F;account&#x2F;  点击修改邮箱的时候，会发起一个请求 1mym.chinahr.com&amp;#x2F;account&amp;#x2F;updateMail?email&amp;#x3D;only_free%40qq.com  这里我手贱的修改了为如下的Url 1http:&amp;#x2F;&amp;#x2F;mym.c">
+<meta name="keywords" content="Web安全">
+<meta property="og:type" content="article">
+<meta property="og:title" content="英才网某处设计缺陷导致任意用户注册以及任意用户重置以及任意用户登录">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;10&#x2F;01&#x2F;%E8%8B%B1%E6%89%8D%E7%BD%91%E6%9F%90%E5%A4%84%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E5%AF%BC%E8%87%B4%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E9%87%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95&#x2F;index.html">
+<meta property="og:site_name" content="$_Fuck">
+<meta property="og:description" content="利用fuzz大法导致的任意用户重置&amp;amp;注册1、打开Url：http:&#x2F;&#x2F;mym.chinahr.com&#x2F;account&#x2F;  点击修改邮箱的时候，会发起一个请求 1mym.chinahr.com&amp;#x2F;account&amp;#x2F;updateMail?email&amp;#x3D;only_free%40qq.com  这里我手贱的修改了为如下的Url 1http:&amp;#x2F;&amp;#x2F;mym.c">
+<meta property="og:locale" content="zh">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;ucv6mvdpmfxv2gp0ri3uvonz&#x2F;image_1dtd2bf8ujgogl413vj199crnf9.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;itubql30hb5hrn9tf9c6qyjy&#x2F;image_1ck7s0pdam5l1ggl10er1oru17ia26.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;o1egupkf2vwolqwrcuzavyq7&#x2F;image_1dtd2cp3hpud1u3e1ruh1f4j1gchm.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;vtied52rp2lsl6094z0ayk9r&#x2F;image_1ck7srmpbkac1kn332l1h4au8u3g.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;ckjgn4peayzjuxhmluocnfac&#x2F;image_1dtd2dsh3rdi19d19c4e1498113.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;mvfr900gpnezji6ny59q5l9z&#x2F;image_1dtd2fifn19be10bk1iu81afq1ov91t.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;llylekmg3yvfnksoiy741ror&#x2F;image_1ck7to9tr1haa4up4s51hkr1365n.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;8j4ong81x6lcp70pl5300lgg&#x2F;image_1ck7tok9u1tb8rbv0lnph1dcu64.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;thndzayqom4txph47y2q746j&#x2F;image_1dtd2gns810bk1l7h1jsoh2jhm72q.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;4l337imtvt75800l31e3153d&#x2F;image_1dtd2hdf21memui11k291nbdskh3a.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;08eh2q859jj8nszdwywdgtjv&#x2F;image_1dtd2i1re8kufmf1pn5b0q158v3n.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;t5zxifxddecbp0wwenjs3jk8&#x2F;image_1dtd2j8081r861uk61k9md4d18kj4k.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;h0wns6wel3qwbbnljjvi3t0h&#x2F;image_1dtd2knao1kr4145b9d217r8fro5e.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;afqg6j9lx6wjqlqm80i3xe44&#x2F;image_1dtd2ltrr1ovq1mvg19i51kkl1bhi6e.png">
+<meta property="og:updated_time" content="2019-12-31T04:16:46.064Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;ucv6mvdpmfxv2gp0ri3uvonz&#x2F;image_1dtd2bf8ujgogl413vj199crnf9.png">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/blog.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">$_Fuck</h5>
+          <a href="mailto:以凡人之躯比肩神明" target="_blank" rel="noopener" title="以凡人之躯比肩神明" class="mail">以凡人之躯比肩神明</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-address-book"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/Web%E5%AE%89%E5%85%A8/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/link"  >
+                <i class="icon icon-lg icon-link"></i>
+                友情链接
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">英才网某处设计缺陷导致任意用户注册以及任意用户重置以及任意用户登录</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">英才网某处设计缺陷导致任意用户注册以及任意用户重置以及任意用户登录</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-10-01T04:05:53.000Z" itemprop="datePublished" class="page-time">
+  2018-10-01
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD/">兴趣爱好</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container-fluid blog body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#利用fuzz大法导致的任意用户重置-amp-注册"><span class="post-toc-number">1.</span> <span class="post-toc-text">利用fuzz大法导致的任意用户重置&amp;注册</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#任意用户注册复现步骤"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">任意用户注册复现步骤</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#任意用户重置复现步骤"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">任意用户重置复现步骤</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#任意用户登录复现步骤"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">任意用户登录复现步骤</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-英才网某处设计缺陷导致任意用户注册以及任意用户重置以及任意用户登录"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">英才网某处设计缺陷导致任意用户注册以及任意用户重置以及任意用户登录</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-10-01 12:05:53" datetime="2018-10-01T04:05:53.000Z"  itemprop="datePublished">2018-10-01</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD/">兴趣爱好</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="利用fuzz大法导致的任意用户重置-amp-注册"><a href="#利用fuzz大法导致的任意用户重置-amp-注册" class="headerlink" title="利用fuzz大法导致的任意用户重置&amp;注册"></a>利用fuzz大法导致的任意用户重置&amp;注册</h3><p>1、打开Url：<a href="http://mym.chinahr.com/account/" target="_blank" rel="noopener">http://mym.chinahr.com/account/</a></p>
+<p><img src="http://static.zybuluo.com/1kbfree/ucv6mvdpmfxv2gp0ri3uvonz/image_1dtd2bf8ujgogl413vj199crnf9.png" alt="image_1dtd2bf8ujgogl413vj199crnf9.png-253.1kB"></p>
+<p>点击修改邮箱的时候，会发起一个请求</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">mym.chinahr.com&#x2F;account&#x2F;updateMail?email&#x3D;only_free%40qq.com</span></pre></td></tr></table></figure>
+
+<p>这里我手贱的修改了为如下的Url</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;mym.chinahr.com&#x2F;account&#x2F;updatePhone?mobile&#x3D;2333333</span></pre></td></tr></table></figure>
+
+<p><img src="http://static.zybuluo.com/1kbfree/itubql30hb5hrn9tf9c6qyjy/image_1ck7s0pdam5l1ggl10er1oru17ia26.png" alt="image_1ck7s0pdam5l1ggl10er1oru17ia26.png-40.2kB"></p>
+<p>果然，傻人有傻福，居然成功了，那么任意用户注册和任意用户重置就简单了</p>
+<h4 id="任意用户注册复现步骤"><a href="#任意用户注册复现步骤" class="headerlink" title="任意用户注册复现步骤"></a>任意用户注册复现步骤</h4><p>现在我有2个账号，如下</p>
+<table>
+<thead>
+<tr>
+<th align="center">账号A</th>
+<th align="center">账号B</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">17777777777</td>
+<td align="center">18888888888</td>
+</tr>
+</tbody></table>
+<p>首先我登陆用手机号码<code>17777777777</code>然后把手机号码修改为<code>18888888888</code>，如下</p>
+<p><img src="http://static.zybuluo.com/1kbfree/o1egupkf2vwolqwrcuzavyq7/image_1dtd2cp3hpud1u3e1ruh1f4j1gchm.png" alt="image_1dtd2cp3hpud1u3e1ruh1f4j1gchm.png-261.9kB"></p>
+<p><img src="http://static.zybuluo.com/1kbfree/vtied52rp2lsl6094z0ayk9r/image_1ck7srmpbkac1kn332l1h4au8u3g.png" alt="image_1ck7srmpbkac1kn332l1h4au8u3g.png-83.2kB"></p>
+<p>然后我现在再用<code>17777777777</code>注册一个号然后再把手机号码改成<code>13688888888</code>，那么就可以导致用户注册了，具体步骤如下</p>
+<p>登陆A账号修改手机号码为<code>xxxx1</code> -&gt; 然后A账号会变没 -&gt; 然后再用A账号原先绑定的手机号码注册一个用户 -&gt; 再次修改为其他手机号码 -&gt; A账号又变没  ，依次类推就可以任意用户重置了，而这个写脚本也可以实现的（神通广大的审核大大一定知道的我就不多说了）</p>
+<h4 id="任意用户重置复现步骤"><a href="#任意用户重置复现步骤" class="headerlink" title="任意用户重置复现步骤"></a>任意用户重置复现步骤</h4><blockquote>
+<p>我想重置一<code>18888888888</code>这个手机号码的用户，我思路是这样的，如下：</p>
+</blockquote>
+<blockquote>
+<p>首先我拿手机号为<code>17777777777</code>的那个号把手机号码修改为<code>18888888888</code>(访问<code>http://mym.chinahr.com/account/updatePhone?mobile=18888888888</code>)，然后这个时候<code>17777777777</code>就变成空，然后我再登陆<code>18888888888</code>的账号，把手机号码修改为<code>18888888888</code>，然后<code>18888888888</code>这个账号就不存在了</p>
+</blockquote>
+<p>1、登陆<code>17777777777</code>，手机号码修改为<code>18888888888</code></p>
+<p><img src="http://static.zybuluo.com/1kbfree/ckjgn4peayzjuxhmluocnfac/image_1dtd2dsh3rdi19d19c4e1498113.png" alt="image_1dtd2dsh3rdi19d19c4e1498113.png-428.2kB"></p>
+<p>点击<code>Execute</code>会访问这个<code>Url</code>，然后手机号码会成功被修改，如下</p>
+<p><img src="http://static.zybuluo.com/1kbfree/mvfr900gpnezji6ny59q5l9z/image_1dtd2fifn19be10bk1iu81afq1ov91t.png" alt="image_1dtd2fifn19be10bk1iu81afq1ov91t.png-446.5kB"></p>
+<p>2、这个时候再把手机号码修改为<code>1</code></p>
+<p><img src="http://static.zybuluo.com/1kbfree/llylekmg3yvfnksoiy741ror/image_1ck7to9tr1haa4up4s51hkr1365n.png" alt="image_1ck7to9tr1haa4up4s51hkr1365n.png-75.2kB"></p>
+<p><img src="http://static.zybuluo.com/1kbfree/8j4ong81x6lcp70pl5300lgg/image_1ck7tok9u1tb8rbv0lnph1dcu64.png" alt="image_1ck7tok9u1tb8rbv0lnph1dcu64.png-122.4kB"></p>
+<p>3、测试一下手机号码是否不存在了</p>
+<p><img src="http://static.zybuluo.com/1kbfree/thndzayqom4txph47y2q746j/image_1dtd2gns810bk1l7h1jsoh2jhm72q.png" alt="image_1dtd2gns810bk1l7h1jsoh2jhm72q.png-422.5kB"></p>
+<p><img src="http://static.zybuluo.com/1kbfree/4l337imtvt75800l31e3153d/image_1dtd2hdf21memui11k291nbdskh3a.png" alt="image_1dtd2hdf21memui11k291nbdskh3a.png-365.5kB"></p>
+<h4 id="任意用户登录复现步骤"><a href="#任意用户登录复现步骤" class="headerlink" title="任意用户登录复现步骤"></a>任意用户登录复现步骤</h4><p>其实这个洞不是直接登陆的，而是有一定的利用过程，如下</p>
+<p>假设<code>17777777777</code>是我的攻击目标，并且他这里没有绑定邮箱、微信这些</p>
+<p><img src="http://static.zybuluo.com/1kbfree/08eh2q859jj8nszdwywdgtjv/image_1dtd2i1re8kufmf1pn5b0q158v3n.png" alt="image_1dtd2i1re8kufmf1pn5b0q158v3n.png-456.6kB"></p>
+<p>然后我通过登陆<code>18888888888</code>后把手机号码修改为<code>17777777777</code>（访问：<a href="http://mym.chinahr.com/account/updatePhone?mobile=17777777777）" target="_blank" rel="noopener">http://mym.chinahr.com/account/updatePhone?mobile=17777777777）</a></p>
+<p><img src="http://static.zybuluo.com/1kbfree/t5zxifxddecbp0wwenjs3jk8/image_1dtd2j8081r861uk61k9md4d18kj4k.png" alt="image_1dtd2j8081r861uk61k9md4d18kj4k.png-328.6kB"></p>
+<p>ok，然后<code>18888888888</code>的手机号码就变成<code>17777777777</code>那个账号了</p>
+<p><img src="http://static.zybuluo.com/1kbfree/h0wns6wel3qwbbnljjvi3t0h/image_1dtd2knao1kr4145b9d217r8fro5e.png" alt="image_1dtd2knao1kr4145b9d217r8fro5e.png-390.8kB"></p>
+<p>然后这个时候我们来绑定一下微信和邮箱，如下</p>
+<p><img src="http://static.zybuluo.com/1kbfree/afqg6j9lx6wjqlqm80i3xe44/image_1dtd2ltrr1ovq1mvg19i51kkl1bhi6e.png" alt="image_1dtd2ltrr1ovq1mvg19i51kkl1bhi6e.png-376.9kB"></p>
+<p>然后用户发现登陆密码不对了修改完密码后，我还是可以通过微信或者qq邮箱来登陆&amp;找回他密码，也算一个任意登陆了</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-12-31T04:16:46.064Z" itemprop="dateUpdated">2019-12-31 12:16:46</time>
+</span><br>
+
+
+        
+        未经允许，禁止转载：<a href="/2018/10/01/%E8%8B%B1%E6%89%8D%E7%BD%91%E6%9F%90%E5%A4%84%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E5%AF%BC%E8%87%B4%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E9%87%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/" target="_blank" rel="external">http://yoursite.com/2018/10/01/%E8%8B%B1%E6%89%8D%E7%BD%91%E6%9F%90%E5%A4%84%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E5%AF%BC%E8%87%B4%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E9%87%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/blog.jpg" alt="$_Fuck">
+            $_Fuck
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" target="_blank" rel="noopener" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web%E5%AE%89%E5%85%A8/" rel="tag">Web安全</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/10/01/%E8%8B%B1%E6%89%8D%E7%BD%91%E6%9F%90%E5%A4%84%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E5%AF%BC%E8%87%B4%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E9%87%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/&title=《英才网某处设计缺陷导致任意用户注册以及任意用户重置以及任意用户登录》 — $_Fuck&pic=http://yoursite.com/img/blog.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/10/01/%E8%8B%B1%E6%89%8D%E7%BD%91%E6%9F%90%E5%A4%84%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E5%AF%BC%E8%87%B4%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E9%87%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/&title=《英才网某处设计缺陷导致任意用户注册以及任意用户重置以及任意用户登录》 — $_Fuck&source=无助就算了，还要假装坚强。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/10/01/%E8%8B%B1%E6%89%8D%E7%BD%91%E6%9F%90%E5%A4%84%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E5%AF%BC%E8%87%B4%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E9%87%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《英才网某处设计缺陷导致任意用户注册以及任意用户重置以及任意用户登录》 — $_Fuck&url=http://yoursite.com/2018/10/01/%E8%8B%B1%E6%89%8D%E7%BD%91%E6%9F%90%E5%A4%84%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E5%AF%BC%E8%87%B4%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E9%87%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/10/01/%E8%8B%B1%E6%89%8D%E7%BD%91%E6%9F%90%E5%A4%84%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E5%AF%BC%E8%87%B4%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E9%87%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" target="_blank" rel="noopener" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/10/02/%E8%8B%B1%E6%89%8D%E7%BD%91%E7%99%BB%E9%99%86%E5%A4%84%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E5%8F%AF%E5%8A%AB%E6%8C%81%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E5%87%AD%E6%8D%AE/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">英才网登陆处设计缺陷可劫持用户登录凭据</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/09/13/%E7%81%B5%E7%8A%80%E7%99%BB%E9%99%86%E5%A4%84%E5%8F%AF%E5%8A%AB%E6%8C%81%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E5%87%AD%E6%8D%AE/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">灵犀登陆处可劫持用户登录凭据</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        禁止打赏~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/" data-alipay="/img/">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" target="_blank" rel="noopener" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/10/01/%E8%8B%B1%E6%89%8D%E7%BD%91%E6%9F%90%E5%A4%84%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E5%AF%BC%E8%87%B4%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E9%87%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/&title=《英才网某处设计缺陷导致任意用户注册以及任意用户重置以及任意用户登录》 — $_Fuck&pic=http://yoursite.com/img/blog.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/10/01/%E8%8B%B1%E6%89%8D%E7%BD%91%E6%9F%90%E5%A4%84%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E5%AF%BC%E8%87%B4%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E9%87%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/&title=《英才网某处设计缺陷导致任意用户注册以及任意用户重置以及任意用户登录》 — $_Fuck&source=无助就算了，还要假装坚强。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/10/01/%E8%8B%B1%E6%89%8D%E7%BD%91%E6%9F%90%E5%A4%84%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E5%AF%BC%E8%87%B4%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E9%87%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《英才网某处设计缺陷导致任意用户注册以及任意用户重置以及任意用户登录》 — $_Fuck&url=http://yoursite.com/2018/10/01/%E8%8B%B1%E6%89%8D%E7%BD%91%E6%9F%90%E5%A4%84%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E5%AF%BC%E8%87%B4%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E9%87%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/10/01/%E8%8B%B1%E6%89%8D%E7%BD%91%E6%9F%90%E5%A4%84%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E5%AF%BC%E8%87%B4%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E9%87%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2018/10/01/%E8%8B%B1%E6%89%8D%E7%BD%91%E6%9F%90%E5%A4%84%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E5%AF%BC%E8%87%B4%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E9%87%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Bay！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Fuck的博客~';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

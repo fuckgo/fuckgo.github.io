@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>php反序列化漏洞 | $_Fuck | 白天搞笑的废物，晚上抑郁的怪物。</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="代码审计">
+    <meta name="description" content="介绍首先php反序列化没有想象中的那么难，你要知道什么是类，什么是魔法方法就很好理解的，先不说反序列化的原理这些 序列化基础首先我们要知道什么是类，这个需要你们自己去了解了，所以不多说了（随便介绍一下），见谅～ 1class Cls&amp;#123;23	public $name &#x3D; &amp;apos;&amp;apos;;4	public $age  &#x3D; 0;56	public function print_name()&amp;#123;7">
+<meta name="keywords" content="代码审计">
+<meta property="og:type" content="article">
+<meta property="og:title" content="php反序列化漏洞">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;12&#x2F;25&#x2F;php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E&#x2F;index.html">
+<meta property="og:site_name" content="$_Fuck">
+<meta property="og:description" content="介绍首先php反序列化没有想象中的那么难，你要知道什么是类，什么是魔法方法就很好理解的，先不说反序列化的原理这些 序列化基础首先我们要知道什么是类，这个需要你们自己去了解了，所以不多说了（随便介绍一下），见谅～ 1class Cls&amp;#123;23	public $name &#x3D; &amp;apos;&amp;apos;;4	public $age  &#x3D; 0;56	public function print_name()&amp;#123;7">
+<meta property="og:locale" content="zh">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;vr9s1iyd8i6jubhii9fws46x&#x2F;image_1cjt19n851b6h1lgq14941dmc1gg319.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;mk2scnmp7igtkaqs51hv8x73&#x2F;image_1cjt1gaai1f4219lf1b8dneuvrd1m.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;6w5kqn6eh3uzuqn8z2yso0ds&#x2F;image_1cjtfje7ueo5ft1pt51sqv4nq2j.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;ap59bkkre7hszhfnuszqw10j&#x2F;image_1cjtguh609i8dld1lmt5je1sj130.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;xvej8v5zi6wawew4qphnexiy&#x2F;image_1cjthdab5euv1ltl115bha0pg03q.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;33x2db12p74s9wuxmmvtrbeh&#x2F;image_1cjtj57j51no91cqb404aoc1isf51.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;ze5o6geiqcot9vuyro0nmtf1&#x2F;image_1cjtit7fo10801bc31ihk14411mrs4k.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;yiweahc18bcbdfartf8rhg2k&#x2F;image_1cjtjm38l1m1219f71t951pvn1g0078.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;m1l2jxeqswn75kvacv9pycvj&#x2F;image_1cjvlbe9nikk1f9cpbbk3j7qh9.png">
+<meta property="og:updated_time" content="2019-12-25T00:24:56.388Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;vr9s1iyd8i6jubhii9fws46x&#x2F;image_1cjt19n851b6h1lgq14941dmc1gg319.png">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/blog.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">$_Fuck</h5>
+          <a href="mailto:以凡人之躯比肩神明" target="_blank" rel="noopener" title="以凡人之躯比肩神明" class="mail">以凡人之躯比肩神明</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-address-book"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/Web%E5%AE%89%E5%85%A8/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/link"  >
+                <i class="icon icon-lg icon-link"></i>
+                友情链接
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">php反序列化漏洞</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">php反序列化漏洞</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-12-25T00:20:10.000Z" itemprop="datePublished" class="page-time">
+  2018-12-25
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container-fluid blog body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#介绍"><span class="post-toc-number">1.</span> <span class="post-toc-text">介绍</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#序列化基础"><span class="post-toc-number">2.</span> <span class="post-toc-text">序列化基础</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#序列化这个类"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">序列化这个类</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#反序列化这个序列化的字符"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">反序列化这个序列化的字符</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#魔术函数介绍"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">魔术函数介绍</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#序列化漏洞利用"><span class="post-toc-number">3.</span> <span class="post-toc-text">序列化漏洞利用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#复现过程"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">复现过程</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#总结"><span class="post-toc-number">4.</span> <span class="post-toc-text">总结</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-php反序列化漏洞"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">php反序列化漏洞</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-12-25 08:20:10" datetime="2018-12-25T00:20:10.000Z"  itemprop="datePublished">2018-12-25</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>首先php反序列化没有想象中的那么难，你要知道什么是<strong>类</strong>，什么是<br><strong>魔法方法</strong>就很好理解的，先不说<strong>反序列化</strong>的原理这些</p>
+<h3 id="序列化基础"><a href="#序列化基础" class="headerlink" title="序列化基础"></a>序列化基础</h3><p>首先我们要知道什么是类，这个需要你们自己去了解了，所以不多说了（随便介绍一下），见谅～</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cls</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">public</span> $name = <span class="string">''</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">public</span> $age  = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">print_name</span><span class="params">()</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">		<span class="keyword">echo</span> <span class="string">'name is -&gt; '</span>.<span class="keyword">$this</span>-&gt;name;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">		<span class="keyword">echo</span> <span class="string">"\n"</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">		<span class="keyword">echo</span> <span class="string">'age is -&gt; '</span>.<span class="keyword">$this</span>-&gt;age;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">	&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">$my = <span class="keyword">new</span> Cls(); <span class="comment">// 实例化Cls类，就想这个变量是指向了Cls类，可以直接用这个变量操作Cls类</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">$my-&gt;name = <span class="string">'only_free'</span>; <span class="comment">// 类中定义了$name属性但他值为空，所以我这里重新赋值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">$my-&gt;age  = <span class="number">18</span>; <span class="comment">// 同上</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">echo</span> $my -&gt; print_name(); <span class="comment">// 调用类中的print_name函数</span></span></pre></td></tr></table></figure>
+
+<p>效果：</p>
+<p><img src="http://static.zybuluo.com/1kbfree/vr9s1iyd8i6jubhii9fws46x/image_1cjt19n851b6h1lgq14941dmc1gg319.png" alt="image_1cjt19n851b6h1lgq14941dmc1gg319.png-125.3kB"></p>
+<h4 id="序列化这个类"><a href="#序列化这个类" class="headerlink" title="序列化这个类"></a>序列化这个类</h4><p>可以看到这里是成功输出了的，那么我们这里来<strong>序列化</strong>这个类，只需要使用一个函数即可(<code>serialize</code>函数)，如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">echo &quot;\n&quot;.&#39;序列化后到结果：&#39;.serialize($my).&quot;\n&quot;;</span></pre></td></tr></table></figure>
+
+<p><img src="http://static.zybuluo.com/1kbfree/mk2scnmp7igtkaqs51hv8x73/image_1cjt1gaai1f4219lf1b8dneuvrd1m.png" alt="image_1cjt1gaai1f4219lf1b8dneuvrd1m.png-144.7kB"></p>
+<blockquote>
+<p>不懂序列化的作用可以空投到此处：<a href="https://blog.csdn.net/wy0123/article/details/79345842" target="_blank" rel="noopener">https://blog.csdn.net/wy0123/article/details/79345842</a></p>
+</blockquote>
+<h4 id="反序列化这个序列化的字符"><a href="#反序列化这个序列化的字符" class="headerlink" title="反序列化这个序列化的字符"></a>反序列化这个序列化的字符</h4><p>我们上面那个被序列化后的值为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">O:3:&quot;Cls&quot;:2:&#123;s:4:&quot;name&quot;;s:9:&quot;only_free&quot;;s:3:&quot;age&quot;;i:18;&#125;</span></pre></td></tr></table></figure>
+
+<p>那么，我们如何把这些字符都变回类呢，那么就要用到反序列化了，代码如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cls</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">public</span> $name = <span class="string">''</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">public</span> $age  = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">print_name</span><span class="params">()</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">		<span class="keyword">echo</span> <span class="string">'name is -&gt; '</span>.<span class="keyword">$this</span>-&gt;name;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">		<span class="keyword">echo</span> <span class="string">"\n"</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">		<span class="keyword">echo</span> <span class="string">'age is -&gt; '</span>.<span class="keyword">$this</span>-&gt;age;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">		<span class="keyword">echo</span> <span class="string">"\n"</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">	&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">$xlh = <span class="string">'O:3:"Cls":2:&#123;s:4:"name";s:9:"only_free";s:3:"age";i:18;&#125;'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">var_dump( unserialize( $xlh ) );</span></pre></td></tr></table></figure>
+
+<p><img src="http://static.zybuluo.com/1kbfree/6w5kqn6eh3uzuqn8z2yso0ds/image_1cjtfje7ueo5ft1pt51sqv4nq2j.png" alt="image_1cjtfje7ueo5ft1pt51sqv4nq2j.png-45.9kB"></p>
+<p>可以看到我之前定义的<code>类</code>和<code>$name</code>、<code>$age</code>参数都会展示出来的，那么我们再来看下这个反序列化漏洞如何利用</p>
+<h4 id="魔术函数介绍"><a href="#魔术函数介绍" class="headerlink" title="魔术函数介绍"></a>魔术函数介绍</h4><blockquote>
+<p>不要想太多为什么他叫魔术函数，其实他就是类中内置（规定好）的函数</p>
+</blockquote>
+<p>首先我们来看看其中一个的<code>__construct()</code>魔术函数可以用来干嘛，代码如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&lt;?php</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">class Cls&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">	function __construct()&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">		echo &#39;使用了__construct()&#39;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">	&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">$cls &#x3D; new Cls();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">echo &quot;\n&quot;;</span></pre></td></tr></table></figure>
+
+<p><img src="http://static.zybuluo.com/1kbfree/ap59bkkre7hszhfnuszqw10j/image_1cjtguh609i8dld1lmt5je1sj130.png" alt="image_1cjtguh609i8dld1lmt5je1sj130.png-61kB"></p>
+<p>那么这里很容易看明白的了吧，这个<code>__construct</code>魔术方法就是当有变量<code>new</code>这个类的时候就会自动调用，就是说实例化<code>Cls</code>类就会触发<code>__construct</code>方法，那么我序列化是需要用到这个的，下面来看看～</p>
+<blockquote>
+<p>更多的魔术函数可以来这里看看：<a href="https://www.cnblogs.com/jakentec/p/3806793.html" target="_blank" rel="noopener">https://www.cnblogs.com/jakentec/p/3806793.html</a></p>
+</blockquote>
+<h3 id="序列化漏洞利用"><a href="#序列化漏洞利用" class="headerlink" title="序列化漏洞利用"></a>序列化漏洞利用</h3><p>首先，这里漏洞自我感觉还是挺难挖到的（不是难，而是因为利用条件刻薄），待我一一说来～</p>
+<p>首先我写了一个小案例（代码执行的漏洞），如下</p>
+<p><img src="http://static.zybuluo.com/1kbfree/xvej8v5zi6wawew4qphnexiy/image_1cjthdab5euv1ltl115bha0pg03q.png" alt="image_1cjthdab5euv1ltl115bha0pg03q.png-23.8kB"></p>
+<ul>
+<li><code>bug.php</code>是存在反序列化漏洞的地方</li>
+<li><code>class.php</code>是定义一个了一个类（等下会讲的）</li>
+<li><code>poc.php</code>是构造的poc</li>
+</ul>
+<h4 id="复现过程"><a href="#复现过程" class="headerlink" title="复现过程"></a>复现过程</h4><p>1、我们先来看看<code>class.php</code>这个文件</p>
+<p><img src="http://static.zybuluo.com/1kbfree/33x2db12p74s9wuxmmvtrbeh/image_1cjtj57j51no91cqb404aoc1isf51.png" alt="image_1cjtj57j51no91cqb404aoc1isf51.png-89.9kB"></p>
+<p>可以看到这里有一个类，效果是当这个类被消除的时候就会执行这个函数（当php快要执行完后就会消除这个类，就会执行这个函数），那么我们想，如果我们能够执行这个类，并且把文件名变成任意一个文件的话就可以导致任意文件删除漏洞了，对吧，我们继续来看下</p>
+<p>2、查看<code>bug.php</code>里的代码</p>
+<p><img src="http://static.zybuluo.com/1kbfree/ze5o6geiqcot9vuyro0nmtf1/image_1cjtit7fo10801bc31ihk14411mrs4k.png" alt="image_1cjtit7fo10801bc31ihk14411mrs4k.png-136.8kB"></p>
+<p>3、我们来构造一个利用的poc</p>
+<p>前面我们知道了反序列化是可以执行一个类的对吧，那么好玩的来了，我们就可以构造一个操做<code>Delete</code>的类，并且把他要删除的内容为任意一个存在的文件即可，那么我们可以这样</p>
+<p><img src="http://static.zybuluo.com/1kbfree/yiweahc18bcbdfartf8rhg2k/image_1cjtjm38l1m1219f71t951pvn1g0078.png" alt="image_1cjtjm38l1m1219f71t951pvn1g0078.png-87.9kB"></p>
+<p>可以看到我们实例化了类，并且自定义了要删除的文件，然后序列化，并且把序列化的值放入那个反序列化的可控点，我们就可以执行那个删除文件的类，如何我们再自定义文件名，就可以导致任意文件删除了，所以我们现在只要找到反序列（<code>bug.php</code>），然后我们把序列化后的值放上去~</p>
+<p>4、将操作类的代码序列化并且放入可控的反序列化处</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">O:6:&quot;Delete&quot;:1:&#123;s:4:&quot;file&quot;;s:9:&quot;index.php&quot;;&#125;</span></pre></td></tr></table></figure>
+
+<p>这个是序列化操作类的值，然后放入<code>bug.php</code>文件里</p>
+<p><img src="http://static.zybuluo.com/1kbfree/m1l2jxeqswn75kvacv9pycvj/image_1cjvlbe9nikk1f9cpbbk3j7qh9.png" alt="image_1cjvlbe9nikk1f9cpbbk3j7qh9.png-75.8kB"></p>
+<p>可以看到，我们成功的执行了删除<code>index.php</code>的代码，所以这里是存在反序列化漏洞造成的任意文件删除漏洞~</p>
+<p>案例下载地址：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">链接: https:&#x2F;&#x2F;pan.baidu.com&#x2F;s&#x2F;1vbldBSypdozwbqBEYwu1tQ 密码: 6666</span></pre></td></tr></table></figure>
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>所以，反序列化漏洞需要找到一个反序列化可控点，然后找里面类是否使用魔术函数以及类中是否可操作~</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-12-25T00:24:56.388Z" itemprop="dateUpdated">2019-12-25 08:24:56</time>
+</span><br>
+
+
+        
+        未经允许，禁止转载：<a href="/2018/12/25/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/" target="_blank" rel="external">http://yoursite.com/2018/12/25/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/blog.jpg" alt="$_Fuck">
+            $_Fuck
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" target="_blank" rel="noopener" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/" rel="tag">代码审计</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/12/25/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/&title=《php反序列化漏洞》 — $_Fuck&pic=http://yoursite.com/img/blog.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/12/25/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/&title=《php反序列化漏洞》 — $_Fuck&source=无助就算了，还要假装坚强。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/12/25/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《php反序列化漏洞》 — $_Fuck&url=http://yoursite.com/2018/12/25/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/12/25/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" target="_blank" rel="noopener" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/12/26/%E5%9B%BE%E7%89%87%E8%AE%BE%E8%AE%A1%E4%B8%8D%E5%BD%93%E5%8F%AF%E5%AF%BC%E8%87%B4%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8D%A1%E9%A1%BF-CPU%E5%8D%A0%E6%BB%A1/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">图片设计不当可导致服务器卡顿/CPU占满</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/12/21/getshell/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">weblogic getshell</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        禁止打赏~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/" data-alipay="/img/">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" target="_blank" rel="noopener" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/12/25/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/&title=《php反序列化漏洞》 — $_Fuck&pic=http://yoursite.com/img/blog.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/12/25/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/&title=《php反序列化漏洞》 — $_Fuck&source=无助就算了，还要假装坚强。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/12/25/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《php反序列化漏洞》 — $_Fuck&url=http://yoursite.com/2018/12/25/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/12/25/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2018/12/25/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Bay！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Fuck的博客~';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

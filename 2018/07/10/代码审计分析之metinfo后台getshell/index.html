@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>代码审计分析之metinfo后台getshell | $_Fuck | 白天搞笑的废物，晚上抑郁的怪物。</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="代码审计">
+    <meta name="description" content="并非抄袭，而是分析（帮朋友~）。  原文地址 : http:&#x2F;&#x2F;www.91ri.org&#x2F;16663.html 第一处代码分析 1$post&#x3D;array(&amp;apos;ver&amp;apos;&#x3D;&amp;gt;$metcms_v,&amp;apos;app&amp;apos;&#x3D;&amp;gt;$applist);2$result&#x3D;curl_post($post,60);3if(link_error($result)&#x3D;&#x3D;1)&amp;#123;4	$results&#x3D;explode(&amp;apos;">
+<meta name="keywords" content="代码审计">
+<meta property="og:type" content="article">
+<meta property="og:title" content="代码审计分析之metinfo后台getshell">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;07&#x2F;10&#x2F;%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%88%86%E6%9E%90%E4%B9%8Bmetinfo%E5%90%8E%E5%8F%B0getshell&#x2F;index.html">
+<meta property="og:site_name" content="$_Fuck">
+<meta property="og:description" content="并非抄袭，而是分析（帮朋友~）。  原文地址 : http:&#x2F;&#x2F;www.91ri.org&#x2F;16663.html 第一处代码分析 1$post&#x3D;array(&amp;apos;ver&amp;apos;&#x3D;&amp;gt;$metcms_v,&amp;apos;app&amp;apos;&#x3D;&amp;gt;$applist);2$result&#x3D;curl_post($post,60);3if(link_error($result)&#x3D;&#x3D;1)&amp;#123;4	$results&#x3D;explode(&amp;apos;">
+<meta property="og:locale" content="zh">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;eh6fqqq6g9s1d7yd6cyz9wob&#x2F;image_1ci1h3ar3oiqnjf26118n91e459.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;x4xzr960kautsg6umbsv1a0s&#x2F;image_1ci1hjfniip7dlpt4o1vmbotr36.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;2qzcul3c3hdd61jseuj9sdl0&#x2F;image_1ci1i1a7v13grtgb1oeh155l18f693.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;vo05kq9qdm205fz37bk0qxz8&#x2F;image_1ci1i505bbuk19eq1r6j1q5n141m9g.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;q38bx78ismbvvcg88b66dwa4&#x2F;image_1ci1ipjoquqvs8o145f92emu0c7.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;t4ahag9khsbq1d8o2t6z0l6b&#x2F;image_1ci1ie3u4i0p3qv1a57r3a1fvibq.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;3vvvwx9n3sycn688cb9un33k&#x2F;image_1ci1is5nb21ag67ge1660d4mck.png">
+<meta property="og:updated_time" content="2019-12-21T11:16:36.128Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;eh6fqqq6g9s1d7yd6cyz9wob&#x2F;image_1ci1h3ar3oiqnjf26118n91e459.png">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/blog.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">$_Fuck</h5>
+          <a href="mailto:以凡人之躯比肩神明" target="_blank" rel="noopener" title="以凡人之躯比肩神明" class="mail">以凡人之躯比肩神明</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-address-book"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/Web%E5%AE%89%E5%85%A8/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/link"  >
+                <i class="icon icon-lg icon-link"></i>
+                友情链接
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">代码审计分析之metinfo后台getshell</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">代码审计分析之metinfo后台getshell</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-07-10T11:15:57.000Z" itemprop="datePublished" class="page-time">
+  2018-07-10
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container-fluid blog body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第一处代码分析"><span class="post-toc-number">1.</span> <span class="post-toc-text">第一处代码分析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第四行："><span class="post-toc-number">1.1.</span> <span class="post-toc-text">第四行：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第5-6行："><span class="post-toc-number">1.2.</span> <span class="post-toc-text">第5-6行：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第二处代码分析："><span class="post-toc-number">1.3.</span> <span class="post-toc-text">第二处代码分析：</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#standard-php文件的代码："><span class="post-toc-number">2.</span> <span class="post-toc-text">standard.php文件的代码：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#疑问："><span class="post-toc-number">2.1.</span> <span class="post-toc-text">疑问：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#解答："><span class="post-toc-number">2.2.</span> <span class="post-toc-text">解答：</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-代码审计分析之metinfo后台getshell"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">代码审计分析之metinfo后台getshell</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-07-10 19:15:57" datetime="2018-07-10T11:15:57.000Z"  itemprop="datePublished">2018-07-10</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <blockquote>
+<p>并非抄袭，而是分析（帮朋友~）。</p>
+</blockquote>
+<p>原文地址 : <a href="http://www.91ri.org/16663.html" target="_blank" rel="noopener">http://www.91ri.org/16663.html</a></p>
+<h3 id="第一处代码分析"><a href="#第一处代码分析" class="headerlink" title="第一处代码分析"></a>第一处代码分析</h3><p><img src="http://static.zybuluo.com/1kbfree/eh6fqqq6g9s1d7yd6cyz9wob/image_1ci1h3ar3oiqnjf26118n91e459.png" alt="image_1ci1h3ar3oiqnjf26118n91e459.png-153.2kB"></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$post=<span class="keyword">array</span>(<span class="string">'ver'</span>=&gt;$metcms_v,<span class="string">'app'</span>=&gt;$applist);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">$result=curl_post($post,<span class="number">60</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(link_error($result)==<span class="number">1</span>)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">	$results=explode(<span class="string">'&lt;Met&gt;'</span>,$result); <span class="comment">//下面会讲解</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    file_put_contents(<span class="string">'dlappfile.php'</span>,$results[<span class="number">1</span>]); <span class="comment">//下面会讲解</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    file_put_contents(<span class="string">'standard.php'</span>,$results[<span class="number">0</span>].$results[<span class="number">1</span>]); <span class="comment">//下面会讲解</span></span></pre></td></tr></table></figure>
+
+<h4 id="第四行："><a href="#第四行：" class="headerlink" title="第四行："></a>第四行：</h4><p><strong>explode函数小案例</strong>：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$str = <span class="string">'iamfree1,iamfree2'</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">var_dump( explode(<span class="string">','</span>, $str) );</span></pre></td></tr></table></figure>
+
+<p><img src="http://static.zybuluo.com/1kbfree/x4xzr960kautsg6umbsv1a0s/image_1ci1hjfniip7dlpt4o1vmbotr36.png" alt="image_1ci1hjfniip7dlpt4o1vmbotr36.png-21.6kB"></p>
+<p>所以<code>explode(&#39;,&#39;, $str)</code>就是将<code>$str</code>中的<code>,</code>的内容分割为出来分别放到数组里。</p>
+<h4 id="第5-6行："><a href="#第5-6行：" class="headerlink" title="第5-6行："></a>第5-6行：</h4><p><strong>file_put_contents函数小案例：</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">file_put_contents(<span class="string">'2018-07-10.txt'</span>, <span class="string">'iamfree'</span>); <span class="comment">// 会在当前脚本创建一个2018-07-10.txt文件，内容为iamfree</span></span></pre></td></tr></table></figure>
+
+<p><img src="http://static.zybuluo.com/1kbfree/2qzcul3c3hdd61jseuj9sdl0/image_1ci1i1a7v13grtgb1oeh155l18f693.png" alt="image_1ci1i1a7v13grtgb1oeh155l18f693.png-77kB"></p>
+<h4 id="第二处代码分析："><a href="#第二处代码分析：" class="headerlink" title="第二处代码分析："></a>第二处代码分析：</h4><p><img src="http://static.zybuluo.com/1kbfree/vo05kq9qdm205fz37bk0qxz8/image_1ci1i505bbuk19eq1r6j1q5n141m9g.png" alt="image_1ci1i505bbuk19eq1r6j1q5n141m9g.png-148kB"></p>
+<p>我做了相应的注释，如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">curl_post</span><span class="params">($post,$timeout)</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">global</span> $met_weburl,$met_host,$met_file;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    $host=$met_host;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    $file=$met_file;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span>(get_extension_funcs(<span class="string">'curl'</span>)&amp;&amp;function_exists(<span class="string">'curl_init'</span>)&amp;&amp;function_exists(<span class="string">'curl_setopt'</span>)&amp;&amp;function_exists(<span class="string">'curl_exec'</span>)&amp;&amp;function_exists(<span class="string">'curl_close'</span>)) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    	<span class="comment">// 这个if判断是否可以用curl、curl_init、curl_setopt、curl_exec、ecurl_close，如果可用，就执行下面的操作</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    	</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    	$curlHandle=curl_init();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    	</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    	curl_setopt($curlHandle,CURLOPT_URL,<span class="string">'http://'</span>.$host.$file); <span class="comment">// CURLOPT_URL：需要获取的URL地址，也可以在curl_init()函数中设置。</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    	curl_setopt($curlHandle,CURLOPT_REFERER,$met_weburl); <span class="comment">//CURLOPT_REFERER：在HTTP请求头中"Referer: "的内容。</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    	curl_setopt($curlHandle,CURLOPT_RETURNTRANSFER,<span class="number">1</span>);<span class="comment">// CURLOPT_RETURNTRANSFER：在启用CURLOPT_RETURNTRANSFER的时候，返回原生的（Raw）输出。</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    	curl_setopt($curlHandle,CURLOPT_CONNECTTIMEOUT,$timeout); <span class="comment">//CURLOPT_CONNECTTIMEOUT：在发起连接前等待的时间，如果设置为0，则无限等待。</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    	curl_setopt($curlHandle,CURLOPT_TIMEOUT,$timeout); <span class="comment">//CURLOPT_TIMEOUT：设置cURL允许执行的最长秒数。</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    	</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    	curl_setopt($curlHandle,CURLOPT_POST, <span class="number">1</span>); <span class="comment">// CURLOPT_POST：启用时会发送一个常规的POST请求，类型为：application/x-www-form-urlencoded，就像表单提交的一样。</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">    	curl_setopt($curlHandle,CURLOPT_POSTFIELDS, $post); <span class="comment">// CURLOPT_POSTFIELDS：全部数据使用HTTP协议中的"POST"操作来发送。要发送文件，在文件名前面加上@前缀并使用完整路径。这个参数可以通过urlencoded后的字符串类似'para1=val1&amp;para2=val2&amp;...'或使用一个以字段名为键值，字段数据为值的数组。如果value是一个数组，Content-Type头将会被设置成multipart/form-data</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">    	$result=curl_exec($curlHandle); <span class="comment">// 执行</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">    	var_dump($result);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">    	curl_close($curlHandle); </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">    	&#125;</span></pre></td></tr></table></figure>
+
+<p><img src="http://static.zybuluo.com/1kbfree/q38bx78ismbvvcg88b66dwa4/image_1ci1ipjoquqvs8o145f92emu0c7.png" alt="image_1ci1ipjoquqvs8o145f92emu0c7.png-356.5kB"></p>
+<h3 id="standard-php文件的代码："><a href="#standard-php文件的代码：" class="headerlink" title="standard.php文件的代码："></a>standard.php文件的代码：</h3><p><img src="http://static.zybuluo.com/1kbfree/t4ahag9khsbq1d8o2t6z0l6b/image_1ci1ie3u4i0p3qv1a57r3a1fvibq.png" alt="image_1ci1ie3u4i0p3qv1a57r3a1fvibq.png-81.1kB"></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">metinfo</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&lt;Met&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">echo</span> <span class="string">"Joseph"</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="meta">?&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&lt;Met&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">echo</span> <span class="string">"&lt;?php phpinfo();?&gt;"</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="meta">?&gt;</span></span></pre></td></tr></table></figure>
+
+<h4 id="疑问："><a href="#疑问：" class="headerlink" title="疑问："></a>疑问：</h4><p>这里为什么要有<code>&lt;Met&gt;</code>呢？  我也不饶圈子了下面是解答</p>
+<h4 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h4><p><img src="http://static.zybuluo.com/1kbfree/3vvvwx9n3sycn688cb9un33k/image_1ci1is5nb21ag67ge1660d4mck.png" alt="image_1ci1is5nb21ag67ge1660d4mck.png-145.8kB"></p>
+<p>完成，下面的很简单了，不用再讲了(不要问我为什么不自己审计一个，而是去分析别人的，我是不会告诉你我审计不出漏洞的)~</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-12-21T11:16:36.128Z" itemprop="dateUpdated">2019-12-21 19:16:36</time>
+</span><br>
+
+
+        
+        未经允许，禁止转载：<a href="/2018/07/10/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%88%86%E6%9E%90%E4%B9%8Bmetinfo%E5%90%8E%E5%8F%B0getshell/" target="_blank" rel="external">http://yoursite.com/2018/07/10/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%88%86%E6%9E%90%E4%B9%8Bmetinfo%E5%90%8E%E5%8F%B0getshell/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/blog.jpg" alt="$_Fuck">
+            $_Fuck
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" target="_blank" rel="noopener" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/" rel="tag">代码审计</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/07/10/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%88%86%E6%9E%90%E4%B9%8Bmetinfo%E5%90%8E%E5%8F%B0getshell/&title=《代码审计分析之metinfo后台getshell》 — $_Fuck&pic=http://yoursite.com/img/blog.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/07/10/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%88%86%E6%9E%90%E4%B9%8Bmetinfo%E5%90%8E%E5%8F%B0getshell/&title=《代码审计分析之metinfo后台getshell》 — $_Fuck&source=无助就算了，还要假装坚强。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/07/10/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%88%86%E6%9E%90%E4%B9%8Bmetinfo%E5%90%8E%E5%8F%B0getshell/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《代码审计分析之metinfo后台getshell》 — $_Fuck&url=http://yoursite.com/2018/07/10/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%88%86%E6%9E%90%E4%B9%8Bmetinfo%E5%90%8E%E5%8F%B0getshell/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/07/10/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%88%86%E6%9E%90%E4%B9%8Bmetinfo%E5%90%8E%E5%8F%B0getshell/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" target="_blank" rel="noopener" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/07/22/%E4%B8%80%E4%B8%AA%E6%9C%89%E8%B6%A3%E7%9A%84%E6%81%B6%E4%BD%9C%E5%89%A7/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">一个有趣的恶作剧</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/06/21/%E8%81%94%E6%83%B3%E4%B9%90%E9%97%AE%E5%90%A7%E6%9F%90%E5%A4%84%E8%AE%BE%E8%AE%A1%E4%B8%8D%E5%BD%93%E5%8F%AF%E4%BD%BF%E7%94%A8%E6%88%B7%E6%89%93%E5%BC%80%E7%BD%91%E7%AB%99%E6%85%A2/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">联想乐问吧某处设计不当可使用户打开网站慢</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        禁止打赏~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/" data-alipay="/img/">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" target="_blank" rel="noopener" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/07/10/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%88%86%E6%9E%90%E4%B9%8Bmetinfo%E5%90%8E%E5%8F%B0getshell/&title=《代码审计分析之metinfo后台getshell》 — $_Fuck&pic=http://yoursite.com/img/blog.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/07/10/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%88%86%E6%9E%90%E4%B9%8Bmetinfo%E5%90%8E%E5%8F%B0getshell/&title=《代码审计分析之metinfo后台getshell》 — $_Fuck&source=无助就算了，还要假装坚强。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/07/10/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%88%86%E6%9E%90%E4%B9%8Bmetinfo%E5%90%8E%E5%8F%B0getshell/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《代码审计分析之metinfo后台getshell》 — $_Fuck&url=http://yoursite.com/2018/07/10/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%88%86%E6%9E%90%E4%B9%8Bmetinfo%E5%90%8E%E5%8F%B0getshell/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/07/10/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%88%86%E6%9E%90%E4%B9%8Bmetinfo%E5%90%8E%E5%8F%B0getshell/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2018/07/10/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%88%86%E6%9E%90%E4%B9%8Bmetinfo%E5%90%8E%E5%8F%B0getshell/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Bay！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Fuck的博客~';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
