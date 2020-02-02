@@ -25,7 +25,7 @@
 <meta name="keywords" content="小技巧">
 <meta property="og:type" content="article">
 <meta property="og:title" content="有数据库修改权限并且想登陆后台但密码不可逆的小思路解决办法">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;23&#x2F;%E6%9C%89%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%AE%E6%94%B9%E6%9D%83%E9%99%90%E5%B9%B6%E4%B8%94%E6%83%B3%E7%99%BB%E9%99%86%E5%90%8E%E5%8F%B0%E4%BD%86%E5%AF%86%E7%A0%81%E4%B8%8D%E5%8F%AF%E9%80%86%E7%9A%84%E5%B0%8F%E6%80%9D%E8%B7%AF%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95&#x2F;index.html">
+<meta property="og:url" content="https:&#x2F;&#x2F;fuckgo.github.io&#x2F;2019&#x2F;12&#x2F;23&#x2F;%E6%9C%89%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%AE%E6%94%B9%E6%9D%83%E9%99%90%E5%B9%B6%E4%B8%94%E6%83%B3%E7%99%BB%E9%99%86%E5%90%8E%E5%8F%B0%E4%BD%86%E5%AF%86%E7%A0%81%E4%B8%8D%E5%8F%AF%E9%80%86%E7%9A%84%E5%B0%8F%E6%80%9D%E8%B7%AF%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95&#x2F;index.html">
 <meta property="og:site_name" content="$_Fuck">
 <meta property="og:description" content="办法一 比如我们在获取了mysql数据库的用户名和密码后，登入进去，发现后台管理员的密码是贵那么长的数字，且不可逆，然后我们需要获取webshell，那么我们的扩展面可能就得去后台找上传点、命令执行什么的获取shell了  我之前实战过程中就遇到了这样的情况，那么我的解决方法是（口头描述） 1、把后台用户所有的账户导出来，然后将密码设为123456，爆破用户名2、假设跑出了用户名为Fuck11的密">
 <meta property="og:locale" content="zh">
@@ -216,12 +216,12 @@
 
 
         
-        未经允许，禁止转载：<a href="/2019/12/23/%E6%9C%89%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%AE%E6%94%B9%E6%9D%83%E9%99%90%E5%B9%B6%E4%B8%94%E6%83%B3%E7%99%BB%E9%99%86%E5%90%8E%E5%8F%B0%E4%BD%86%E5%AF%86%E7%A0%81%E4%B8%8D%E5%8F%AF%E9%80%86%E7%9A%84%E5%B0%8F%E6%80%9D%E8%B7%AF%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" target="_blank" rel="external">http://yoursite.com/2019/12/23/%E6%9C%89%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%AE%E6%94%B9%E6%9D%83%E9%99%90%E5%B9%B6%E4%B8%94%E6%83%B3%E7%99%BB%E9%99%86%E5%90%8E%E5%8F%B0%E4%BD%86%E5%AF%86%E7%A0%81%E4%B8%8D%E5%8F%AF%E9%80%86%E7%9A%84%E5%B0%8F%E6%80%9D%E8%B7%AF%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</a>
+        未经允许，禁止转载：<a href="/2019/12/23/%E6%9C%89%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%AE%E6%94%B9%E6%9D%83%E9%99%90%E5%B9%B6%E4%B8%94%E6%83%B3%E7%99%BB%E9%99%86%E5%90%8E%E5%8F%B0%E4%BD%86%E5%AF%86%E7%A0%81%E4%B8%8D%E5%8F%AF%E9%80%86%E7%9A%84%E5%B0%8F%E6%80%9D%E8%B7%AF%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" target="_blank" rel="external">https://fuckgo.github.io/2019/12/23/%E6%9C%89%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%AE%E6%94%B9%E6%9D%83%E9%99%90%E5%B9%B6%E4%B8%94%E6%83%B3%E7%99%BB%E9%99%86%E5%90%8E%E5%8F%B0%E4%BD%86%E5%AF%86%E7%A0%81%E4%B8%8D%E5%8F%AF%E9%80%86%E7%9A%84%E5%B0%8F%E6%80%9D%E8%B7%AF%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</a>
         
     </div>
     
     <footer>
-        <a href="http://yoursite.com">
+        <a href="https://fuckgo.github.io">
             <img src="/img/blog.jpg" alt="$_Fuck">
             $_Fuck
         </a>
@@ -247,7 +247,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/12/23/%E6%9C%89%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%AE%E6%94%B9%E6%9D%83%E9%99%90%E5%B9%B6%E4%B8%94%E6%83%B3%E7%99%BB%E9%99%86%E5%90%8E%E5%8F%B0%E4%BD%86%E5%AF%86%E7%A0%81%E4%B8%8D%E5%8F%AF%E9%80%86%E7%9A%84%E5%B0%8F%E6%80%9D%E8%B7%AF%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/&title=《有数据库修改权限并且想登陆后台但密码不可逆的小思路解决办法》 — $_Fuck&pic=http://yoursite.com/img/blog.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://fuckgo.github.io/2019/12/23/%E6%9C%89%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%AE%E6%94%B9%E6%9D%83%E9%99%90%E5%B9%B6%E4%B8%94%E6%83%B3%E7%99%BB%E9%99%86%E5%90%8E%E5%8F%B0%E4%BD%86%E5%AF%86%E7%A0%81%E4%B8%8D%E5%8F%AF%E9%80%86%E7%9A%84%E5%B0%8F%E6%80%9D%E8%B7%AF%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/&title=《有数据库修改权限并且想登陆后台但密码不可逆的小思路解决办法》 — $_Fuck&pic=https://fuckgo.github.io/img/blog.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -257,22 +257,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/12/23/%E6%9C%89%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%AE%E6%94%B9%E6%9D%83%E9%99%90%E5%B9%B6%E4%B8%94%E6%83%B3%E7%99%BB%E9%99%86%E5%90%8E%E5%8F%B0%E4%BD%86%E5%AF%86%E7%A0%81%E4%B8%8D%E5%8F%AF%E9%80%86%E7%9A%84%E5%B0%8F%E6%80%9D%E8%B7%AF%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/&title=《有数据库修改权限并且想登陆后台但密码不可逆的小思路解决办法》 — $_Fuck&source=无助就算了，还要假装坚强。" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://fuckgo.github.io/2019/12/23/%E6%9C%89%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%AE%E6%94%B9%E6%9D%83%E9%99%90%E5%B9%B6%E4%B8%94%E6%83%B3%E7%99%BB%E9%99%86%E5%90%8E%E5%8F%B0%E4%BD%86%E5%AF%86%E7%A0%81%E4%B8%8D%E5%8F%AF%E9%80%86%E7%9A%84%E5%B0%8F%E6%80%9D%E8%B7%AF%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/&title=《有数据库修改权限并且想登陆后台但密码不可逆的小思路解决办法》 — $_Fuck&source=无助就算了，还要假装坚强。" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/12/23/%E6%9C%89%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%AE%E6%94%B9%E6%9D%83%E9%99%90%E5%B9%B6%E4%B8%94%E6%83%B3%E7%99%BB%E9%99%86%E5%90%8E%E5%8F%B0%E4%BD%86%E5%AF%86%E7%A0%81%E4%B8%8D%E5%8F%AF%E9%80%86%E7%9A%84%E5%B0%8F%E6%80%9D%E8%B7%AF%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://fuckgo.github.io/2019/12/23/%E6%9C%89%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%AE%E6%94%B9%E6%9D%83%E9%99%90%E5%B9%B6%E4%B8%94%E6%83%B3%E7%99%BB%E9%99%86%E5%90%8E%E5%8F%B0%E4%BD%86%E5%AF%86%E7%A0%81%E4%B8%8D%E5%8F%AF%E9%80%86%E7%9A%84%E5%B0%8F%E6%80%9D%E8%B7%AF%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《有数据库修改权限并且想登陆后台但密码不可逆的小思路解决办法》 — $_Fuck&url=http://yoursite.com/2019/12/23/%E6%9C%89%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%AE%E6%94%B9%E6%9D%83%E9%99%90%E5%B9%B6%E4%B8%94%E6%83%B3%E7%99%BB%E9%99%86%E5%90%8E%E5%8F%B0%E4%BD%86%E5%AF%86%E7%A0%81%E4%B8%8D%E5%8F%AF%E9%80%86%E7%9A%84%E5%B0%8F%E6%80%9D%E8%B7%AF%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/&via=http://yoursite.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《有数据库修改权限并且想登陆后台但密码不可逆的小思路解决办法》 — $_Fuck&url=https://fuckgo.github.io/2019/12/23/%E6%9C%89%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%AE%E6%94%B9%E6%9D%83%E9%99%90%E5%B9%B6%E4%B8%94%E6%83%B3%E7%99%BB%E9%99%86%E5%90%8E%E5%8F%B0%E4%BD%86%E5%AF%86%E7%A0%81%E4%B8%8D%E5%8F%AF%E9%80%86%E7%9A%84%E5%B0%8F%E6%80%9D%E8%B7%AF%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/&via=https://fuckgo.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/12/23/%E6%9C%89%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%AE%E6%94%B9%E6%9D%83%E9%99%90%E5%B9%B6%E4%B8%94%E6%83%B3%E7%99%BB%E9%99%86%E5%90%8E%E5%8F%B0%E4%BD%86%E5%AF%86%E7%A0%81%E4%B8%8D%E5%8F%AF%E9%80%86%E7%9A%84%E5%B0%8F%E6%80%9D%E8%B7%AF%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://fuckgo.github.io/2019/12/23/%E6%9C%89%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%AE%E6%94%B9%E6%9D%83%E9%99%90%E5%B9%B6%E4%B8%94%E6%83%B3%E7%99%BB%E9%99%86%E5%90%8E%E5%8F%B0%E4%BD%86%E5%AF%86%E7%A0%81%E4%B8%8D%E5%8F%AF%E9%80%86%E7%9A%84%E5%B0%8F%E6%80%9D%E8%B7%AF%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -377,7 +377,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/12/23/%E6%9C%89%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%AE%E6%94%B9%E6%9D%83%E9%99%90%E5%B9%B6%E4%B8%94%E6%83%B3%E7%99%BB%E9%99%86%E5%90%8E%E5%8F%B0%E4%BD%86%E5%AF%86%E7%A0%81%E4%B8%8D%E5%8F%AF%E9%80%86%E7%9A%84%E5%B0%8F%E6%80%9D%E8%B7%AF%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/&title=《有数据库修改权限并且想登陆后台但密码不可逆的小思路解决办法》 — $_Fuck&pic=http://yoursite.com/img/blog.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://fuckgo.github.io/2019/12/23/%E6%9C%89%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%AE%E6%94%B9%E6%9D%83%E9%99%90%E5%B9%B6%E4%B8%94%E6%83%B3%E7%99%BB%E9%99%86%E5%90%8E%E5%8F%B0%E4%BD%86%E5%AF%86%E7%A0%81%E4%B8%8D%E5%8F%AF%E9%80%86%E7%9A%84%E5%B0%8F%E6%80%9D%E8%B7%AF%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/&title=《有数据库修改权限并且想登陆后台但密码不可逆的小思路解决办法》 — $_Fuck&pic=https://fuckgo.github.io/img/blog.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -387,22 +387,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/12/23/%E6%9C%89%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%AE%E6%94%B9%E6%9D%83%E9%99%90%E5%B9%B6%E4%B8%94%E6%83%B3%E7%99%BB%E9%99%86%E5%90%8E%E5%8F%B0%E4%BD%86%E5%AF%86%E7%A0%81%E4%B8%8D%E5%8F%AF%E9%80%86%E7%9A%84%E5%B0%8F%E6%80%9D%E8%B7%AF%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/&title=《有数据库修改权限并且想登陆后台但密码不可逆的小思路解决办法》 — $_Fuck&source=无助就算了，还要假装坚强。" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://fuckgo.github.io/2019/12/23/%E6%9C%89%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%AE%E6%94%B9%E6%9D%83%E9%99%90%E5%B9%B6%E4%B8%94%E6%83%B3%E7%99%BB%E9%99%86%E5%90%8E%E5%8F%B0%E4%BD%86%E5%AF%86%E7%A0%81%E4%B8%8D%E5%8F%AF%E9%80%86%E7%9A%84%E5%B0%8F%E6%80%9D%E8%B7%AF%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/&title=《有数据库修改权限并且想登陆后台但密码不可逆的小思路解决办法》 — $_Fuck&source=无助就算了，还要假装坚强。" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/12/23/%E6%9C%89%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%AE%E6%94%B9%E6%9D%83%E9%99%90%E5%B9%B6%E4%B8%94%E6%83%B3%E7%99%BB%E9%99%86%E5%90%8E%E5%8F%B0%E4%BD%86%E5%AF%86%E7%A0%81%E4%B8%8D%E5%8F%AF%E9%80%86%E7%9A%84%E5%B0%8F%E6%80%9D%E8%B7%AF%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://fuckgo.github.io/2019/12/23/%E6%9C%89%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%AE%E6%94%B9%E6%9D%83%E9%99%90%E5%B9%B6%E4%B8%94%E6%83%B3%E7%99%BB%E9%99%86%E5%90%8E%E5%8F%B0%E4%BD%86%E5%AF%86%E7%A0%81%E4%B8%8D%E5%8F%AF%E9%80%86%E7%9A%84%E5%B0%8F%E6%80%9D%E8%B7%AF%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《有数据库修改权限并且想登陆后台但密码不可逆的小思路解决办法》 — $_Fuck&url=http://yoursite.com/2019/12/23/%E6%9C%89%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%AE%E6%94%B9%E6%9D%83%E9%99%90%E5%B9%B6%E4%B8%94%E6%83%B3%E7%99%BB%E9%99%86%E5%90%8E%E5%8F%B0%E4%BD%86%E5%AF%86%E7%A0%81%E4%B8%8D%E5%8F%AF%E9%80%86%E7%9A%84%E5%B0%8F%E6%80%9D%E8%B7%AF%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/&via=http://yoursite.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《有数据库修改权限并且想登陆后台但密码不可逆的小思路解决办法》 — $_Fuck&url=https://fuckgo.github.io/2019/12/23/%E6%9C%89%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%AE%E6%94%B9%E6%9D%83%E9%99%90%E5%B9%B6%E4%B8%94%E6%83%B3%E7%99%BB%E9%99%86%E5%90%8E%E5%8F%B0%E4%BD%86%E5%AF%86%E7%A0%81%E4%B8%8D%E5%8F%AF%E9%80%86%E7%9A%84%E5%B0%8F%E6%80%9D%E8%B7%AF%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/&via=https://fuckgo.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/12/23/%E6%9C%89%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%AE%E6%94%B9%E6%9D%83%E9%99%90%E5%B9%B6%E4%B8%94%E6%83%B3%E7%99%BB%E9%99%86%E5%90%8E%E5%8F%B0%E4%BD%86%E5%AF%86%E7%A0%81%E4%B8%8D%E5%8F%AF%E9%80%86%E7%9A%84%E5%B0%8F%E6%80%9D%E8%B7%AF%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://fuckgo.github.io/2019/12/23/%E6%9C%89%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%AE%E6%94%B9%E6%9D%83%E9%99%90%E5%B9%B6%E4%B8%94%E6%83%B3%E7%99%BB%E9%99%86%E5%90%8E%E5%8F%B0%E4%BD%86%E5%AF%86%E7%A0%81%E4%B8%8D%E5%8F%AF%E9%80%86%E7%9A%84%E5%B0%8F%E6%80%9D%E8%B7%AF%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -413,7 +413,7 @@
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2019/12/23/%E6%9C%89%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%AE%E6%94%B9%E6%9D%83%E9%99%90%E5%B9%B6%E4%B8%94%E6%83%B3%E7%99%BB%E9%99%86%E5%90%8E%E5%8F%B0%E4%BD%86%E5%AF%86%E7%A0%81%E4%B8%8D%E5%8F%AF%E9%80%86%E7%9A%84%E5%B0%8F%E6%80%9D%E8%B7%AF%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" alt="微信分享二维码">
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://fuckgo.github.io/2019/12/23/%E6%9C%89%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%AE%E6%94%B9%E6%9D%83%E9%99%90%E5%B9%B6%E4%B8%94%E6%83%B3%E7%99%BB%E9%99%86%E5%90%8E%E5%8F%B0%E4%BD%86%E5%AF%86%E7%A0%81%E4%B8%8D%E5%8F%AF%E9%80%86%E7%9A%84%E5%B0%8F%E6%80%9D%E8%B7%AF%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" alt="微信分享二维码">
 </div>
 
 

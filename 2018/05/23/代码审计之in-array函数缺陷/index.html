@@ -25,7 +25,7 @@
 <meta name="keywords" content="代码审计">
 <meta property="og:type" content="article">
 <meta property="og:title" content="代码审计之php in_array函数缺陷">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;05&#x2F;23&#x2F;%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E4%B9%8Bin-array%E5%87%BD%E6%95%B0%E7%BC%BA%E9%99%B7&#x2F;index.html">
+<meta property="og:url" content="https:&#x2F;&#x2F;fuckgo.github.io&#x2F;2018&#x2F;05&#x2F;23&#x2F;%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E4%B9%8Bin-array%E5%87%BD%E6%95%B0%E7%BC%BA%E9%99%B7&#x2F;index.html">
 <meta property="og:site_name" content="$_Fuck">
 <meta property="og:description" content="这篇文章是选与红日安全网出品的，这里只是来实际操作并且总结简化一下~原文地址：https:&#x2F;&#x2F;xz.aliyun.com&#x2F;t&#x2F;2451  函数介绍首先先来讲解函数的用法  然后执行一下这个脚本  返回的是no，如果代码是  返回的结果是yes 那么这个函数应该很容易明白了，就是说如果$name的值在第二个参数里（也就是对比是否在数组里的元素）返回true如果不在，返回false 一般的实现的功能">
 <meta property="og:locale" content="zh">
@@ -226,12 +226,12 @@
 
 
         
-        未经允许，禁止转载：<a href="/2018/05/23/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E4%B9%8Bin-array%E5%87%BD%E6%95%B0%E7%BC%BA%E9%99%B7/" target="_blank" rel="external">http://yoursite.com/2018/05/23/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E4%B9%8Bin-array%E5%87%BD%E6%95%B0%E7%BC%BA%E9%99%B7/</a>
+        未经允许，禁止转载：<a href="/2018/05/23/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E4%B9%8Bin-array%E5%87%BD%E6%95%B0%E7%BC%BA%E9%99%B7/" target="_blank" rel="external">https://fuckgo.github.io/2018/05/23/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E4%B9%8Bin-array%E5%87%BD%E6%95%B0%E7%BC%BA%E9%99%B7/</a>
         
     </div>
     
     <footer>
-        <a href="http://yoursite.com">
+        <a href="https://fuckgo.github.io">
             <img src="/img/blog.jpg" alt="$_Fuck">
             $_Fuck
         </a>
@@ -257,7 +257,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/05/23/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E4%B9%8Bin-array%E5%87%BD%E6%95%B0%E7%BC%BA%E9%99%B7/&title=《代码审计之php in_array函数缺陷》 — $_Fuck&pic=http://yoursite.com/img/blog.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://fuckgo.github.io/2018/05/23/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E4%B9%8Bin-array%E5%87%BD%E6%95%B0%E7%BC%BA%E9%99%B7/&title=《代码审计之php in_array函数缺陷》 — $_Fuck&pic=https://fuckgo.github.io/img/blog.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -267,22 +267,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/05/23/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E4%B9%8Bin-array%E5%87%BD%E6%95%B0%E7%BC%BA%E9%99%B7/&title=《代码审计之php in_array函数缺陷》 — $_Fuck&source=无助就算了，还要假装坚强。" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://fuckgo.github.io/2018/05/23/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E4%B9%8Bin-array%E5%87%BD%E6%95%B0%E7%BC%BA%E9%99%B7/&title=《代码审计之php in_array函数缺陷》 — $_Fuck&source=无助就算了，还要假装坚强。" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/05/23/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E4%B9%8Bin-array%E5%87%BD%E6%95%B0%E7%BC%BA%E9%99%B7/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://fuckgo.github.io/2018/05/23/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E4%B9%8Bin-array%E5%87%BD%E6%95%B0%E7%BC%BA%E9%99%B7/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《代码审计之php in_array函数缺陷》 — $_Fuck&url=http://yoursite.com/2018/05/23/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E4%B9%8Bin-array%E5%87%BD%E6%95%B0%E7%BC%BA%E9%99%B7/&via=http://yoursite.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《代码审计之php in_array函数缺陷》 — $_Fuck&url=https://fuckgo.github.io/2018/05/23/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E4%B9%8Bin-array%E5%87%BD%E6%95%B0%E7%BC%BA%E9%99%B7/&via=https://fuckgo.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/05/23/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E4%B9%8Bin-array%E5%87%BD%E6%95%B0%E7%BC%BA%E9%99%B7/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://fuckgo.github.io/2018/05/23/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E4%B9%8Bin-array%E5%87%BD%E6%95%B0%E7%BC%BA%E9%99%B7/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -387,7 +387,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/05/23/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E4%B9%8Bin-array%E5%87%BD%E6%95%B0%E7%BC%BA%E9%99%B7/&title=《代码审计之php in_array函数缺陷》 — $_Fuck&pic=http://yoursite.com/img/blog.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://fuckgo.github.io/2018/05/23/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E4%B9%8Bin-array%E5%87%BD%E6%95%B0%E7%BC%BA%E9%99%B7/&title=《代码审计之php in_array函数缺陷》 — $_Fuck&pic=https://fuckgo.github.io/img/blog.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -397,22 +397,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/05/23/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E4%B9%8Bin-array%E5%87%BD%E6%95%B0%E7%BC%BA%E9%99%B7/&title=《代码审计之php in_array函数缺陷》 — $_Fuck&source=无助就算了，还要假装坚强。" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://fuckgo.github.io/2018/05/23/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E4%B9%8Bin-array%E5%87%BD%E6%95%B0%E7%BC%BA%E9%99%B7/&title=《代码审计之php in_array函数缺陷》 — $_Fuck&source=无助就算了，还要假装坚强。" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/05/23/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E4%B9%8Bin-array%E5%87%BD%E6%95%B0%E7%BC%BA%E9%99%B7/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://fuckgo.github.io/2018/05/23/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E4%B9%8Bin-array%E5%87%BD%E6%95%B0%E7%BC%BA%E9%99%B7/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《代码审计之php in_array函数缺陷》 — $_Fuck&url=http://yoursite.com/2018/05/23/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E4%B9%8Bin-array%E5%87%BD%E6%95%B0%E7%BC%BA%E9%99%B7/&via=http://yoursite.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《代码审计之php in_array函数缺陷》 — $_Fuck&url=https://fuckgo.github.io/2018/05/23/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E4%B9%8Bin-array%E5%87%BD%E6%95%B0%E7%BC%BA%E9%99%B7/&via=https://fuckgo.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/05/23/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E4%B9%8Bin-array%E5%87%BD%E6%95%B0%E7%BC%BA%E9%99%B7/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://fuckgo.github.io/2018/05/23/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E4%B9%8Bin-array%E5%87%BD%E6%95%B0%E7%BC%BA%E9%99%B7/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -423,7 +423,7 @@
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2018/05/23/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E4%B9%8Bin-array%E5%87%BD%E6%95%B0%E7%BC%BA%E9%99%B7/" alt="微信分享二维码">
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://fuckgo.github.io/2018/05/23/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E4%B9%8Bin-array%E5%87%BD%E6%95%B0%E7%BC%BA%E9%99%B7/" alt="微信分享二维码">
 </div>
 
 

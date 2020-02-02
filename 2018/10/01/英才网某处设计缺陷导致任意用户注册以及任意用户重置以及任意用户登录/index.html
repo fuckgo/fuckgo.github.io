@@ -25,7 +25,7 @@
 <meta name="keywords" content="Web安全">
 <meta property="og:type" content="article">
 <meta property="og:title" content="英才网某处设计缺陷导致任意用户注册以及任意用户重置以及任意用户登录">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;10&#x2F;01&#x2F;%E8%8B%B1%E6%89%8D%E7%BD%91%E6%9F%90%E5%A4%84%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E5%AF%BC%E8%87%B4%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E9%87%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95&#x2F;index.html">
+<meta property="og:url" content="https:&#x2F;&#x2F;fuckgo.github.io&#x2F;2018&#x2F;10&#x2F;01&#x2F;%E8%8B%B1%E6%89%8D%E7%BD%91%E6%9F%90%E5%A4%84%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E5%AF%BC%E8%87%B4%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E9%87%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95&#x2F;index.html">
 <meta property="og:site_name" content="$_Fuck">
 <meta property="og:description" content="利用fuzz大法导致的任意用户重置&amp;amp;注册1、打开Url：http:&#x2F;&#x2F;mym.chinahr.com&#x2F;account&#x2F;  点击修改邮箱的时候，会发起一个请求 1mym.chinahr.com&amp;#x2F;account&amp;#x2F;updateMail?email&amp;#x3D;only_free%40qq.com  这里我手贱的修改了为如下的Url 1http:&amp;#x2F;&amp;#x2F;mym.c">
 <meta property="og:locale" content="zh">
@@ -271,12 +271,12 @@
 
 
         
-        未经允许，禁止转载：<a href="/2018/10/01/%E8%8B%B1%E6%89%8D%E7%BD%91%E6%9F%90%E5%A4%84%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E5%AF%BC%E8%87%B4%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E9%87%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/" target="_blank" rel="external">http://yoursite.com/2018/10/01/%E8%8B%B1%E6%89%8D%E7%BD%91%E6%9F%90%E5%A4%84%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E5%AF%BC%E8%87%B4%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E9%87%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/</a>
+        未经允许，禁止转载：<a href="/2018/10/01/%E8%8B%B1%E6%89%8D%E7%BD%91%E6%9F%90%E5%A4%84%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E5%AF%BC%E8%87%B4%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E9%87%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/" target="_blank" rel="external">https://fuckgo.github.io/2018/10/01/%E8%8B%B1%E6%89%8D%E7%BD%91%E6%9F%90%E5%A4%84%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E5%AF%BC%E8%87%B4%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E9%87%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/</a>
         
     </div>
     
     <footer>
-        <a href="http://yoursite.com">
+        <a href="https://fuckgo.github.io">
             <img src="/img/blog.jpg" alt="$_Fuck">
             $_Fuck
         </a>
@@ -302,7 +302,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/10/01/%E8%8B%B1%E6%89%8D%E7%BD%91%E6%9F%90%E5%A4%84%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E5%AF%BC%E8%87%B4%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E9%87%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/&title=《英才网某处设计缺陷导致任意用户注册以及任意用户重置以及任意用户登录》 — $_Fuck&pic=http://yoursite.com/img/blog.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://fuckgo.github.io/2018/10/01/%E8%8B%B1%E6%89%8D%E7%BD%91%E6%9F%90%E5%A4%84%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E5%AF%BC%E8%87%B4%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E9%87%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/&title=《英才网某处设计缺陷导致任意用户注册以及任意用户重置以及任意用户登录》 — $_Fuck&pic=https://fuckgo.github.io/img/blog.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -312,22 +312,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/10/01/%E8%8B%B1%E6%89%8D%E7%BD%91%E6%9F%90%E5%A4%84%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E5%AF%BC%E8%87%B4%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E9%87%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/&title=《英才网某处设计缺陷导致任意用户注册以及任意用户重置以及任意用户登录》 — $_Fuck&source=无助就算了，还要假装坚强。" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://fuckgo.github.io/2018/10/01/%E8%8B%B1%E6%89%8D%E7%BD%91%E6%9F%90%E5%A4%84%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E5%AF%BC%E8%87%B4%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E9%87%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/&title=《英才网某处设计缺陷导致任意用户注册以及任意用户重置以及任意用户登录》 — $_Fuck&source=无助就算了，还要假装坚强。" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/10/01/%E8%8B%B1%E6%89%8D%E7%BD%91%E6%9F%90%E5%A4%84%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E5%AF%BC%E8%87%B4%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E9%87%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://fuckgo.github.io/2018/10/01/%E8%8B%B1%E6%89%8D%E7%BD%91%E6%9F%90%E5%A4%84%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E5%AF%BC%E8%87%B4%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E9%87%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《英才网某处设计缺陷导致任意用户注册以及任意用户重置以及任意用户登录》 — $_Fuck&url=http://yoursite.com/2018/10/01/%E8%8B%B1%E6%89%8D%E7%BD%91%E6%9F%90%E5%A4%84%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E5%AF%BC%E8%87%B4%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E9%87%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/&via=http://yoursite.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《英才网某处设计缺陷导致任意用户注册以及任意用户重置以及任意用户登录》 — $_Fuck&url=https://fuckgo.github.io/2018/10/01/%E8%8B%B1%E6%89%8D%E7%BD%91%E6%9F%90%E5%A4%84%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E5%AF%BC%E8%87%B4%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E9%87%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/&via=https://fuckgo.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/10/01/%E8%8B%B1%E6%89%8D%E7%BD%91%E6%9F%90%E5%A4%84%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E5%AF%BC%E8%87%B4%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E9%87%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://fuckgo.github.io/2018/10/01/%E8%8B%B1%E6%89%8D%E7%BD%91%E6%9F%90%E5%A4%84%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E5%AF%BC%E8%87%B4%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E9%87%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -432,7 +432,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/10/01/%E8%8B%B1%E6%89%8D%E7%BD%91%E6%9F%90%E5%A4%84%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E5%AF%BC%E8%87%B4%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E9%87%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/&title=《英才网某处设计缺陷导致任意用户注册以及任意用户重置以及任意用户登录》 — $_Fuck&pic=http://yoursite.com/img/blog.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://fuckgo.github.io/2018/10/01/%E8%8B%B1%E6%89%8D%E7%BD%91%E6%9F%90%E5%A4%84%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E5%AF%BC%E8%87%B4%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E9%87%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/&title=《英才网某处设计缺陷导致任意用户注册以及任意用户重置以及任意用户登录》 — $_Fuck&pic=https://fuckgo.github.io/img/blog.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -442,22 +442,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/10/01/%E8%8B%B1%E6%89%8D%E7%BD%91%E6%9F%90%E5%A4%84%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E5%AF%BC%E8%87%B4%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E9%87%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/&title=《英才网某处设计缺陷导致任意用户注册以及任意用户重置以及任意用户登录》 — $_Fuck&source=无助就算了，还要假装坚强。" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://fuckgo.github.io/2018/10/01/%E8%8B%B1%E6%89%8D%E7%BD%91%E6%9F%90%E5%A4%84%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E5%AF%BC%E8%87%B4%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E9%87%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/&title=《英才网某处设计缺陷导致任意用户注册以及任意用户重置以及任意用户登录》 — $_Fuck&source=无助就算了，还要假装坚强。" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/10/01/%E8%8B%B1%E6%89%8D%E7%BD%91%E6%9F%90%E5%A4%84%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E5%AF%BC%E8%87%B4%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E9%87%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://fuckgo.github.io/2018/10/01/%E8%8B%B1%E6%89%8D%E7%BD%91%E6%9F%90%E5%A4%84%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E5%AF%BC%E8%87%B4%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E9%87%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《英才网某处设计缺陷导致任意用户注册以及任意用户重置以及任意用户登录》 — $_Fuck&url=http://yoursite.com/2018/10/01/%E8%8B%B1%E6%89%8D%E7%BD%91%E6%9F%90%E5%A4%84%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E5%AF%BC%E8%87%B4%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E9%87%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/&via=http://yoursite.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《英才网某处设计缺陷导致任意用户注册以及任意用户重置以及任意用户登录》 — $_Fuck&url=https://fuckgo.github.io/2018/10/01/%E8%8B%B1%E6%89%8D%E7%BD%91%E6%9F%90%E5%A4%84%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E5%AF%BC%E8%87%B4%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E9%87%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/&via=https://fuckgo.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/10/01/%E8%8B%B1%E6%89%8D%E7%BD%91%E6%9F%90%E5%A4%84%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E5%AF%BC%E8%87%B4%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E9%87%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://fuckgo.github.io/2018/10/01/%E8%8B%B1%E6%89%8D%E7%BD%91%E6%9F%90%E5%A4%84%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E5%AF%BC%E8%87%B4%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E9%87%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -468,7 +468,7 @@
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2018/10/01/%E8%8B%B1%E6%89%8D%E7%BD%91%E6%9F%90%E5%A4%84%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E5%AF%BC%E8%87%B4%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E9%87%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/" alt="微信分享二维码">
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://fuckgo.github.io/2018/10/01/%E8%8B%B1%E6%89%8D%E7%BD%91%E6%9F%90%E5%A4%84%E8%AE%BE%E8%AE%A1%E7%BC%BA%E9%99%B7%E5%AF%BC%E8%87%B4%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E9%87%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/" alt="微信分享二维码">
 </div>
 
 

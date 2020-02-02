@@ -25,7 +25,7 @@
 <meta name="keywords" content="Web安全">
 <meta property="og:type" content="article">
 <meta property="og:title" content="猫眼头像上传处存在ssrf">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;12&#x2F;13&#x2F;%E7%8C%AB%E7%9C%BC%E5%A4%B4%E5%83%8F%E4%B8%8A%E4%BC%A0%E5%A4%84%E5%AD%98%E5%9C%A8ssrf&#x2F;index.html">
+<meta property="og:url" content="https:&#x2F;&#x2F;fuckgo.github.io&#x2F;2018&#x2F;12&#x2F;13&#x2F;%E7%8C%AB%E7%9C%BC%E5%A4%B4%E5%83%8F%E4%B8%8A%E4%BC%A0%E5%A4%84%E5%AD%98%E5%9C%A8ssrf&#x2F;index.html">
 <meta property="og:site_name" content="$_Fuck">
 <meta property="og:description" content="1、打开Url：http:&#x2F;&#x2F;maoyan.com&#x2F;profile，然后选择一个图片上传然后抓包发现有如下请求  然后我猜想这里的处理流程是这样的：  上传文件后返回包返回一个Url 然后上图那个请求把一部的Url去访问并且使其成为图片地址（应该是读取Url然后把它内容写入~）  那么以上流程如果Url没有严格过滤的话是会造成SSRF的，然后发现可以用如下绕过~ 1http:&amp;#x2F;&amp;#x2F">
 <meta property="og:locale" content="zh">
@@ -232,12 +232,12 @@
 
 
         
-        未经允许，禁止转载：<a href="/2018/12/13/%E7%8C%AB%E7%9C%BC%E5%A4%B4%E5%83%8F%E4%B8%8A%E4%BC%A0%E5%A4%84%E5%AD%98%E5%9C%A8ssrf/" target="_blank" rel="external">http://yoursite.com/2018/12/13/%E7%8C%AB%E7%9C%BC%E5%A4%B4%E5%83%8F%E4%B8%8A%E4%BC%A0%E5%A4%84%E5%AD%98%E5%9C%A8ssrf/</a>
+        未经允许，禁止转载：<a href="/2018/12/13/%E7%8C%AB%E7%9C%BC%E5%A4%B4%E5%83%8F%E4%B8%8A%E4%BC%A0%E5%A4%84%E5%AD%98%E5%9C%A8ssrf/" target="_blank" rel="external">https://fuckgo.github.io/2018/12/13/%E7%8C%AB%E7%9C%BC%E5%A4%B4%E5%83%8F%E4%B8%8A%E4%BC%A0%E5%A4%84%E5%AD%98%E5%9C%A8ssrf/</a>
         
     </div>
     
     <footer>
-        <a href="http://yoursite.com">
+        <a href="https://fuckgo.github.io">
             <img src="/img/blog.jpg" alt="$_Fuck">
             $_Fuck
         </a>
@@ -263,7 +263,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/12/13/%E7%8C%AB%E7%9C%BC%E5%A4%B4%E5%83%8F%E4%B8%8A%E4%BC%A0%E5%A4%84%E5%AD%98%E5%9C%A8ssrf/&title=《猫眼头像上传处存在ssrf》 — $_Fuck&pic=http://yoursite.com/img/blog.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://fuckgo.github.io/2018/12/13/%E7%8C%AB%E7%9C%BC%E5%A4%B4%E5%83%8F%E4%B8%8A%E4%BC%A0%E5%A4%84%E5%AD%98%E5%9C%A8ssrf/&title=《猫眼头像上传处存在ssrf》 — $_Fuck&pic=https://fuckgo.github.io/img/blog.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -273,22 +273,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/12/13/%E7%8C%AB%E7%9C%BC%E5%A4%B4%E5%83%8F%E4%B8%8A%E4%BC%A0%E5%A4%84%E5%AD%98%E5%9C%A8ssrf/&title=《猫眼头像上传处存在ssrf》 — $_Fuck&source=无助就算了，还要假装坚强。" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://fuckgo.github.io/2018/12/13/%E7%8C%AB%E7%9C%BC%E5%A4%B4%E5%83%8F%E4%B8%8A%E4%BC%A0%E5%A4%84%E5%AD%98%E5%9C%A8ssrf/&title=《猫眼头像上传处存在ssrf》 — $_Fuck&source=无助就算了，还要假装坚强。" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/12/13/%E7%8C%AB%E7%9C%BC%E5%A4%B4%E5%83%8F%E4%B8%8A%E4%BC%A0%E5%A4%84%E5%AD%98%E5%9C%A8ssrf/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://fuckgo.github.io/2018/12/13/%E7%8C%AB%E7%9C%BC%E5%A4%B4%E5%83%8F%E4%B8%8A%E4%BC%A0%E5%A4%84%E5%AD%98%E5%9C%A8ssrf/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《猫眼头像上传处存在ssrf》 — $_Fuck&url=http://yoursite.com/2018/12/13/%E7%8C%AB%E7%9C%BC%E5%A4%B4%E5%83%8F%E4%B8%8A%E4%BC%A0%E5%A4%84%E5%AD%98%E5%9C%A8ssrf/&via=http://yoursite.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《猫眼头像上传处存在ssrf》 — $_Fuck&url=https://fuckgo.github.io/2018/12/13/%E7%8C%AB%E7%9C%BC%E5%A4%B4%E5%83%8F%E4%B8%8A%E4%BC%A0%E5%A4%84%E5%AD%98%E5%9C%A8ssrf/&via=https://fuckgo.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/12/13/%E7%8C%AB%E7%9C%BC%E5%A4%B4%E5%83%8F%E4%B8%8A%E4%BC%A0%E5%A4%84%E5%AD%98%E5%9C%A8ssrf/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://fuckgo.github.io/2018/12/13/%E7%8C%AB%E7%9C%BC%E5%A4%B4%E5%83%8F%E4%B8%8A%E4%BC%A0%E5%A4%84%E5%AD%98%E5%9C%A8ssrf/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -393,7 +393,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/12/13/%E7%8C%AB%E7%9C%BC%E5%A4%B4%E5%83%8F%E4%B8%8A%E4%BC%A0%E5%A4%84%E5%AD%98%E5%9C%A8ssrf/&title=《猫眼头像上传处存在ssrf》 — $_Fuck&pic=http://yoursite.com/img/blog.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://fuckgo.github.io/2018/12/13/%E7%8C%AB%E7%9C%BC%E5%A4%B4%E5%83%8F%E4%B8%8A%E4%BC%A0%E5%A4%84%E5%AD%98%E5%9C%A8ssrf/&title=《猫眼头像上传处存在ssrf》 — $_Fuck&pic=https://fuckgo.github.io/img/blog.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -403,22 +403,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/12/13/%E7%8C%AB%E7%9C%BC%E5%A4%B4%E5%83%8F%E4%B8%8A%E4%BC%A0%E5%A4%84%E5%AD%98%E5%9C%A8ssrf/&title=《猫眼头像上传处存在ssrf》 — $_Fuck&source=无助就算了，还要假装坚强。" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://fuckgo.github.io/2018/12/13/%E7%8C%AB%E7%9C%BC%E5%A4%B4%E5%83%8F%E4%B8%8A%E4%BC%A0%E5%A4%84%E5%AD%98%E5%9C%A8ssrf/&title=《猫眼头像上传处存在ssrf》 — $_Fuck&source=无助就算了，还要假装坚强。" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/12/13/%E7%8C%AB%E7%9C%BC%E5%A4%B4%E5%83%8F%E4%B8%8A%E4%BC%A0%E5%A4%84%E5%AD%98%E5%9C%A8ssrf/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://fuckgo.github.io/2018/12/13/%E7%8C%AB%E7%9C%BC%E5%A4%B4%E5%83%8F%E4%B8%8A%E4%BC%A0%E5%A4%84%E5%AD%98%E5%9C%A8ssrf/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《猫眼头像上传处存在ssrf》 — $_Fuck&url=http://yoursite.com/2018/12/13/%E7%8C%AB%E7%9C%BC%E5%A4%B4%E5%83%8F%E4%B8%8A%E4%BC%A0%E5%A4%84%E5%AD%98%E5%9C%A8ssrf/&via=http://yoursite.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《猫眼头像上传处存在ssrf》 — $_Fuck&url=https://fuckgo.github.io/2018/12/13/%E7%8C%AB%E7%9C%BC%E5%A4%B4%E5%83%8F%E4%B8%8A%E4%BC%A0%E5%A4%84%E5%AD%98%E5%9C%A8ssrf/&via=https://fuckgo.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/12/13/%E7%8C%AB%E7%9C%BC%E5%A4%B4%E5%83%8F%E4%B8%8A%E4%BC%A0%E5%A4%84%E5%AD%98%E5%9C%A8ssrf/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://fuckgo.github.io/2018/12/13/%E7%8C%AB%E7%9C%BC%E5%A4%B4%E5%83%8F%E4%B8%8A%E4%BC%A0%E5%A4%84%E5%AD%98%E5%9C%A8ssrf/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -429,7 +429,7 @@
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2018/12/13/%E7%8C%AB%E7%9C%BC%E5%A4%B4%E5%83%8F%E4%B8%8A%E4%BC%A0%E5%A4%84%E5%AD%98%E5%9C%A8ssrf/" alt="微信分享二维码">
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://fuckgo.github.io/2018/12/13/%E7%8C%AB%E7%9C%BC%E5%A4%B4%E5%83%8F%E4%B8%8A%E4%BC%A0%E5%A4%84%E5%AD%98%E5%9C%A8ssrf/" alt="微信分享二维码">
 </div>
 
 
