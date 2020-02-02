@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>目标机器不出网上线办法</title>
+    <url>/2020/02/03/%E7%9B%AE%E6%A0%87%E6%9C%BA%E5%99%A8%E4%B8%8D%E5%87%BA%E7%BD%91%E4%B8%8A%E7%BA%BF%E5%8A%9E%E6%B3%95/</url>
+    <content><![CDATA[<h2 id="网络环境"><a href="#网络环境" class="headerlink" title="网络环境"></a>网络环境</h2><p><img src="http://static.zybuluo.com/1kbfree/zkqlgw3w6102uhg85fb6alp6/image_1e03au6485c51kv6f9d1kd1s3f9.png" alt="image_1e03au6485c51kv6f9d1kd1s3f9.png-24.8kB"></p>
+<h2 id="上线办法"><a href="#上线办法" class="headerlink" title="上线办法"></a>上线办法</h2><p>1、设置中转监听</p>
+<p>点击服务器<code>A</code>会话</p>
+<p><img src="http://static.zybuluo.com/1kbfree/l8s0is4l7v0p92tv11i9qblm/image_1e03e2kebicn3fr1e0o1t4ljop9.png" alt="image_1e03e2kebicn3fr1e0o1t4ljop9.png-24.6kB"></p>
+<p><img src="http://static.zybuluo.com/1kbfree/u5acix71lj8501kui7zuljvt/image_1e03h3ul114abfi3em318nakp39.png" alt="image_1e03h3ul114abfi3em318nakp39.png-143.3kB"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Name：备注名</span></pre></td></tr><tr><td class="code"><pre><span class="line">Payload：就图中这个</span></pre></td></tr><tr><td class="code"><pre><span class="line">Listen Host：服务器A的内网IP</span></pre></td></tr><tr><td class="code"><pre><span class="line">Listen Port：监听端口</span></pre></td></tr></table></figure>
+
+<p>2、生成<code>exe</code>上线马</p>
+<p><img src="http://static.zybuluo.com/1kbfree/f1avz3j671b3d4qy328rzk5y/image_1e03ed7pte4kgbb1cvpv7t51p13.png" alt="image_1e03ed7pte4kgbb1cvpv7t51p13.png-40.2kB"></p>
+<p>3、利用<code>ipc</code>连接上传文件或直接<code>3389</code>连接拖进去</p>
+<p>4、打开文件</p>
+<p>5、上线成功</p>
+<p><img src="http://static.zybuluo.com/1kbfree/1qkctpmcston21x9vgtvuahe/image_1e03h6dng1t7gbtb106s1mgi2ctm.png" alt="image_1e03h6dng1t7gbtb106s1mgi2ctm.png-76.8kB"></p>
+<p><img src="http://static.zybuluo.com/1kbfree/h0wcjn7cx8kagks3fxag7zm3/image_1e03h71ci14pd1879kr1b6vgk913.png" alt="image_1e03h71ci14pd1879kr1b6vgk913.png-10.9kB"></p>
+<h2 id="上线原理"><a href="#上线原理" class="headerlink" title="上线原理"></a>上线原理</h2><p>服务器<code>B</code>通过服务器<code>A</code>来连接我们的攻击机，然后我们执行服务器<code>B</code>的操作会先经过服务器<code>A</code>，然后由服务器<code>A</code>回显到攻击机/<code>Cs</code></p>
+]]></content>
+      <categories>
+        <category>兴趣爱好</category>
+      </categories>
+      <tags>
+        <tag>内网渗透</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Vlunstack ATT&amp;CK实战系列一</title>
     <url>/2020/02/02/ATT/</url>
     <content><![CDATA[<blockquote>
