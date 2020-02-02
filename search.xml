@@ -155,7 +155,7 @@
 
 <p><img src="http://static.zybuluo.com/1kbfree/guc3xu119n20jh7ba1to2bha/image_1e034uo80138jdrl1u8m6llf2d3n.png" alt="image_1e034uo80138jdrl1u8m6llf2d3n.png-67.6kB"></p>
 <p>然后这里我想让<code>2003</code>系统上上线<code>Cs</code>，操作过程看我这篇文章</p>
-<p><a href="https://fuckgo.github.io/2020/02/03/%E7%9B%AE%E6%A0%87%E6%9C%BA%E5%99%A8%E4%B8%8D%E5%87%BA%E7%BD%91%E4%B8%8A%E7%BA%BF%E5%8A%9E%E6%B3%95/" target="_blank" rel="noopener">https://fuckgo.github.io/2020/02/03/%E7%9B%AE%E6%A0%87%E6%9C%BA%E5%99%A8%E4%B8%8D%E5%87%BA%E7%BD%91%E4%B8%8A%E7%BA%BF%E5%8A%9E%E6%B3%95/</a></p>
+<p><a href="https://fuckgo.github.io/2020/02/03/%E7%9B%AE%E6%A0%87%E6%9C%BA%E5%99%A8%E4%B8%8D%E5%87%BA%E7%BD%91%E4%B8%8A%E7%BA%BF%E5%8A%9E%E6%B3%95/">https://fuckgo.github.io/2020/02/03/%E7%9B%AE%E6%A0%87%E6%9C%BA%E5%99%A8%E4%B8%8D%E5%87%BA%E7%BD%91%E4%B8%8A%E7%BA%BF%E5%8A%9E%E6%B3%95/</a></p>
 <h3 id="对xp的信息收集"><a href="#对xp的信息收集" class="headerlink" title="对xp的信息收集"></a>对xp的信息收集</h3><p>常规的信息收集</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ipconfig &#x2F;all</span></pre></td></tr><tr><td class="code"><pre><span class="line">查看网络环境</span></pre></td></tr></table></figure>
 
@@ -179,7 +179,7 @@
 <h4 id="使用ipc上传上线马"><a href="#使用ipc上传上线马" class="headerlink" title="使用ipc上传上线马"></a>使用ipc上传上线马</h4><p>这里使用<code>ipc</code>连接上传上线马，然后用计划任务执行该文件</p>
 <p><img src="http://static.zybuluo.com/1kbfree/y5lknl43ut5k6862dyxv54b8/image_1e03klhlrkb3jqu1p674u516sn2a.png" alt="image_1e03klhlrkb3jqu1p674u516sn2a.png-54.7kB"></p>
 <blockquote>
-<p>上线马依旧看这篇文章：<br><a href="https://fuckgo.github.io/2020/02/03/%E7%9B%AE%E6%A0%87%E6%9C%BA%E5%99%A8%E4%B8%8D%E5%87%BA%E7%BD%91%E4%B8%8A%E7%BA%BF%E5%8A%9E%E6%B3%95/" target="_blank" rel="noopener">https://fuckgo.github.io/2020/02/03/%E7%9B%AE%E6%A0%87%E6%9C%BA%E5%99%A8%E4%B8%8D%E5%87%BA%E7%BD%91%E4%B8%8A%E7%BA%BF%E5%8A%9E%E6%B3%95/</a></p>
+<p>上线马依旧看这篇文章：<br><a href="https://fuckgo.github.io/2020/02/03/%E7%9B%AE%E6%A0%87%E6%9C%BA%E5%99%A8%E4%B8%8D%E5%87%BA%E7%BD%91%E4%B8%8A%E7%BA%BF%E5%8A%9E%E6%B3%95/">https://fuckgo.github.io/2020/02/03/%E7%9B%AE%E6%A0%87%E6%9C%BA%E5%99%A8%E4%B8%8D%E5%87%BA%E7%BD%91%E4%B8%8A%E7%BA%BF%E5%8A%9E%E6%B3%95/</a></p>
 </blockquote>
 <h4 id="上线成功"><a href="#上线成功" class="headerlink" title="上线成功"></a>上线成功</h4><p><img src="http://static.zybuluo.com/1kbfree/c6y62wuj455i5orto3o40tpv/image_1e03kt9fo8j519dmi0o1dv6gom2n.png" alt="image_1e03kt9fo8j519dmi0o1dv6gom2n.png-31.7kB"></p>
 <p>然后使用<code>mimikatz</code>跑一下密码</p>
@@ -190,6 +190,7 @@
 ]]></content>
       <categories>
         <category>兴趣爱好</category>
+        <category>好文</category>
       </categories>
       <tags>
         <tag>内网渗透</tag>
