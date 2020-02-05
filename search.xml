@@ -6,7 +6,7 @@
     <content><![CDATA[<blockquote>
 <p>准备出一个系列课程，分别为<code>SQL</code>注入、命令执行、文件上传、<code>Xss</code>等的<code>Bypass</code>。</p>
 </blockquote>
-<h2 id="什么是Waf"><a href="#什么是Waf" class="headerlink" title="什么是Waf"></a>什么是Waf</h2><p>首先学<code>Bypass Waf</code>，首先要必须知道什么是<code>Waf</code>。</p>
+<h2 id="什么是Waf"><a href="#什么是Waf" class="headerlink" title="什么是Waf"></a>什么是Waf</h2><p>首先学<code>Bypass Waf</code>，必须要知道什么是<code>Waf</code>。</p>
 <p><code>WAF</code>全称<code>Web application firewall</code>，是<code>Web</code>安全防护的一种手段，对攻击者输入的内容进行检测，匹配是否存在恶意内容，如果有放弃这个请求包，或加入黑名单，不允许此<code>IP</code>再次访问网站</p>
 <h3 id="Waf核心功能"><a href="#Waf核心功能" class="headerlink" title="Waf核心功能"></a>Waf核心功能</h3><ul>
 <li>特征匹配<br><code>Waf</code>一般都有自己的匹配规则，多为正则匹配校验内容。</li>
