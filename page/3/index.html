@@ -154,6 +154,57 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
+            <article id="post-命令执行绕过Payload"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-12-31 12:04:37" datetime="2019-12-31T04:04:37.000Z"  itemprop="datePublished">2019-12-31</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD/">兴趣爱好</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/12/31/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E7%BB%95%E8%BF%87Payload/">命令执行绕过Payload</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        利用连接符来执行命令读取/etc/passwd
+1&#x2F;&#39;b&#39;i&#39;n&#39;&#x2F;&#39;c&#39;a&#39;t&#39; &#x2F;&#39;e&#39;t&#39;c&#39;&#x2F;&#39;p&#39;a&#39;s&#39;s&#39;w&#39;d
+
+执行ls
+1&#39;&#39;&#39;l&#39;&#39;s&#39;&#...
+    
+
+        <a href="/2019/12/31/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E7%BB%95%E8%BF%87Payload/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web%E5%AE%89%E5%85%A8/" rel="tag">Web安全</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
             <article id="post-好奇心-菜刀连接shell进行了什么操作"
   class="article-card article-type-post" itemprop="blogPost">
 
@@ -411,57 +462,6 @@ JavsScript是可以通过创建ActiveXObject来执行命令，但是基本上不
     <div class="post-footer">
         
 	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/" rel="tag">内网渗透</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-有数据库修改权限并且想登陆后台但密码不可逆的小思路解决办法"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2019-12-23 10:37:37" datetime="2019-12-23T02:37:37.000Z"  itemprop="datePublished">2019-12-23</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD/">兴趣爱好</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD/%E6%8A%80%E5%B7%A7/">技巧</a></li></ul></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/12/23/%E6%9C%89%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%AE%E6%94%B9%E6%9D%83%E9%99%90%E5%B9%B6%E4%B8%94%E6%83%B3%E7%99%BB%E9%99%86%E5%90%8E%E5%8F%B0%E4%BD%86%E5%AF%86%E7%A0%81%E4%B8%8D%E5%8F%AF%E9%80%86%E7%9A%84%E5%B0%8F%E6%80%9D%E8%B7%AF%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/">有数据库修改权限并且想登陆后台但密码不可逆的小思路解决办法</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        办法一
-比如我们在获取了mysql数据库的用户名和密码后，登入进去，发现后台管理员的密码是贵那么长的数字，且不可逆，然后我们需要获取webshell，那么我们的扩展面可能就得去后台找上传点、命令执行什么的获取shell了
-
-我之前实战过程中就遇到了这样的情况，那么我的解决方法是（口头描述）
-1、把后台用户所有的账户导出来，然后将密码设为123456，爆破用户名2、假设跑出了用户名为Fuck1...
-    
-
-        <a href="/2019/12/23/%E6%9C%89%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%AE%E6%94%B9%E6%9D%83%E9%99%90%E5%B9%B6%E4%B8%94%E6%83%B3%E7%99%BB%E9%99%86%E5%90%8E%E5%8F%B0%E4%BD%86%E5%AF%86%E7%A0%81%E4%B8%8D%E5%8F%AF%E9%80%86%E7%9A%84%E5%B0%8F%E6%80%9D%E8%B7%AF%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" class="post-more waves-effect waves-button">
-            Continue reading...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/" rel="tag">小技巧</a></li></ul>
 
     </div>
     
